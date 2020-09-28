@@ -1,0 +1,89 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        buildConfigField 'Integer', 'RES_OK', "200"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // work-runtime-ktx 2.1.0 and above now requires Java 8
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.core:core-ktx:1.3.1'
+    api 'androidx.constraintlayout:constraintlayout:2.0.1'
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Added Dependencies
+    api "androidx.recyclerview:recyclerview:1.1.0"
+    api 'android.arch.lifecycle:extensions:1.1.1'
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    api 'androidx.activity:activity-ktx:1.1.0'
+
+
+    //Dagger
+    api 'com.google.dagger:hilt-android:2.28-alpha'
+    kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
+    api 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+
+    // Networking
+    api "com.squareup.retrofit2:converter-moshi:2.6.2"
+    api "com.squareup.retrofit2:retrofit:2.8.1"
+    api "com.squareup.okhttp3:okhttp:4.7.2"
+    api "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    api "com.squareup.retrofit2:converter-gson:2.6.2"
+    //Coroutine
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.6"
+
+    def lifecycle_version = "2.2.0"
+    api "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    api "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
+
+    // live-bus
+    api 'com.jeremyliao:live-event-bus-x:1.6.1'
+
+    //glide
+    api 'com.github.bumptech.glide:glide:4.11.0'
+    api 'com.github.bumptech.glide:compiler:4.11.0'
+    api "com.github.bumptech.glide:okhttp3-integration:4.6.1"
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3'
+}

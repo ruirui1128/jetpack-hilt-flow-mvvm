@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="infoVm"
+            type="com.lihui.hilt.data.bean.InfoBean" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
+        android:layout_marginEnd="@dimen/dp15"
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            imageUrl="@{infoVm.url}"
+            isCircle="@{Boolean.TRUE}"
+            errorHolder="@{@drawable/ic_launcher_round}"
+            android:id="@+id/iv"
+            tools:src="@mipmap/ic_launcher"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40" />
+
+        <TextView
+            tools:text="作者:张三丰"
+            android:text='@{infoVm.shareUser}'
+            android:layout_marginStart="@dimen/dp_10"
+            app:layout_constraintTop_toTopOf="@id/iv"
+            app:layout_constraintStart_toEndOf="@id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <TextView
+            tools:text="时间: 宋末元初"
+            android:text='@{infoVm.niceShareDate}'
+            android:layout_marginStart="@dimen/dp_10"
+            app:layout_constraintBottom_toBottomOf="@id/iv"
+            app:layout_constraintStart_toEndOf="@id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            tools:text="桃花岛"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/dp_10"
+            android:text="@{infoVm.superChapterName}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

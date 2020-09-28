@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="loginVm"
+            type="com.lihui.hilt.vm.LoginVm" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        tools:context="com.lihui.hilt.ui.act.LoginActivity">
+
+
+        <EditText
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp15"
+            android:textSize="@dimen/sp14"
+            android:text="@={loginVm.username}"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:inputType="phone"
+            android:hint="输入用户名"
+            android:maxLines="1"
+            android:maxLength="14"
+            android:digits="0123456789+"
+            android:lines="1"
+            android:layout_height="@dimen/dp40"/>
+
+        <EditText
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp15"
+            android:textSize="@dimen/sp14"
+            android:text="@={loginVm.passwrod}"
+            android:layout_width="match_parent"
+            android:background="@null"
+            android:inputType="textPassword"
+            android:hint="密码"
+            android:maxLines="1"
+            android:maxLength="16"
+            android:lines="1"
+            android:layout_height="@dimen/dp40"/>
+
+
+        <Button
+            android:onClick="@{()->loginVm.login()}"
+            android:layout_marginTop="10dp"
+            android:text="登录"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:text="登录自定义处理错误"
+            android:id="@+id/btnLogin"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</layout>
