@@ -60,7 +60,6 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
 
     }
 
-
     private fun registerUIChange() {
         viewModel.uiChange.showDialog.observe(this, Observer {
             showLoadingDialog()

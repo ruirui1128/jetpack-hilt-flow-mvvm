@@ -20,15 +20,7 @@ class LoginVm @ViewModelInject constructor(
 
     val loginResult = MutableLiveData<String>()
     fun login(){
-        if (TextUtils.isEmpty(username.value)){
-            ToastUtil.toast("用户名为空")
-            return
-        }
-
-        if (TextUtils.isEmpty(passwrod.value)){
-            ToastUtil.toast("密码为空")
-            return
-        }
+        if (!checkParams())return
         val map = hashMapOf("username" to (username.value?:""),
         "password" to (passwrod.value?:""))
         launchFlow({userApi.login(map)},{loginResult.postValue(it)},isShowDialog = true)
@@ -36,22 +28,29 @@ class LoginVm @ViewModelInject constructor(
     }
 
 
-    fun login2(listener: (String)->Unit){
-        if (TextUtils.isEmpty(username.value)){
-            ToastUtil.toast("用户名为空")
-            return
-        }
 
-        if (TextUtils.isEmpty(passwrod.value)){
-            ToastUtil.toast("密码为空")
-            return
-        }
+
+    fun login2(listener: (String)->Unit){
+        if (!checkParams())return
         val map = hashMapOf("username" to (username.value?:""),
             "password" to (passwrod.value?:""))
         launchFlow({userApi.login(map)},{loginResult.postValue(it)},
             isShowDialog = true,
             error = {listener(it)})
 
+    }
+
+    private fun checkParams():Boolean{
+        if (TextUtils.isEmpty(username.value)){
+            ToastUtil.toast("用户名为空")
+            return false
+        }
+
+        if (TextUtils.isEmpty(passwrod.value)){
+            ToastUtil.toast("密码为空")
+            return false
+        }
+        return true
     }
 
 
