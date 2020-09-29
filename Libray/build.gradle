@@ -86,4 +86,6 @@ dependencies {
     api 'com.github.bumptech.glide:compiler:4.11.0'
     api "com.github.bumptech.glide:okhttp3-integration:4.6.1"
     api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.3'
+
+    api 'com.jaeger.statusbarutil:library:1.5.1'
 }

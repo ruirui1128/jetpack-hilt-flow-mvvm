@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import com.rui.libray.R
+
 import com.rui.libray.data.net.ResCode
 import com.rui.libray.util.AppManager
+import com.rui.libray.util.StatusBarUtils
 
 import javax.inject.Inject
 
@@ -26,12 +29,19 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
     protected abstract val viewModelConfig: ViewModelConfig<VM>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        appManager.addActivity(this)
         super.onCreate(savedInstanceState)
+        appManager.addActivity(this)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 禁用横屏
         initViewDataBinding()
         registerUIChange()
+        initBar()
         init()
+    }
+
+    private fun initBar() {
+        StatusBarUtils.with(this)
+            .setColor(resources.getColor(R.color.white))
+            .init()
     }
 
     abstract fun init()
@@ -56,11 +66,14 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
                 i++
             }
         }
-        lifecycle.addObserver(viewModel)
+        if (viewModel!=null){
+            lifecycle.addObserver(viewModel)
+        }
 
     }
 
     private fun registerUIChange() {
+        if (viewModel==null)return
         viewModel.uiChange.showDialog.observe(this, Observer {
             showLoadingDialog()
         })

@@ -1,4 +1,4 @@
-package com.lihui.hilt.vm
+package com.lihui.hilt.ui.vm
 
 import android.text.TextUtils
 import androidx.hilt.lifecycle.ViewModelInject
@@ -7,7 +7,6 @@ import com.lihui.hilt.data.api.UserApi
 import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
-import okhttp3.EventListener
 
 class LoginVm @ViewModelInject constructor(
          private val userApi: UserApi,
@@ -16,6 +15,10 @@ class LoginVm @ViewModelInject constructor(
 
     val username = MutableLiveData<String>()
     val passwrod = MutableLiveData<String>()
+
+    val loginText = MutableLiveData<String>().apply {
+        this.value = "默认登录"
+    }
 
 
     val loginResult = MutableLiveData<String>()

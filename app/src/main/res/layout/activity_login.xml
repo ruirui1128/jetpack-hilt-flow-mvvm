@@ -7,7 +7,7 @@
     <data>
         <variable
             name="loginVm"
-            type="com.lihui.hilt.vm.LoginVm" />
+            type="com.lihui.hilt.ui.vm.LoginVm" />
 
     </data>
 
@@ -15,53 +15,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
         tools:context="com.lihui.hilt.ui.act.LoginActivity">
+
+        <com.rui.libray.widget.HeaderBar
+            app:titleText="登录"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
 
         <EditText
+            android:layout_marginTop="@dimen/dp20"
+            android:hint="输入账号"
+            android:paddingStart="@dimen/dp15"
             android:layout_marginStart="@dimen/dp15"
             android:layout_marginEnd="@dimen/dp15"
             android:textSize="@dimen/sp14"
-            android:text="@={loginVm.username}"
             android:layout_width="match_parent"
-            android:background="@null"
+            android:background="@drawable/bg_r_5_s_1"
             android:inputType="phone"
-            android:hint="输入用户名"
             android:maxLines="1"
             android:maxLength="14"
             android:digits="0123456789+"
+            android:id="@+id/etPhone"
             android:lines="1"
-            android:layout_height="@dimen/dp40"/>
-
-        <EditText
-            android:layout_marginStart="@dimen/dp15"
-            android:layout_marginEnd="@dimen/dp15"
-            android:textSize="@dimen/sp14"
-            android:text="@={loginVm.passwrod}"
-            android:layout_width="match_parent"
-            android:background="@null"
-            android:inputType="textPassword"
-            android:hint="密码"
-            android:maxLines="1"
-            android:maxLength="16"
-            android:lines="1"
-            android:layout_height="@dimen/dp40"/>
-
-
-        <Button
-            android:onClick="@{()->loginVm.login()}"
-            android:layout_marginTop="10dp"
-            android:text="登录"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:text="登录自定义处理错误"
-            android:id="@+id/btnLogin"
-            android:layout_marginTop="@dimen/dp20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="@dimen/dp50"/>
 
 
     </LinearLayout>

@@ -36,7 +36,6 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel =viewModelConfig.getViewModel()?:return
     }
 
     override fun onCreateView(
@@ -56,7 +55,7 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         val variableId = config.getVmVariableId()
         viewModel = config.getViewModel()?:return null
         if (variableId!=ViewModelConfig.VM_NO_BIND){
-            mBinding?.setVariable(variableId,viewModel)
+            binding?.setVariable(variableId,viewModel)
         }
 
         val bindingParams: SparseArray<*> = config.getBindingParams()

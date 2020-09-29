@@ -1,6 +1,5 @@
-package com.lihui.hilt.vm
+package com.lihui.hilt.ui.vm
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 
@@ -15,7 +14,9 @@ class MainViewModel @ViewModelInject constructor(
          private val apiService: ApiService,
          networkHelper: NetworkHelper) : BaseViewModel(networkHelper) {
 
-     val result = MutableLiveData<String>()
+     val result = MutableLiveData<String>().apply {
+         this.value = "谜一样的男人"
+     }
      fun fetchUsers(  listener: (String) -> Unit) {}
 
 }

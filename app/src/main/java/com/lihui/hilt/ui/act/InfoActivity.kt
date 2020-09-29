@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.lihui.hilt.R
 import com.lihui.hilt.base.BaseConstant.PAGESIZE_19
 import com.lihui.hilt.ui.adapter.InfoAdapter
-import com.lihui.hilt.vm.InfoVm
+import com.lihui.hilt.ui.vm.InfoVm
 import com.lihui.hilt.widget.loadmore.CustomLoadMoreView
 import com.rui.libray.base.BaseActivity
 import com.rui.libray.base.Message

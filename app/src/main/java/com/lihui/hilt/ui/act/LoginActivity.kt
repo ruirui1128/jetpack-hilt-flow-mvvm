@@ -6,7 +6,7 @@ import androidx.lifecycle.Observer
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.uitl.ToastUtil
-import com.lihui.hilt.vm.LoginVm
+import com.lihui.hilt.ui.vm.LoginVm
 import com.rui.libray.base.BaseActivity
 
 import com.rui.libray.base.ViewModelConfig
@@ -26,11 +26,11 @@ class LoginActivity : BaseActivity<LoginVm>() {
     }
 
     private fun initView() {
-        btnLogin.onClick {
-            viewModel.login2(){
-                ToastUtil.toast("干哈我要自己处理")
-            }
-        }
+//        btnLogin.onClick {
+//            viewModel.login2(){
+//                ToastUtil.toast("干哈我要自己处理")
+//            }
+//        }
     }
 
     private fun initVm() {

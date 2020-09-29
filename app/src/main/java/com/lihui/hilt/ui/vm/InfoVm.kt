@@ -1,4 +1,4 @@
-package com.lihui.hilt.vm
+package com.lihui.hilt.ui.vm
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData

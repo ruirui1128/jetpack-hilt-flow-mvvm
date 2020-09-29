@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.act.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
 
-    <Button
-        android:id="@+id/btnLogin"
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:gravity="center"
-        android:text="登录"
-        android:layout_marginEnd="@dimen/dp30"
-        android:layout_marginStart="@dimen/dp30"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp40"/>
-    <Button
-        android:id="@+id/btnInfo"
-        android:gravity="center"
-        android:text="信息列表"
-        android:layout_marginEnd="@dimen/dp30"
-        android:layout_marginStart="@dimen/dp30"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp40"/>
+        android:layout_height="match_parent"
+        tools:context=".ui.act.MainActivity">
 
-</LinearLayout>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:gravity="center"
+            android:text="登录"
+            android:layout_marginEnd="@dimen/dp30"
+            android:layout_marginStart="@dimen/dp30"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40" />
+
+        <Button
+            android:id="@+id/btnInfo"
+            android:gravity="center"
+            android:text="信息列表"
+            android:layout_marginEnd="@dimen/dp30"
+            android:layout_marginStart="@dimen/dp30"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40" />
+
+    </LinearLayout>
+</layout>
