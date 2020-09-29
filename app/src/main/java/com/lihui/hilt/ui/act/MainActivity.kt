@@ -14,8 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel>() {
 
-    override val viewModelConfig: ViewModelConfig<MainViewModel>
-        get() = ViewModelConfig<MainViewModel>(R.layout.activity_main)
+    override val viewModelConfig =
+        ViewModelConfig<MainViewModel>(R.layout.activity_main)
             .addViewModel(viewModels<MainViewModel>().value)
     override fun init() {
 
