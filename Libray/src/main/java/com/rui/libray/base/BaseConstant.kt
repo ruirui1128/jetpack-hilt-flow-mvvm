@@ -1,4 +1,4 @@
-package com.lihui.hilt.base
+package com.rui.libray.base
 
 object BaseConstant {
 

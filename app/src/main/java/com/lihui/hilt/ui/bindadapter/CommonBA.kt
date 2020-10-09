@@ -63,9 +63,6 @@ object CommonBA {
 
 
 
-
-
-
     @JvmStatic
     @BindingAdapter(
         value = [
@@ -125,8 +122,6 @@ object CommonBA {
 
             val roundedCorners = RoundedCorners( DensityUtil.dp2px(corners?.toFloat()?:1f,imageView.context))
             RequestOptions.bitmapTransform(roundedCorners)
-
-
         }
 
         val layoutParams = imageView.layoutParams
@@ -148,10 +143,6 @@ object CommonBA {
 
     }
 
-
-
-
-
     @JvmStatic
     @BindingAdapter(
         value = [
@@ -171,10 +162,7 @@ object CommonBA {
         errorHolder: Drawable?
 
     ) {
-
         imageView.setBackgroundResource(imageUrl?:R.color.color_999)
-
-
     }
 
 

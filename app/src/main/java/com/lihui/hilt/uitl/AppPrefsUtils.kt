@@ -3,8 +3,8 @@ package com.lihui.hilt.uitl
 import android.content.Context
 import android.content.SharedPreferences.Editor
 
-import com.lihui.hilt.base.BaseConstant
 import com.lihui.hilt.app.MyApp
+import com.rui.libray.base.BaseConstant
 
 
 /*
