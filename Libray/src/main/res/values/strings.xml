@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Hilt</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="no_more">没有更多了</string>
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">广场</string>
+    <string name="title_notifications">用户</string>
+</resources>

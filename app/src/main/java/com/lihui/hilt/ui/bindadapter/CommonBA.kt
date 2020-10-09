@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
@@ -20,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
 import com.rui.libray.util.DensityUtil
+import kotlinx.android.synthetic.main.activity_info.*
 
 import java.io.File
 
@@ -165,6 +167,21 @@ object CommonBA {
         imageView.setBackgroundResource(imageUrl?:R.color.color_999)
     }
 
+    /**
+     * SwipeRefreshLayout
+     */
+    @JvmStatic
+    @BindingAdapter(
+        value = [
+            "isRefreshing"],
+        requireAll = false
+    )
+    fun swipeRefresh(
+        swipeRefresh: SwipeRefreshLayout,
+        isRefreshing:Boolean = false
+    ) {
+        swipeRefresh.isRefreshing = false
+    }
 
 
 

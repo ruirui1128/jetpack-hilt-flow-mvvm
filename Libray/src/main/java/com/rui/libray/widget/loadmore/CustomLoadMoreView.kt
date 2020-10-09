@@ -1,4 +1,4 @@
-package com.lihui.hilt.widget.loadmore
+package com.rui.libray.widget.loadmore
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import com.chad.library.adapter.base.loadmore.BaseLoadMoreView
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
-import com.lihui.hilt.R
+
+import com.rui.libray.R
 
 class CustomLoadMoreView : BaseLoadMoreView() {
     override fun getRootView(parent: ViewGroup): View {

@@ -11,26 +11,51 @@
             type="com.lihui.hilt.ui.vm.MainViewModel" />
 
     </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragment.HomeFragment">
-
-
-        <TextView
-            android:text="@{homeVm.result}"
-            android:id="@+id/text_home"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:layout_height="match_parent">
+
+            <cn.bingoogolapple.bgabanner.BGABanner
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginEnd="@dimen/dp15"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp210"
+                android:id="@+id/banner"
+                style="@style/BannerDefaultStyle"
+                app:banner_pointTopBottomMargin="@dimen/dp17"
+                app:banner_pointContainerBackground="@android:color/transparent"
+                app:banner_indicatorGravity="bottom|center_horizontal"
+                app:banner_transitionEffect="zoom"
+                />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_marginTop="@dimen/dp15"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </layout>

@@ -13,12 +13,17 @@ class InfoVm @ViewModelInject constructor(
     networkHelper: NetworkHelper
 ) :BaseViewModel(networkHelper) {
 
-    val infoResult = MutableLiveData<PageList<InfoBean>>()
-    fun getInfoList(pageNumber: Int) {
+    val isRefreshing = MutableLiveData<Boolean>().apply {
+        this.value = false
+    }
 
-        launchFlow({apiService.getPageList(pageNumber.toString())}
-            ,{infoResult.postValue(it)},
-              isLoadMore = (pageNumber!=1))
+    val infoResult = MutableLiveData<PageList<InfoBean>>()
+    fun getInfoList(pageNumber: Int,loadMoreError:()->Unit) {
+        launchFlow({apiService.getPageList(pageNumber.toString())},
+            {infoResult.postValue(it)},
+            isLoadMore = (pageNumber!=1),
+            loadMoreError = {loadMoreError()},
+            complete = { isRefreshing.postValue(false)})
 
     }
 

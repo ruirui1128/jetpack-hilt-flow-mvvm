@@ -34,15 +34,18 @@ open class BaseViewModel(): ViewModel(), LifecycleObserver {
      * @param block 请求体
      * @param success 成功回调
      * @param error 失败回调
+     * @param loadMoreError 加载更多失败
      * @param complete  完成回调（无论成功失败都会调用）
      * @param isShowDialog 是否显示加载框
      * @param isLoadMore 是否加载更多
      * @param isToastFore 是否自行处理res.message ,默认基类处理
+     * @param
      */
     fun <T>launchFlow(
         block: suspend CoroutineScope.() -> Res<T>,
         success: (T?) -> Unit,
         error: (String) -> Unit = {},
+        loadMoreError: () -> Unit = {},
         complete: () -> Unit = {},
         isShowDialog: Boolean = false,
         isLoadMore: Boolean = false,
@@ -62,7 +65,8 @@ open class BaseViewModel(): ViewModel(), LifecycleObserver {
                 .catch { t: Throwable ->   //异常捕获处理
                     error(t.message?:"")
                     if (isLoadMore){
-                        uiChange.msgEvent.postValue(Message(code = ResCode.LOAD_MORE_ERROR.getCode()))
+                        loadMoreError()
+  //                    uiChange.msgEvent.postValue(Message(code = ResCode.LOAD_MORE_ERROR.getCode()))
                     }else  {
                         uiChange.msgEvent.postValue(Message(code = ResCode.OTHER_ERROR.getCode(),msg = t.message?:""))
                     }

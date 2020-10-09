@@ -2,18 +2,17 @@ package com.lihui.hilt.ui.act
 
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
+import com.lihui.hilt.BR
 import com.lihui.hilt.R
 
 import com.lihui.hilt.ui.adapter.InfoAdapter
 import com.lihui.hilt.ui.vm.InfoVm
-import com.lihui.hilt.widget.loadmore.CustomLoadMoreView
 import com.rui.libray.base.BaseActivity
 import com.rui.libray.base.Message
 import com.rui.libray.base.ViewModelConfig
 import com.rui.libray.data.net.ResCode
-import com.rui.libray.ext.baseInitLoadMoreAdapter
+import com.rui.libray.ext.*
 
-import com.rui.libray.ext.baseLoadMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_info.*
 import javax.inject.Inject
@@ -28,7 +27,7 @@ class InfoActivity : BaseActivity<InfoVm>() {
 
     override val viewModelConfig: ViewModelConfig<InfoVm>
         get() = ViewModelConfig<InfoVm>(R.layout.activity_info)
-            .addViewModel(viewModels<InfoVm>().value)
+            .addViewModel(viewModels<InfoVm>().value,BR.infoVm)
 
     override fun init() {
         initView()
@@ -42,38 +41,23 @@ class InfoActivity : BaseActivity<InfoVm>() {
     }
 
     private fun initAdapter() {
-        baseInitLoadMoreAdapter(adapter, CustomLoadMoreView()){refresh(false)}
+        adapter.initLoadMore{refresh(false)}
         recyclerView.adapter = adapter
     }
 
-
     private fun initVm() {
         viewModel.infoResult.observe(this, Observer {
-            swipeRefreshLayout.isRefreshing = false
-            pageNumber = baseLoadMoreAdapter(adapter,it.datas,pageNumber)
+            pageNumber = adapter.loadMore(it.datas,pageNumber)
         })
     }
 
     private fun initView() {
-        swipeRefreshLayout.setColorSchemeResources(R.color.color_999)
-        swipeRefreshLayout.setOnRefreshListener { refresh(true) }
+        swipeRefreshLayout.init{refresh(true)}
     }
-
 
     private fun refresh(isRefresh: Boolean) {
         if (isRefresh){  pageNumber = 1}
-        viewModel.getInfoList(pageNumber)
+        viewModel.getInfoList(pageNumber){adapter.loadMoreModule.loadMoreFail()}
     }
-
-    //加载更多失败，重新加载
-    override fun handleEvent(msg: Message) {
-        super.handleEvent(msg)
-        swipeRefreshLayout.isRefreshing = false
-        if (msg.code == ResCode.LOAD_MORE_ERROR.getCode()){
-            adapter.loadMoreModule.loadMoreFail()
-        }
-    }
-
-
 
 }
