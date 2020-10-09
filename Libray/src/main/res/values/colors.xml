@@ -9,4 +9,6 @@
     <color name="color_ededed">#ededed</color>
     <color name="color_e6e6e6">#e6e6ed</color>
     <color name="black">#000</color>
+    <color name="color_333">#333333</color>
+    <color name="color_666">#666666</color>
 </resources>

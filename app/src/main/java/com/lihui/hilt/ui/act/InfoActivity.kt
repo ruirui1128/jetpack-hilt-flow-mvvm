@@ -1,5 +1,6 @@
 package com.lihui.hilt.ui.act
 
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.lihui.hilt.BR
@@ -22,42 +23,30 @@ import javax.inject.Inject
 class InfoActivity : BaseActivity<InfoVm>() {
 
     @Inject lateinit var adapter:InfoAdapter
-
     private var pageNumber = 1
-
     override val viewModelConfig: ViewModelConfig<InfoVm>
         get() = ViewModelConfig<InfoVm>(R.layout.activity_info)
             .addViewModel(viewModels<InfoVm>().value,BR.infoVm)
-
+    /**
+     * 带有StatusLayout布局界面 必须复写此方法
+     */
+    override fun setStatusLayout(): View? {
+        reloadListener = { refresh(true) }
+        return swipeRefreshLayout
+    }
     override fun init() {
-        initView()
-        initAdapter()
-        initVm()
-        initData()
-    }
-
-    private fun initData() {
-        refresh(true)
-    }
-
-    private fun initAdapter() {
+        swipeRefreshLayout.init{refresh(true)}
         adapter.initLoadMore{refresh(false)}
         recyclerView.adapter = adapter
-    }
-
-    private fun initVm() {
         viewModel.infoResult.observe(this, Observer {
             pageNumber = adapter.loadMore(it.datas,pageNumber)
         })
+        refresh(true, firstLoad = true)
     }
 
-    private fun initView() {
-        swipeRefreshLayout.init{refresh(true)}
-    }
-
-    private fun refresh(isRefresh: Boolean) {
+    private fun refresh(isRefresh: Boolean,firstLoad : Boolean = false) {
         if (isRefresh){  pageNumber = 1}
-        viewModel.getInfoList(pageNumber){adapter.loadMoreModule.loadMoreFail()}
+        viewModel.getInfoList(pageNumber,firstLoad){adapter.loadMoreModule.loadMoreFail()}
     }
 
 }

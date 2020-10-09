@@ -18,9 +18,11 @@ class InfoVm @ViewModelInject constructor(
     }
 
     val infoResult = MutableLiveData<PageList<InfoBean>>()
-    fun getInfoList(pageNumber: Int,loadMoreError:()->Unit) {
+
+    fun getInfoList(pageNumber: Int,firstLoad : Boolean,loadMoreError:()->Unit) {
         launchFlow({apiService.getPageList(pageNumber.toString())},
             {infoResult.postValue(it)},
+            isStatueLayout = firstLoad,
             isLoadMore = (pageNumber!=1),
             loadMoreError = {loadMoreError()},
             complete = { isRefreshing.postValue(false)})

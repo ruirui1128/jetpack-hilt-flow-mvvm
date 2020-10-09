@@ -63,6 +63,6 @@ fun SwipeRefreshLayout.init(refreshListener: () -> Unit) {
         setOnRefreshListener {
             refreshListener()
         }
-      setColorSchemeResources(R.color.colorPrimary)
+      setColorSchemeResources(R.color.colorAccent)
     }
 }
