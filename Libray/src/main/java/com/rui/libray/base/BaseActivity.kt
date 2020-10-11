@@ -54,21 +54,30 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
     }
 
     private fun initLoadSir() {
-        if (setStatusLayout()!=null){
-            loadService = LoadSir.getDefault().register(setStatusLayout()) {
+        val view = setStatusLayoutAndListener()
+        if (view!=null){
+            loadService = LoadSir.getDefault().register(view) {
                 loadSirShowLoading()
                 reloadListener()
             }
         }
     }
-    //加载布局
-    protected open fun setStatusLayout(): View? {
+
+    /**
+     * 子类需要加载页面，需要复写此方法，并重新赋值reloadListener
+     * override fun setStatusLayout(): View? {
+        reloadListener = { refresh(true) }
+        return swipeRefreshLayout
+        }
+     *
+     */
+    protected open fun setStatusLayoutAndListener(): View? {
         return null
     }
     private fun initBar() {
-        StatusBarUtils.with(this)
-            .setColor(resources.getColor(R.color.white))
-            .init()
+//        StatusBarUtils.with(this)
+//            .setColor(resources.getColor(R.color.white))
+//            .init()
     }
 
     abstract fun init()
@@ -152,7 +161,7 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
         loadService?.showCallback(ErrorCallback::class.java)
     }
 
-    private fun loadSirShowEmpty(){
+    open fun loadSirShowEmpty(){
         loadService?.showCallback(EmptyCallback::class.java)
     }
 

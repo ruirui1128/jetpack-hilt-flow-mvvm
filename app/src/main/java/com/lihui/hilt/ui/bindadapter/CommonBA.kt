@@ -180,7 +180,10 @@ object CommonBA {
         swipeRefresh: SwipeRefreshLayout,
         isRefreshing:Boolean = false
     ) {
-        swipeRefresh.isRefreshing = false
+        if (swipeRefresh.isRefreshing){
+            swipeRefresh.isRefreshing = false
+        }
+
     }
 
 

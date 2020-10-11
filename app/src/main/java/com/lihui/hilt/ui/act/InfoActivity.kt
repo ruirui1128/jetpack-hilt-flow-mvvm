@@ -30,7 +30,7 @@ class InfoActivity : BaseActivity<InfoVm>() {
     /**
      * 带有StatusLayout布局界面 必须复写此方法
      */
-    override fun setStatusLayout(): View? {
+    override fun setStatusLayoutAndListener(): View? {
         reloadListener = { refresh(true) }
         return swipeRefreshLayout
     }
@@ -39,7 +39,7 @@ class InfoActivity : BaseActivity<InfoVm>() {
         adapter.initLoadMore{refresh(false)}
         recyclerView.adapter = adapter
         viewModel.infoResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it.datas,pageNumber)
+            pageNumber = adapter.loadMore(it.datas,pageNumber){loadSirShowEmpty()}
         })
         refresh(true, firstLoad = true)
     }

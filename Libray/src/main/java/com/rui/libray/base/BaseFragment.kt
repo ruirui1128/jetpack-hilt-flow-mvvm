@@ -13,9 +13,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.kingja.loadsir.core.LoadService
+import com.kingja.loadsir.core.LoadSir
 import com.rui.libray.data.net.ResCode
-
-
+import com.rui.libray.widget.loadsir.EmptyCallback
+import com.rui.libray.widget.loadsir.ErrorCallback
+import com.rui.libray.widget.loadsir.LoadingCallback
 
 
 abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
@@ -28,6 +31,9 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
     protected abstract val viewModelConfig: ViewModelConfig<VM>
 
+    private  var loadService: LoadService<Any>? = null
+
+    var reloadListener:()->Unit = {}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,14 +50,8 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val config = viewModelConfig
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(
-            inflater,
-            config.getLayout(),
-            container,
-            false
-        )
+        val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, config.getLayout(), container, false)
         binding.lifecycleOwner = this
-
         val variableId = config.getVmVariableId()
         viewModel = config.getViewModel()?:return null
         if (variableId!=ViewModelConfig.VM_NO_BIND){
@@ -66,19 +66,51 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
             i++
         }
         mBinding = binding
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initLoadSir()
         registerUIChange()
         init(savedInstanceState)
+    }
+
+    private fun initLoadSir() {
+        val view = setStatusLayoutAndListener()
+        if (view!=null){
+            loadService = LoadSir.getDefault().register(view) {
+                loadSirShowLoading()
+                reloadListener()
+            }
+        }
+    }
+
+    protected open fun setStatusLayoutAndListener(): View? {
+        return null
     }
 
     open fun dismissLoading() {
     }
 
     open fun showLoadingDialog() {
+    }
+
+    private fun loadSirShowSuccess(){
+        loadService?.showSuccess()
+    }
+
+    private fun loadSirShowLoading(){
+        loadService?.showCallback(LoadingCallback::class.java)
+    }
+
+    private fun loadSirShowError(){
+        loadService?.showCallback(ErrorCallback::class.java)
+    }
+
+    open fun loadSirShowEmpty(){
+        loadService?.showCallback(EmptyCallback::class.java)
     }
 
 
@@ -92,6 +124,18 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
         viewModel.uiChange.msgEvent.observe(viewLifecycleOwner, Observer {
             handleEvent(it)
+        })
+
+        viewModel.uiChange.statueShowLoading.observe(this,{
+            loadSirShowLoading()
+        })
+
+        viewModel.uiChange.statueSuccess.observe(this,{
+            loadSirShowSuccess()
+        })
+
+        viewModel.uiChange.statueError.observe(this,{
+            loadSirShowError()
         })
 
     }
@@ -115,7 +159,5 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     }
 
     abstract fun init(savedInstanceState: Bundle?)
-
-
 
 }

@@ -17,4 +17,9 @@
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp210">210dp</dimen>
     <dimen name="dp17">17dp</dimen>
+    <dimen name="sp10">10sp</dimen>
+    <dimen name="dp8">8dp</dimen>
+    <dimen name="dp24">24dp</dimen>
+    <dimen name="dp3">3dp</dimen>
+    <dimen name="dp54">54dp</dimen>
 </resources>

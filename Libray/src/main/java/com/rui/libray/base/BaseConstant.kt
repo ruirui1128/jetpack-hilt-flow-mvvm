@@ -10,4 +10,6 @@ object BaseConstant {
 
     //每页个数
     const val PAGESIZE_19 = 19
+
+    const val PAGESIZE_20 = 20
 }

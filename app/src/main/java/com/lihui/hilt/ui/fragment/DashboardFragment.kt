@@ -5,15 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import com.lihui.hilt.BR
 import com.lihui.hilt.R
+import com.lihui.hilt.ui.vm.HomeVm
+import com.rui.libray.base.BaseFragment
+import com.rui.libray.base.BaseViewModel
+import com.rui.libray.base.ViewModelConfig
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class DashboardFragment : BaseFragment<BaseViewModel>() {
 
-class DashboardFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false)
+    override val viewModelConfig: ViewModelConfig<BaseViewModel>
+        get() = ViewModelConfig<BaseViewModel>(R.layout.fragment_dashboard)
+            .addViewModel(viewModels<BaseViewModel>().value)
+
+    override fun init(savedInstanceState: Bundle?) {
+
     }
 }
