@@ -1,0 +1,271 @@
+<resources>
+
+    <style name="wrap_wrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="match_wrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="wrap_wrap_margin_15" parent="wrap_wrap">
+        <item name="android:layout_marginStart">@dimen/dp15</item>
+        <item name="android:layout_marginEnd">@dimen/dp15</item>
+    </style>
+
+    <style name="match_wrap_margin_15" parent="match_wrap">
+        <item name="android:layout_marginStart">@dimen/dp15</item>
+        <item name="android:layout_marginEnd">@dimen/dp15</item>
+    </style>
+    <style name="match_wrap_margin_20" parent="match_wrap">
+        <item name="android:layout_marginStart">@dimen/dp20</item>
+        <item name="android:layout_marginEnd">@dimen/dp20</item>
+    </style>
+
+  <!--  通用textView按钮属性-->
+    <style name="text_button_base">
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_marginStart">@dimen/dp15</item>
+        <item name="android:layout_marginEnd">@dimen/dp15</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp44</item>
+    </style>
+
+    <style name="text_blue_common" parent="text_button_base">
+        <item name="android:background">@drawable/ripple_bg_0d6cff_r_25</item>
+    </style>
+
+    <style name="text_dark_common" parent="text_button_base">
+        <item name="android:background">@drawable/ripple_bg_1a202e_r_25</item>
+    </style>
+    
+    <style name="text_1ec898_common_r_5" parent="text_button_base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp36</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:background">@drawable/ripple_bg_1ec898_r_5</item>
+    </style>
+
+
+    <style name="text_ff3455_common_r_5" parent="text_button_base">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp36</item>
+        <item name="android:layout_marginStart">0dp</item>
+        <item name="android:layout_marginEnd">0dp</item>
+        <item name="android:background">@drawable/ripple_bg_ff3455_r_5</item>
+    </style>
+
+
+    <!--  通用textView 747880颜色-->
+    <style name="text_747880">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:textColor">@color/color_747880</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="text_747880_12" parent="text_747880">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+    <style name="text_747880_14" parent="text_747880">
+        <item name="android:textSize">@dimen/sp14</item>
+    </style>
+    <style name="text_747880_16" parent="text_747880">
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+    <style name="text_747880_16_bold" parent="text_747880_16">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="text_747880_18" parent="text_747880">
+        <item name="android:textSize">@dimen/sp18</item>
+    </style>
+
+    <!--  Space-->
+    <style name="space_width">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+    <style name="space_height">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <!--  通用textView 747880颜色-->
+    <style name="text_0d6cff">
+        <item name="android:textColor">@color/color_0d6cff</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="background">@color/transparent</item>
+    </style>
+    <style name="text_0d6cff_12" parent="text_0d6cff">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+    <style name="text_0d6cff_14" parent="text_0d6cff">
+        <item name="android:textSize">@dimen/sp14</item>
+    </style>
+    <style name="text_0d6cff_16" parent="text_0d6cff">
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+    <style name="text_0d6cff_18" parent="text_0d6cff">
+        <item name="android:textSize">@dimen/sp18</item>
+    </style>
+    <style name="text_0d6cff_18_bold" parent="text_0d6cff_18">
+        <item name="android:textSize">@dimen/sp18</item>
+    </style>
+
+    <!--  通用textView 白色-->
+    <style name="text_white">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    <style name="text_white_34_bold" parent="text_white">
+        <item name="android:textSize">34sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_white_18" parent="text_white">
+        <item name="android:textSize">@dimen/sp18</item>
+    </style>
+
+    <style name="text_white_22" parent="text_white">
+        <item name="android:textSize">22sp</item>
+    </style>
+    <style name="text_white_22_bold" parent="text_white_22">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_white_16" parent="text_white">
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+    <style name="text_white_14" parent="text_white">
+        <item name="android:textSize">@dimen/sp14</item>
+    </style>
+    <style name="text_white_12" parent="text_white">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+
+    <style name="text_white_16_bold" parent="text_white">
+        <item name="android:textSize">@dimen/sp16</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_white_18_bold" parent="text_white_18">
+        <item name="android:textSize">@dimen/sp18</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_white_20_bold" parent="text_white">
+        <item name="android:textSize">@dimen/sp20</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
+    <style name="text_white_26_bold" parent="text_white_18">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  通用textView FFB254色-->
+    <style name="text_ffb254">
+        <item name="android:textColor">@color/color_ffb254</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+    
+    <style name="text_ffb254_14" parent="text_ffb254">
+        <item name="android:textSize">@dimen/sp14</item>
+    </style>
+
+    <style name="text_ffb254_22" parent="text_ffb254">
+        <item name="android:textSize">@dimen/sp22</item>
+    </style>
+    <style name="text_ffb254_22_bold" parent="text_ffb254_22">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text_ffb254_12" parent="text_ffb254">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+    <style name="text_ffb254_wei_h_30" parent="text_ffb254">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">@dimen/dp30</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/ripple_bg_202636_r_5</item>
+    </style>
+
+    <!--  通用textView 87B6FF色-->
+    <style name="text_87b6ff">
+        <item name="android:textColor">@color/color_87b6ff</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="text_87b6ff_12" parent="text_87b6ff">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+    <style name="text_87b6ff_14" parent="text_87b6ff">
+        <item name="android:textSize">@dimen/sp14</item>
+    </style>
+
+    <!--  通用textView FF3455色-->
+    <style name="text_ff3455">
+        <item name="android:textColor">@color/color_ff3455</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="text_ff3455_12" parent="text_ff3455">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+
+    <style name="text_ff3455_16" parent="text_ff3455">
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+
+    <style name="text_ff3455_16_bold" parent="text_ff3455_16">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+
+    <!--  通用textView 1ec898色-->
+    <style name="text_1ec898">
+        <item name="android:textColor">@color/color_1ec898</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+    </style>
+
+    <style name="text_1ec898_12" parent="text_1ec898">
+        <item name="android:textSize">@dimen/sp12</item>
+    </style>
+
+    <style name="text_1ec898_16" parent="text_1ec898">
+        <item name="android:textSize">@dimen/sp16</item>
+    </style>
+
+    <style name="text_1ec898_16_bold" parent="text_1ec898_16">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="text_1ec898_26" parent="text_1ec898">
+        <item name="android:textSize">26sp</item>
+    </style>
+
+    <style name="text_1ec898_26_bold" parent="text_1ec898_26">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+</resources>

@@ -8,6 +8,11 @@
         <variable
             name="loginVm"
             type="com.lihui.hilt.ui.vm.LoginVm" />
+        <variable
+            name="loginPresenter"
+            type="com.lihui.hilt.ui.presenter.LoginPresenter" />
+
+        <import type="android.text.InputType" />
 
     </data>
 
@@ -21,8 +26,6 @@
             app:titleText="登录"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
-
-
         <EditText
             android:layout_marginTop="@dimen/dp20"
             android:hint="输入账号"
@@ -34,11 +37,50 @@
             android:background="@drawable/bg_r_5_s_1"
             android:inputType="phone"
             android:maxLines="1"
-            android:maxLength="14"
+            android:maxLength="16"
             android:digits="0123456789+"
-            android:id="@+id/etPhone"
             android:lines="1"
             android:layout_height="@dimen/dp50"/>
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginEnd="@dimen/dp15"
+            android:background="@drawable/bg_r_5_s_1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:hint="输入密码"
+                android:paddingStart="@dimen/dp15"
+                android:textSize="@dimen/sp14"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:maxLength="16"
+                android:lines="1"
+                android:layout_height="@dimen/dp50"/>
+
+            <ImageView
+                android:onClick="@{()->loginPresenter.showPwd(loginVm)}"
+                android:background="?android:attr/selectableItemBackground"
+                android:layout_gravity="center_vertical"
+                android:id="@+id/ivSee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp5"
+                android:src="@{loginVm.isClose? @drawable/ic_close: @drawable/ic_open}"
+                tools:src="@drawable/ic_pwd_close" />
+        </LinearLayout>
+
+        <TextView
+            android:onClick="@{()->loginPresenter.login(loginVm)}"
+            style="@style/text_blue_common"
+            android:text="登录"
+            android:layout_marginTop="@dimen/dp25"/>
+
 
 
     </LinearLayout>

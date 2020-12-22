@@ -8,4 +8,46 @@
     <color name="color_999">#999</color>
     <color name="color_ededed">#ededed</color>
     <color name="color_e6e6e6">#e6e6ed</color>
+    <color name="color_0d6cff">#0D6CFF</color>
+    <color name="color_1a202e">#1A202E</color>
+    <color name="color_1a202e_50">#801A202E</color>
+    <color name="gray">#808080</color>
+    <color name="gray_40">#40808080</color>
+    <color name="color_747880">#747880</color>
+    <color name="color_202636">#202636</color>
+    <color name="color_ffb254">#FFB254</color>
+    <color name="color_1ec898">#1EC898</color>
+    <color name="color_ff3455">#FF3455</color>
+    <color name="color_242b3c">#242B3C</color>
+    <color name="color_87b6ff">#87B6FF</color>
+    <color name="color_411c2d">#411C2D</color>
+    <color name="color_b8babf">#B8BABF</color>
+    <color name="color_13262c">#13262C</color>
+    <color name="color_271827">#271827</color>
+    <color name="white_5">#0CFFFFFF</color>
+    <color name="color_28334d">#28334D</color>
+
+
+
+    <!-- chart -->
+    <color name="chart_bg">#ffffff</color>
+    <color name="marker_bg">#406ebc</color>
+    <color name="marker_text_color">#FFFFFF</color>
+    <color name="border_color">#e8e8e8</color>
+    <color name="grid_color">#e8e8e8</color>
+    <color name="label_text">#A7ADBC</color>
+    <color name="axis_text">#333333</color>
+    <color name="minute_jizhun">#7F9976</color>
+    <color name="minute_blue">#5198FA</color>
+    <color name="minute_yellow">#E7B448</color>
+    <color name="highLight_Color">#aa424242</color>
+    <color name="fill_Color">#D0F1FF</color>
+    <color name="up_color">#E9403C</color><!-- 行情UP颜色  涨-->
+    <color name="down_color">#30A52F</color><!-- 行情DOWN颜色  跌 -->
+    <color name="equal_color">#696969</color><!-- 行情Equal颜色  不变 -->
+
+    <color name="ma5">#5198FA</color>
+    <color name="ma10">#E9967A</color>
+    <color name="ma20">#8d4bbb</color>
+    <color name="ma30">#804000</color>
 </resources>

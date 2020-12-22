@@ -13,13 +13,13 @@ class LoginVm @ViewModelInject constructor(
          networkHelper: NetworkHelper)
     :BaseViewModel(networkHelper) {
 
+    //账号
     val username = MutableLiveData<String>()
+    //密码
     val passwrod = MutableLiveData<String>()
 
-    val loginText = MutableLiveData<String>().apply {
-        this.value = "默认登录"
-    }
-
+    //是否显示密码  默认不显示
+    val isClose = MutableLiveData<Boolean>().apply { this.value = false }
 
     val loginResult = MutableLiveData<String>()
     fun login(){
