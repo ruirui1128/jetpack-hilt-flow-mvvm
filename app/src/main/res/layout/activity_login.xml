@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <EditText
+            android:text="@={loginVm.username}"
             android:layout_marginTop="@dimen/dp20"
             android:hint="输入账号"
             android:paddingStart="@dimen/dp15"
@@ -51,13 +52,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <EditText
+                android:text="@={loginVm.passwrod}"
                 android:hint="输入密码"
+                android:inputType="@{loginVm.isClose ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD}"
                 android:paddingStart="@dimen/dp15"
                 android:textSize="@dimen/sp14"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:background="@null"
-                android:inputType="textPassword"
                 android:maxLines="1"
                 android:maxLength="16"
                 android:lines="1"
@@ -71,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp5"
-                android:src="@{loginVm.isClose? @drawable/ic_close: @drawable/ic_open}"
+                android:src="@{loginVm.isClose? @drawable/ic_pwd_close: @drawable/ic_pwd_open}"
                 tools:src="@drawable/ic_pwd_close" />
         </LinearLayout>
 

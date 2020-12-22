@@ -26,7 +26,7 @@ class LoginPresenter @Inject constructor() {
      */
     fun showPwd(viewModel: LoginVm){
         val value = viewModel.isClose.value?:false
-        viewModel.isClose.value = !value
+        viewModel.isClose.postValue(!value)
     }
 
 }

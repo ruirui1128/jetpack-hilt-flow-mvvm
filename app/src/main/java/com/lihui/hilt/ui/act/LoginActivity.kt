@@ -33,7 +33,7 @@ class LoginActivity : BaseActivity<LoginVm>() {
         //登录成功 操作
         viewModel.loginResult.observe(this, Observer {
             ToastUtil.toast("登录成功")
-            finish()
+            goToAndFinish(HomeActivity::class.java)
         })
     }
 }
