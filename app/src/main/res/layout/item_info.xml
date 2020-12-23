@@ -7,7 +7,7 @@
     <data>
         <variable
             name="infoVm"
-            type="com.lihui.hilt.data.bean.InfoBean" />
+            type="com.lihui.hilt.data.model.InfoModel" />
 
     </data>
 

@@ -8,17 +8,15 @@ import android.widget.ImageView
 
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import cn.bingoogolapple.bgabanner.BGABanner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
-import com.lihui.hilt.data.bean.BannerDataBean
+import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.ui.vm.HomeVm
-import com.lihui.hilt.ui.vm.MainViewModel
 import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.ViewModelConfig
@@ -26,23 +24,15 @@ import com.rui.libray.ext.init
 import com.rui.libray.ext.initLoadMore
 import com.rui.libray.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.WithFragmentBindings
 import kotlinx.android.synthetic.main.fragment_home.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, BannerDataBean>,
-    BGABanner.Adapter<ImageView, BannerDataBean> {
+class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, BannerDataModel>,
+    BGABanner.Adapter<ImageView, BannerDataModel> {
 
     @Inject lateinit var adapter : ArticleAdapter
     private var pageNumber = 1
-
-
-    override fun setStatusLayoutAndListener(): View? {
-        reloadListener = { initData(true) }
-        return swipe
-    }
-
 
     override val viewModelConfig: ViewModelConfig<HomeVm>
         get() = ViewModelConfig<HomeVm>(R.layout.fragment_home)
@@ -50,9 +40,11 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
-        initAdapter()
-        initVm()
-        initData(true)
+        viewModel.uiChange.statueError.call()
+
+//        initAdapter()
+//        initVm()
+//        initData(true)
     }
 
     private fun initAdapter() {
@@ -62,7 +54,6 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
 
     private fun initData(firstLoad : Boolean = false) {
         pageNumber = 1
-        //获取banner数据
         viewModel.getBanner()
         getArticleList(firstLoad)
     }
@@ -84,15 +75,12 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
 
     private fun initView() {
         swipe.init { initData(false) }
-//        banner.setAdapter(this)
-//        banner.setDelegate(this)
     }
-
 
     override fun onBannerItemClick(
         banner: BGABanner?,
         itemView: ImageView?,
-        model: BannerDataBean?,
+        model: BannerDataModel?,
         position: Int
     ) {
         ToastUtil.toast("点击了$position")
@@ -101,7 +89,7 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
     override fun fillBannerItem(
         banner: BGABanner?,
         itemView: ImageView?,
-        model: BannerDataBean?,
+        model: BannerDataModel?,
         position: Int
     ) {
         itemView?.context?:return

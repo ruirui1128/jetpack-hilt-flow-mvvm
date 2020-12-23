@@ -1,11 +1,11 @@
-package com.lihui.hilt.data.bean
+package com.lihui.hilt.data.model
 
 import android.os.Parcelable
 import androidx.databinding.BaseObservable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class ArticleBean(
+data class ArticleModel(
     var apkLink: String,
     var author: String,//作者
     var chapterId: Int,
@@ -25,7 +25,7 @@ data class ArticleBean(
     var superChapterId: Int,
     var superChapterName: String,
     var shareUser: String,
-    var tags: List<TagsBean>,
+    var tags: List<TagsModel>,
     var title: String,
     var type: Int,
     var userId: Int,

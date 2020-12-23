@@ -1,12 +1,15 @@
 package com.lihui.hilt.ui.vm
 
-import android.text.TextUtils
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.UserApi
+import com.lihui.hilt.data.model.BannerDataModel
+import com.lihui.hilt.data.model.LoginModel
 import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
 class LoginVm @ViewModelInject constructor(
          private val userApi: UserApi,
@@ -19,42 +22,21 @@ class LoginVm @ViewModelInject constructor(
     val passwrod = MutableLiveData<String>()
 
     //是否显示密码  默认不显示
-    val isClose = MutableLiveData<Boolean>().apply { this.value = false }
+    val isClose = MutableLiveData<Boolean>().apply { this.value = true }
 
-    val loginResult = MutableLiveData<String>()
+    val loginResult = MutableLiveData<LoginModel>()
     fun login(){
-        if (!checkParams())return
         val map = hashMapOf("username" to (username.value?:""),
         "password" to (passwrod.value?:""))
         launchFlow({userApi.login(map)},{loginResult.postValue(it)},isShowDialog = true)
+    }
+
+     fun login2(map :HashMap<String,String>)   =  getData<LoginModel?> { userApi.login(map) }.collect {
 
     }
 
 
 
-
-    fun login2(listener: (String)->Unit){
-        if (!checkParams())return
-        val map = hashMapOf("username" to (username.value?:""),
-            "password" to (passwrod.value?:""))
-        launchFlow({userApi.login(map)},{loginResult.postValue(it)},
-            isShowDialog = true,
-            error = {listener(it)})
-
-    }
-
-    private fun checkParams():Boolean{
-        if (TextUtils.isEmpty(username.value)){
-            ToastUtil.toast("用户名为空")
-            return false
-        }
-
-        if (TextUtils.isEmpty(passwrod.value)){
-            ToastUtil.toast("密码为空")
-            return false
-        }
-        return true
-    }
 
 
 }

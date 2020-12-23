@@ -1,10 +1,10 @@
-package com.lihui.hilt.data.bean
+package com.lihui.hilt.data.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class BannerDataBean(
+data class BannerDataModel(
     var desc: String = "",
     var id: Int = 0,
     var imagePath: String = "",

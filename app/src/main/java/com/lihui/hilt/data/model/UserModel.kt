@@ -1,9 +1,7 @@
-package com.lihui.hilt.data.bean
-
-import com.squareup.moshi.Json
+package com.lihui.hilt.data.model
 
 
-data class UserBean(
+data class UserModel(
     val id: Int = 0,
     val name: String = "",
     val email: String = "",

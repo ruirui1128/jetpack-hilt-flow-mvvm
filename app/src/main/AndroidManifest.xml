@@ -17,13 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-<!--        <activity android:name=".ui.act.InfoActivity" />-->
+        <activity android:name=".ui.act.HomeActivity" />
 
-<!--        <activity android:name=".ui.act.LoginActivity" />-->
         <activity android:name=".ui.act.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

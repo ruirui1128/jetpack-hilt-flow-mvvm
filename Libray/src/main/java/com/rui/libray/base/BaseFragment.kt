@@ -3,6 +3,8 @@ package com.rui.libray.base
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
+import com.rui.libray.R
 import com.rui.libray.data.net.ResCode
 import com.rui.libray.widget.loadsir.EmptyCallback
 import com.rui.libray.widget.loadsir.ErrorCallback
@@ -31,9 +34,9 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
 
     protected abstract val viewModelConfig: ViewModelConfig<VM>
 
-    private  var loadService: LoadService<Any>? = null
+    private var loadService: LoadService<Any>? = null
 
-    var reloadListener:()->Unit = {}
+    var reloadListener: () -> Unit = {}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,18 +47,14 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val config = viewModelConfig
         val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, config.getLayout(), container, false)
         binding.lifecycleOwner = this
         val variableId = config.getVmVariableId()
-        viewModel = config.getViewModel()?:return null
-        if (variableId!=ViewModelConfig.VM_NO_BIND){
-            binding?.setVariable(variableId,viewModel)
+        viewModel = config.getViewModel() ?: return null
+        if (variableId != ViewModelConfig.VM_NO_BIND) {
+            binding?.setVariable(variableId, viewModel)
         }
 
         val bindingParams: SparseArray<*> = config.getBindingParams()
@@ -67,25 +66,29 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
         }
         mBinding = binding
 
-        return binding.root
+        val loadSir = LoadSir.Builder()
+                .addCallback(LoadingCallback())
+                .addCallback(EmptyCallback())
+                .addCallback(ErrorCallback())
+                .build()
+
+        loadService = loadSir.register(mBinding?.root) {
+            // 重新加载逻辑
+            when (it?.id) {
+                R.id.btnRetry -> {
+                    Toast.makeText(context, "点击了", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        return loadService?.loadLayout
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initLoadSir()
         registerUIChange()
         init(savedInstanceState)
     }
 
-    private fun initLoadSir() {
-        val view = setStatusLayoutAndListener()
-        if (view!=null){
-            loadService = LoadSir.getDefault().register(view) {
-                loadSirShowLoading()
-                reloadListener()
-            }
-        }
-    }
 
     protected open fun setStatusLayoutAndListener(): View? {
         return null
@@ -97,20 +100,37 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     open fun showLoadingDialog() {
     }
 
-    private fun loadSirShowSuccess(){
-        loadService?.showSuccess()
+    /**
+     * LoadSir问题 必须延迟一段时间
+     */
+    private val handler = Handler(Looper.getMainLooper())
+    private fun loadSirShowSuccess() {
+        handler.postDelayed({
+            loadService?.showSuccess()
+        }, 200L)
+
     }
 
-    private fun loadSirShowLoading(){
-        loadService?.showCallback(LoadingCallback::class.java)
+    private fun loadSirShowLoading() {
+        handler.postDelayed({
+            loadService?.showCallback(LoadingCallback::class.java)
+        }, 200L)
+
     }
 
-    private fun loadSirShowError(){
-        loadService?.showCallback(ErrorCallback::class.java)
+    private fun loadSirShowError() {
+        handler.postDelayed({
+            loadService?.showCallback(ErrorCallback::class.java)
+        }, 200L)
+
+
     }
 
-    open fun loadSirShowEmpty(){
-        loadService?.showCallback(EmptyCallback::class.java)
+    open fun loadSirShowEmpty() {
+        handler.postDelayed({
+            loadService?.showCallback(EmptyCallback::class.java)
+        }, 200L)
+
     }
 
 
@@ -126,15 +146,15 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
             handleEvent(it)
         })
 
-        viewModel.uiChange.statueShowLoading.observe(this,{
+
+        viewModel.uiChange.statueShowLoading.observe(this, Observer {
             loadSirShowLoading()
         })
-
-        viewModel.uiChange.statueSuccess.observe(this,{
+        viewModel.uiChange.statueSuccess.observe(this, Observer {
             loadSirShowSuccess()
         })
 
-        viewModel.uiChange.statueError.observe(this,{
+        viewModel.uiChange.statueError.observe(this, Observer {
             loadSirShowError()
         })
 
@@ -143,12 +163,12 @@ abstract class BaseFragment<VM : BaseViewModel> : Fragment() {
     open fun handleEvent(msg: Message) {
         when (msg.code) {
             ResCode.NETWORK_ERROR.getCode() -> {
-                Toast.makeText(activity,msg.msg,Toast.LENGTH_LONG).show()
+                Toast.makeText(activity, msg.msg, Toast.LENGTH_LONG).show()
             }
-            ResCode.TOKEN_ERROR.getCode()->{
+            ResCode.TOKEN_ERROR.getCode()   -> {
 //                LiveEventBus.get(MsgBusEvent.TOKEN_OUT_EVENT).post("")
             }
-            else ->  Toast.makeText(activity,msg.msg,Toast.LENGTH_LONG).show()
+            else                            -> Toast.makeText(activity, msg.msg, Toast.LENGTH_LONG).show()
         }
 
     }

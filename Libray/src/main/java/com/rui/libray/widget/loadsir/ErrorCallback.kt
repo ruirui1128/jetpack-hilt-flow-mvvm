@@ -1,5 +1,7 @@
 package com.rui.libray.widget.loadsir
 
+import android.content.Context
+import android.view.View
 import com.kingja.loadsir.callback.Callback
 import com.rui.libray.R
 
@@ -10,4 +12,7 @@ class ErrorCallback : Callback() {
         return R.layout.layout_error
     }
 
+    override fun onReloadEvent(context: Context?, view: View?): Boolean {
+        return true
+    }
 }

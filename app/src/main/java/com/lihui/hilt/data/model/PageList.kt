@@ -1,4 +1,4 @@
-package com.lihui.hilt.data.bean
+package com.lihui.hilt.data.model
 
 data class PageList<T>(
     val curPage:Int,

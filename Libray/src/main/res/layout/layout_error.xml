@@ -21,11 +21,11 @@
         android:textColor="@color/color_333"
         android:textSize="@dimen/sp14" />
 
-    <TextView
-        android:id="@+id/error_text"
+    <Button
+        android:id="@+id/btnRetry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp12"
         android:textSize="@dimen/sp12"
-        android:text="请检查网络后点击重新加载" />
+        android:text="点击重试" />
 </LinearLayout>
