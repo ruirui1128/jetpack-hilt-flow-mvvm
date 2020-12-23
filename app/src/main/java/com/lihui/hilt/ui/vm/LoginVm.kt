@@ -31,9 +31,6 @@ class LoginVm @ViewModelInject constructor(
         launchFlow({userApi.login(map)},{loginResult.postValue(it)},isShowDialog = true)
     }
 
-     fun login2(map :HashMap<String,String>)   =  getData<LoginModel?> { userApi.login(map) }.collect {
-
-    }
 
 
 

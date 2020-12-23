@@ -29,47 +29,63 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, BannerDataModel>,
-    BGABanner.Adapter<ImageView, BannerDataModel> {
+        BGABanner.Adapter<ImageView, BannerDataModel> {
 
-    @Inject lateinit var adapter : ArticleAdapter
+    /**
+     * fastmock接口不保存数据!!!  不保存数据!!!  不保存数据!!!
+     *
+     * 仅仅是为了演示
+     */
+
+    @Inject
+    lateinit var adapter: ArticleAdapter
     private var pageNumber = 1
 
     override val viewModelConfig: ViewModelConfig<HomeVm>
         get() = ViewModelConfig<HomeVm>(R.layout.fragment_home)
-            .addViewModel(viewModels<HomeVm>().value,BR.homeVm)
+                .addViewModel(viewModels<HomeVm>().value, BR.homeVm)
 
     override fun init(savedInstanceState: Bundle?) {
         initView()
-        viewModel.uiChange.statueError.call()
-
-//        initAdapter()
-//        initVm()
-//        initData(true)
+        initAdapter()
+        initVm()
+        initData(true)
     }
 
     private fun initAdapter() {
+        //加载更多 loadMore = getArticleList()   在扩展里面
         adapter.initLoadMore { getArticleList() }
         rcvArticle.adapter = adapter
+        adapter.setOnItemClickListener { ada, view, position ->
+            //数据请求成功 更新状态
+            viewModel.getCollect {
+                val item = adapter.getItem(position)
+                item.isCollect = true
+                item.notifyChange()
+            }
+        }
+
     }
 
-    private fun initData(firstLoad : Boolean = false) {
+    private fun initData(firstLoad: Boolean = false) {
         pageNumber = 1
-        viewModel.getBanner()
+        // viewModel.getBanner()
         getArticleList(firstLoad)
     }
+
     //获取文章数据
-    private fun getArticleList(firstLoad : Boolean = false){
-        viewModel.getArticleList(pageNumber,firstLoad){adapter.loadMoreModule.loadMoreFail()}
+    private fun getArticleList(firstLoad: Boolean = false) {
+        viewModel.getArticleList(pageNumber, firstLoad) { adapter.loadMoreModule.loadMoreFail() }
     }
 
     private fun initVm() {
         //banner数据返回
         viewModel.bannerResult.observe(this, Observer {
-          //  banner.setData(it,null)
+            //  banner.setData(it,null)
         })
         //文章数据返回
         viewModel.articleResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it.datas,pageNumber){loadSirShowEmpty()}
+            pageNumber = adapter.loadMore(it.list, pageNumber) { loadSirShowEmpty() }
         })
     }
 
@@ -78,26 +94,26 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
     }
 
     override fun onBannerItemClick(
-        banner: BGABanner?,
-        itemView: ImageView?,
-        model: BannerDataModel?,
-        position: Int
+            banner: BGABanner?,
+            itemView: ImageView?,
+            model: BannerDataModel?,
+            position: Int
     ) {
         ToastUtil.toast("点击了$position")
     }
 
     override fun fillBannerItem(
-        banner: BGABanner?,
-        itemView: ImageView?,
-        model: BannerDataModel?,
-        position: Int
+            banner: BGABanner?,
+            itemView: ImageView?,
+            model: BannerDataModel?,
+            position: Int
     ) {
-        itemView?.context?:return
+        itemView?.context ?: return
         val roundedCorners = RoundedCorners(10);
         val options = RequestOptions.bitmapTransform(roundedCorners);
         Glide.with(itemView.context)
-            .load(model?.imagePath)
-            .apply(options)
-            .into(itemView)
+                .load(model?.imagePath)
+                .apply(options)
+                .into(itemView)
     }
 }

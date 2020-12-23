@@ -26,6 +26,15 @@
             app:titleText="登录"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+
+        <TextView
+            android:text="fastmock不验证随便输"
+            android:layout_marginTop="@dimen/dp5"
+            android:textSize="@dimen/sp12"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
         <EditText
             android:text="@={loginVm.username}"
             android:layout_marginTop="@dimen/dp20"

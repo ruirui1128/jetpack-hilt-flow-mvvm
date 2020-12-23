@@ -60,7 +60,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
             uiChange.msgEvent.postValue(Message(code = ResCode.NETWORK_ERROR.getCode(), msg = ResCode.NETWORK_ERROR.getMessage()))
             return
         }
-        viewModelScope.launch {
+       viewModelScope.launch {
             flow { emit(block()) }    //网络请求
                     .flowOn(Dispatchers.IO)  //指定网络请求的线程
                     .catch { t: Throwable ->   //异常捕获处理
@@ -104,7 +104,50 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
     }
 
 
+    /**
+     * 数据直接返回
+     */
+    fun <T> launchData(block: suspend CoroutineScope.() -> Res<T>,
+                       success: (T?) -> Unit,
+                       error: (String) -> Unit = {},
+                       isShowDialog: Boolean = false, ) {
+        //是否显示对话框
+        if (isShowDialog) {
+            uiChange.showDialog.call()
+        }
+        //网络监测
+        if (networkHelper?.isNetworkConnected() == false) {
+            uiChange.msgEvent.postValue(Message(code = ResCode.NETWORK_ERROR.getCode(), msg = ResCode.NETWORK_ERROR.getMessage()))
+            return
+        }
+         viewModelScope.launch {
+            flow { emit(block()) }    //网络请求
+                    .flowOn(Dispatchers.IO)  //指定网络请求的线程
+                    .catch { t: Throwable ->   //异常捕获处理
+                        error(t.message ?: "")   //有基类自行处理,业务层也可以自行处理
+                        uiChange.msgEvent.postValue(Message(code = ResCode.OTHER_ERROR.getCode(), msg = t.message ?: ""))
+                    }
+                    //数据请求返回处理  emit(block()) 返回的数据
+                    .collect {
+                        when (it.status) {     //网络响应解析
+                            ResCode.OK.getCode()          -> {
+                                success(it.data)  //数据加载完成交由业务层处理
+                            }
+                            //token 失效
+                            ResCode.TOKEN_ERROR.getCode() -> uiChange.msgEvent.postValue(Message(code = ResCode.TOKEN_ERROR.getCode(), msg = ResCode.TOKEN_ERROR.getMessage()))
+                            else                          -> {
+                                error("")
+                                uiChange.msgEvent.postValue(Message(code = it.status, msg = it.message))
+                            }
 
+                        }
+                    }
+        }
+        if (isShowDialog) {
+            uiChange.dismissDialog.call()
+        }
+
+    }
 
 
 

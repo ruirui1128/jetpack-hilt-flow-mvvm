@@ -28,10 +28,10 @@ class LoginActivity : BaseActivity<LoginVm>() {
             .addViewModel(viewModels<LoginVm>().value,BR.loginVm)
             .addBindingParam(BR.loginPresenter,loginPresenter)
     override fun init() {
-
+        initVm()
     }
 
-    private suspend fun initVm() {
+    private  fun initVm() {
         //登录成功 操作
         viewModel.loginResult.observe(this, Observer {
             ToastUtil.toast("登录成功")

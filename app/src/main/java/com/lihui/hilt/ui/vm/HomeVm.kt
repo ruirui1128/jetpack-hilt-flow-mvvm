@@ -35,7 +35,9 @@ class HomeVm  @ViewModelInject constructor(
      */
     val articleResult = MutableLiveData<PageList<ArticleModel>>()
     fun getArticleList(pageNumber: Int,firstLoad : Boolean,loadMoreError:()->Unit) {
-        launchFlow({apiService.getArticle(pageNumber.toString())},
+        val map = hashMapOf("pageNumber" to pageNumber.toString(),
+        "pageSize" to "20")
+        launchFlow({apiService.getArticle(map)},
             {articleResult.postValue(it)},
             isStatueLayout = firstLoad,
             isLoadMore = (pageNumber!=1),
@@ -44,10 +46,15 @@ class HomeVm  @ViewModelInject constructor(
 
     }
 
-    suspend fun gets(){
-        val data = getData<MutableList<BannerDataModel>> { apiService.getBanner() }.collect{
-        }
-
+    /**
+     * 是否收藏成功   这里无须在viewmodel 设置 livedata 监听数据返回
+     *
+     * 而是直接返回
+     *
+     * 注意区分场景
+     */
+     fun getCollect(ok:(String?)->Unit){
+         launchData({apiService.getCollect()},{ok(it)})
     }
 
 

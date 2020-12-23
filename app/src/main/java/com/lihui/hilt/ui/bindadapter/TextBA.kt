@@ -17,12 +17,12 @@ object TextBA {
         textView: TextView,
         data:ArticleModel
     ) {
-        if (data.tags.isNotEmpty()){
-            textView.visibility = View.VISIBLE
-            textView.text = data.tags[0].name
-        }else{
-            textView.visibility = View.GONE
-        }
+//        if (data.tags.isNotEmpty()){
+//            textView.visibility = View.VISIBLE
+//            textView.text = data.tags[0].name
+//        }else{
+//            textView.visibility = View.GONE
+//        }
     }
 
 }
