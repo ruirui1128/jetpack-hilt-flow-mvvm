@@ -22,12 +22,8 @@ class HomeVm  @ViewModelInject constructor(
         this.value = false
     }
 
-    /**
-     * 获取Banner 数据
-     */
-    val bannerResult = MutableLiveData<MutableList<BannerDataModel>>()
-    fun getBanner(){
-        launchFlow({apiService.getBanner()},{bannerResult.postValue(it)})
+    fun getBanner(ok: (MutableList<BannerDataModel>?) -> Unit){
+        launchData({apiService.getBanner()},{ok(it)})
     }
 
     /**
@@ -43,14 +39,11 @@ class HomeVm  @ViewModelInject constructor(
             isLoadMore = (pageNumber!=1),
             loadMoreError = {loadMoreError()},
             complete = { isRefreshing.postValue(false)})
-
     }
 
     /**
-     * 是否收藏成功   这里无须在viewmodel 设置 livedata 监听数据返回
-     *
+     * 是否收藏成功   这里无须在viewmodel声明livedata 在Acitity中设置监听
      * 而是直接返回
-     *
      * 注意区分场景
      */
      fun getCollect(ok:(String?)->Unit){

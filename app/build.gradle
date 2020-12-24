@@ -54,5 +54,6 @@ dependencies {
 
     //banner
     implementation 'cn.bingoogolapple:bga-banner:2.2.6@aar'
-
+   //今日头条屏幕适配
+    implementation 'me.jessyan:autosize:1.2.1'
 }

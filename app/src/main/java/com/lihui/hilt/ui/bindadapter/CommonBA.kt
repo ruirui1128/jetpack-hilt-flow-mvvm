@@ -35,8 +35,6 @@ object CommonBA {
      * errorHolder：错误加载图
      * isCircle：是否圆角
      * corners: 矩形角度
-     *
-     *
      */
     @JvmStatic
     @BindingAdapter(
@@ -55,7 +53,6 @@ object CommonBA {
         corners: Int?,
         placeHolder: Drawable?,
         errorHolder: Drawable?
-
     ) {
 
         val builder: RequestBuilder<Drawable> = Glide.with(imageView.context).load(imageUrl)

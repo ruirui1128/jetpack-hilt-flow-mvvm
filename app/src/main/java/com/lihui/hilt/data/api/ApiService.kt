@@ -18,7 +18,7 @@ interface ApiService {
     @GET("/article/list/{page}/json")
     suspend fun getPageList(@Path("page")page:String):Res<PageList<InfoModel>>
 
-    @GET("banner/json")
+    @GET("banner/list")
     suspend fun getBanner(): Res<MutableList<BannerDataModel>>
 
     @POST("article/list")

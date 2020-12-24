@@ -66,6 +66,7 @@
 
 
         <RelativeLayout
+            android:id="@+id/rlRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -85,7 +86,6 @@
 
 
             <TextView
-
                 android:text='@{itemArticleVm.random}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,11 +99,12 @@
 
 
             <ImageView
+                min="@{itemArticleVm}"
                 android:id="@+id/ivCollect"
                 tools:src="@drawable/i_heart_gray"
                 android:src='@{itemArticleVm.collect? @drawable/i_heart_red:@drawable/i_heart_gray}'
-                android:layout_width="@dimen/dp24"
-                android:layout_height="@dimen/dp24"
+                android:layout_width="@dimen/dp30"
+                android:layout_height="@dimen/dp30"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/dp8" />

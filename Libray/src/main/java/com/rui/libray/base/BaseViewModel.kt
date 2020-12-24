@@ -108,7 +108,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
      * 数据直接返回
      */
     fun <T> launchData(block: suspend CoroutineScope.() -> Res<T>,
-                       success: (T?) -> Unit,
+                       ok: (T?) -> Unit,
                        error: (String) -> Unit = {},
                        isShowDialog: Boolean = false, ) {
         //是否显示对话框
@@ -131,7 +131,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                     .collect {
                         when (it.status) {     //网络响应解析
                             ResCode.OK.getCode()          -> {
-                                success(it.data)  //数据加载完成交由业务层处理
+                                ok(it.data)  //数据加载完成交由业务层处理
                             }
                             //token 失效
                             ResCode.TOKEN_ERROR.getCode() -> uiChange.msgEvent.postValue(Message(code = ResCode.TOKEN_ERROR.getCode(), msg = ResCode.TOKEN_ERROR.getMessage()))

@@ -7,6 +7,8 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.databinding.ItemArticleBinding
+import com.lihui.hilt.ui.vm.HomeVm
+import com.rui.libray.base.BaseViewModel
 import javax.inject.Inject
 
 class ArticleAdapter  @Inject constructor():BaseQuickAdapter<ArticleModel,
@@ -14,7 +16,7 @@ class ArticleAdapter  @Inject constructor():BaseQuickAdapter<ArticleModel,
 
     init {
         //添加局部点击事件
-//        addChildClickViewIds(R.id.ivCollect)
+        addChildClickViewIds(R.id.ivCollect)
     }
 
     override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>, item: ArticleModel) {
