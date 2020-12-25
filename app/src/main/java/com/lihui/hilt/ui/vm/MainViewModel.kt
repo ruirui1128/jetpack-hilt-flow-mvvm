@@ -12,7 +12,8 @@ import com.rui.libray.util.NetworkHelper
 
 class MainViewModel @ViewModelInject constructor(
          private val apiService: ApiService,
-         networkHelper: NetworkHelper) : BaseViewModel(networkHelper) {
+         networkHelper: NetworkHelper):BaseViewModel(networkHelper)
+{
 
      val result = MutableLiveData<String>().apply {
          this.value = "谜一样的男人"

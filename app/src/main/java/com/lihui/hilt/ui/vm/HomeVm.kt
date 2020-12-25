@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.collect
 class HomeVm  @ViewModelInject constructor(
     private val apiService: ApiService,
     networkHelper: NetworkHelper):BaseViewModel(networkHelper) {
-
+//    networkHelper: NetworkHelper
 
     /**
      * 界面刷新

@@ -40,7 +40,7 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
     lateinit var adapter: ArticleAdapter
     private var pageNumber = 1
 
-    override val viewModelConfig: ViewModelConfig<HomeVm>
+   public override val viewModelConfig: ViewModelConfig<HomeVm>
         get() = ViewModelConfig<HomeVm>(R.layout.fragment_home)
                 .addViewModel(viewModels<HomeVm>().value, BR.homeVm)
 

@@ -8,6 +8,10 @@
             name="itemArticleVm"
             type="com.lihui.hilt.data.model.ArticleModel" />
 
+        <variable
+            name="itemHomePresenter"
+            type="com.lihui.hilt.ui.presenter.ItemHomePresenter" />
+
         <import type="android.view.View"/>
 
     </data>
@@ -26,6 +30,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:onClick="@{()->itemHomePresenter.taost()}"
                 android:scaleType="centerCrop"
                 imageUrl="@{itemArticleVm.url}"
                 isCircle="@{true}"

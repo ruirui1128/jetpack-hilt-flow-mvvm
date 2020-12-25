@@ -13,8 +13,8 @@ import kotlinx.coroutines.flow.collect
 
 class LoginVm @ViewModelInject constructor(
          private val userApi: UserApi,
-         networkHelper: NetworkHelper)
-    :BaseViewModel(networkHelper) {
+         networkHelper: NetworkHelper):BaseViewModel(networkHelper){
+
 
     //账号
     val username = MutableLiveData<String>()

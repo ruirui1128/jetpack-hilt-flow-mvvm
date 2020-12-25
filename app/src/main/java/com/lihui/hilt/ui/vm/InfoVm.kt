@@ -10,8 +10,8 @@ import com.rui.libray.util.NetworkHelper
 
 class InfoVm @ViewModelInject constructor(
     private val apiService: ApiService,
-    networkHelper: NetworkHelper
-) :BaseViewModel(networkHelper) {
+    networkHelper: NetworkHelper):BaseViewModel(networkHelper)
+ {
 
     val isRefreshing = MutableLiveData<Boolean>().apply {
         this.value = false

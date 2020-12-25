@@ -10,11 +10,12 @@ import com.rui.libray.util.NetworkHelper
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
 
 open class BaseViewModel() : ViewModel(), LifecycleObserver {
 
-    private var networkHelper: NetworkHelper? = null
+    private var networkHelper : NetworkHelper? = null
 
     constructor(networkHelper: NetworkHelper) : this() {
         this.networkHelper = networkHelper
@@ -150,12 +151,6 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
     }
 
 
-
-
-
-
-
-    
 
 
     inner class UIChange {

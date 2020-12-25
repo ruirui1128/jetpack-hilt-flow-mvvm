@@ -1,9 +1,11 @@
 package com.lihui.hilt.di
 
 
+import android.content.Context
 import android.os.Build
 import com.lihui.hilt.BuildConfig
 import com.lihui.hilt.uitl.AppPrefsUtils
+import com.rui.libray.util.NetworkHelper
 
 import dagger.Module
 import dagger.Provides
@@ -13,6 +15,7 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.Proxy
@@ -59,4 +62,8 @@ class NetModule {
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .build()
+
+    @Provides
+    @Singleton
+    fun providerNetworkHelper(@ApplicationContext appContext: Context) = NetworkHelper(appContext)
 }

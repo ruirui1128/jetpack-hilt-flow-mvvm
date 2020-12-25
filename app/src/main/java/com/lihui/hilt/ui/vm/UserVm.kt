@@ -8,8 +8,8 @@ import com.rui.libray.util.NetworkHelper
 
 class UserVm @ViewModelInject constructor(
     private val userApi: UserApi,
-    networkHelper: NetworkHelper
-) :BaseViewModel(networkHelper) {
+    networkHelper: NetworkHelper):BaseViewModel(networkHelper)
+{
 
     val name = MutableLiveData<String>().apply {
         this.value = "默认名称"
