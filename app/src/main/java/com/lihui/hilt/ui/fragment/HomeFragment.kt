@@ -8,14 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import cn.bingoogolapple.bgabanner.BGABanner
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
-import com.lihui.hilt.ui.presenter.ItemHomePresenter
 import com.lihui.hilt.ui.vm.HomeVm
 import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.indiamall.util.ClickUtil
@@ -26,7 +23,6 @@ import com.rui.libray.ext.initLoadMore
 import com.rui.libray.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
-import javax.inject.Inject
 
 
 @AndroidEntryPoint

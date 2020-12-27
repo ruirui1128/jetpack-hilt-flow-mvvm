@@ -9,15 +9,10 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.databinding.ItemArticleBinding
-import com.lihui.hilt.event.JhfEvent
 import com.lihui.hilt.event.MessageEvent
 
 
-import com.lihui.hilt.ui.presenter.ItemHomePresenter
 import com.lihui.hilt.ui.vm.HomeVm
-import dagger.hilt.android.scopes.FragmentScoped
-
-import javax.inject.Inject
 
 
 class ArticleAdapter(

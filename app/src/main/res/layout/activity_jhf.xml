@@ -8,6 +8,10 @@
             name="jhfVm"
             type="com.lihui.hilt.ui.vm.JhfVm" />
 
+        <variable
+            name="jhfOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
     </data>
 
     <LinearLayout
