@@ -3,6 +3,7 @@ package com.lihui.hilt.ui.vm
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.ApiService
+import com.lihui.hilt.data.api.UserApi
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.data.model.PageList
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 
 class HomeVm  @ViewModelInject constructor(
     private val apiService: ApiService,
+    private val userService: UserApi,
     networkHelper: NetworkHelper):BaseViewModel(networkHelper) {
 //    networkHelper: NetworkHelper
 
@@ -47,7 +49,21 @@ class HomeVm  @ViewModelInject constructor(
      * 注意区分场景
      */
      fun getCollect(ok:(String?)->Unit){
-         launchData({apiService.getCollect()},{ok(it)})
+         launchData({userService.getCollect()},{ok(it)})
+    }
+
+    /**
+     * 更换头像
+     */
+    fun changeHeader(ok:(String?)->Unit){
+        launchData({userService.changeHeader()},{ok(it)})
+    }
+
+    /**
+     * 接化发
+     */
+    fun jhf(ok:(String?)->Unit){
+        launchData({userService.jhf()},{ok(it)})
     }
 
 

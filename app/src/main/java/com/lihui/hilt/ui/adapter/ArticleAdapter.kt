@@ -1,42 +1,57 @@
 package com.lihui.hilt.ui.adapter
 
-import androidx.fragment.app.FragmentManager
-import com.bumptech.glide.Glide
+
+import androidx.lifecycle.LifecycleOwner
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.databinding.ItemArticleBinding
+import com.lihui.hilt.event.JhfEvent
+import com.lihui.hilt.event.MessageEvent
+
+
 import com.lihui.hilt.ui.presenter.ItemHomePresenter
 import com.lihui.hilt.ui.vm.HomeVm
-import com.lihui.hilt.uitl.ToastUtil
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.util.NetworkHelper
-import kotlinx.coroutines.GlobalScope
+import dagger.hilt.android.scopes.FragmentScoped
+
 import javax.inject.Inject
 
-class ArticleAdapter  @Inject constructor(
-       val itemHomePresenter: ItemHomePresenter,
 
-):BaseQuickAdapter<ArticleModel,
-        BaseDataBindingHolder<ItemArticleBinding>>(R.layout.item_article),LoadMoreModule {
-
-
-
-//    @Inject lateinit var  itemHomePresenter: ItemHomePresenter
+class ArticleAdapter(
+    private val viewModel: HomeVm,
+    private val owner: LifecycleOwner
+) : BaseQuickAdapter<ArticleModel,
+        BaseDataBindingHolder<ItemArticleBinding>>(R.layout.item_article), LoadMoreModule {
 
     init {
         //添加局部点击事件
         addChildClickViewIds(R.id.ivCollect)
-        
     }
 
-    override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>, item: ArticleModel) {
+    override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>,  item: ArticleModel) {
+        if (item.random.length > 8) {
+            item.random = item.random.substring(0, 8)
+        }
         holder.dataBinding?.itemArticleVm = item
-        holder.dataBinding?.itemHomePresenter = itemHomePresenter
+        holder.dataBinding?.itemHomeVm = viewModel
         holder.dataBinding?.executePendingBindings()
 
-
+        LiveEventBus.get(
+            MessageEvent.ITEM_JHF_EVENT,
+            ArticleModel::class.java
+        ).observe(owner) {
+            if (item.random == it?.random) {
+                item.isCollect = it.isCollect
+                item.isFa = it.isFa
+                item.isJie = it.isJie
+                item.isHua = it.isHua
+                item.notifyChange()
+            }
+        }
     }
+
+
 }

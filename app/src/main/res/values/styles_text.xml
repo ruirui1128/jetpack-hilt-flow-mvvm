@@ -38,6 +38,10 @@
         <item name="android:background">@drawable/ripple_bg_0d6cff_r_25</item>
     </style>
 
+    <style name="text_blue_common_r5" parent="text_button_base">
+        <item name="android:background">@drawable/ripple_bg_0d6cff_r_5</item>
+    </style>
+
     <style name="text_dark_common" parent="text_button_base">
         <item name="android:background">@drawable/ripple_bg_1a202e_r_25</item>
     </style>

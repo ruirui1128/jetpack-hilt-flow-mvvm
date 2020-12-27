@@ -2,17 +2,19 @@ package com.lihui.hilt.di
 
 
 import android.content.Context
-import androidx.fragment.app.Fragment
+
 import androidx.fragment.app.FragmentActivity
+
 import com.lihui.hilt.ui.fragment.HomeFragment
-import com.lihui.hilt.ui.vm.HomeVm
-import com.rui.libray.base.BaseFragment
+
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.android.qualifiers.ActivityContext
+import dagger.hilt.android.scopes.ActivityScoped
+import dagger.hilt.android.scopes.FragmentScoped
 
 
 /**
@@ -22,9 +24,14 @@ import dagger.hilt.android.qualifiers.ActivityContext
 @InstallIn(FragmentComponent::class)
 @Module
 object PresenterModel{
-
+//
 //    @Provides
-//    fun providerHomeVm(@ActivityContext home: HomeFragment) = home.viewModelConfig.getViewModel()
+//    @ActivityScoped
+//    fun providerHomeFragment(@ActivityContext home: HomeFragment) = home
+//
+//    @Provides
+//    @FragmentScoped
+//    fun providerLifecycleOwner(@ActivityContext owner: Context) = (owner as FragmentActivity).lifecycle
 
     @Provides
     fun providerFragmentManager(@ActivityContext context: Context) = (context as FragmentActivity).supportFragmentManager

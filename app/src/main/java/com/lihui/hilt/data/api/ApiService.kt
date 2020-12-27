@@ -24,10 +24,6 @@ interface ApiService {
     @POST("article/list")
     suspend fun getArticle(@Body map:HashMap<String,String>):Res<PageList<ArticleModel>>
 
-    /**
-     * 收藏
-     */
-    @GET("article/collect")
-    suspend fun getCollect():Res<String>
+
 
 }

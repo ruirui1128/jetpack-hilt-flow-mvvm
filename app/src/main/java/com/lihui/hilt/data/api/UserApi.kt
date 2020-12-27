@@ -16,4 +16,22 @@ interface UserApi {
 
     @GET("userInfo")
     suspend fun getUserInfo():Res<UserModel>
+
+    /**
+     * 收藏
+     */
+    @GET("article/collect")
+    suspend fun getCollect():Res<String>
+    /**
+     * 更换头像
+     */
+    @GET("article/header")
+    suspend fun changeHeader():Res<String>
+
+    /**
+     * 接化发
+     */
+    @GET("article/jhf")
+    suspend fun jhf():Res<String>
+
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="jhfVm"
+            type="com.lihui.hilt.ui.vm.JhfVm" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        tools:context=".ui.act.JhfActivity">
+
+        <TextView
+            android:id="@+id/tvCollect"
+            android:text="收藏"
+            android:layout_marginTop="@dimen/dp20"
+            style="@style/text_blue_common_r5" />
+
+        <TextView
+            android:id="@+id/tvJie"
+            android:text="接"
+            android:layout_marginTop="@dimen/dp20"
+            style="@style/text_blue_common_r5" />
+
+        <TextView
+            android:id="@+id/tvHua"
+            android:text="化"
+            android:layout_marginTop="@dimen/dp20"
+            style="@style/text_blue_common_r5" />
+
+        <TextView
+            android:id="@+id/tvFa"
+            android:text="发"
+            android:layout_marginTop="@dimen/dp20"
+            style="@style/text_blue_common_r5" />
+
+    </LinearLayout>
+</layout>

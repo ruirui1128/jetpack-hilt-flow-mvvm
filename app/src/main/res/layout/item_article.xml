@@ -5,12 +5,14 @@
 
     <data>
         <variable
+            name="itemHomeVm"
+            type="com.lihui.hilt.ui.vm.HomeVm" />
+
+        <variable
             name="itemArticleVm"
             type="com.lihui.hilt.data.model.ArticleModel" />
 
-        <variable
-            name="itemHomePresenter"
-            type="com.lihui.hilt.ui.presenter.ItemHomePresenter" />
+        <import type="com.lihui.hilt.ui.presenter.ItemHomePresenter" />
 
         <import type="android.view.View"/>
 
@@ -30,7 +32,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:onClick="@{()->itemHomePresenter.taost()}"
+                android:onClick="@{()->ItemHomePresenter.INSTANCE.changeHeader(itemHomeVm,itemArticleVm)}"
                 android:scaleType="centerCrop"
                 imageUrl="@{itemArticleVm.url}"
                 isCircle="@{true}"
@@ -67,40 +69,73 @@
         </RelativeLayout>
 
 
-
-
-
         <RelativeLayout
             android:id="@+id/rlRoot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+          <LinearLayout
+              android:layout_centerInParent="true"
+              android:orientation="horizontal"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
             <TextView
-                android:text='@{itemArticleVm.type}'
-                android:id="@+id/item_home_type2"
+                android:padding="@dimen/dp2"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{()->ItemHomePresenter.INSTANCE.jhf(itemHomeVm,itemArticleVm,ItemHomePresenter.JIE)}"
+                android:textSize="@dimen/sp14"
+                android:textColor="@{itemArticleVm.jie?@color/colorPrimary:@color/color_888}"
+                android:drawablePadding="@dimen/dp5"
+                android:gravity="center"
+                tools:drawableStart = "@drawable/ic_jie_gray"
+                android:drawableStart="@{itemArticleVm.jie?@drawable/ic_jie:@drawable/ic_jie_gray}"
+                android:text="接"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp8"
-                android:layout_marginTop="@dimen/dp12"
-                android:layout_marginBottom="@dimen/dp12"
-                android:textColor="@color/color_666"
-                android:textSize="@dimen/sp12"
-                tools:text="分类·项目" />
+                android:layout_height="wrap_content"/>
+
+              <TextView
+                  android:padding="@dimen/dp2"
+                  android:background="?android:attr/selectableItemBackground"
+                  android:onClick="@{()->ItemHomePresenter.INSTANCE.jhf(itemHomeVm,itemArticleVm,ItemHomePresenter.HUA)}"
+                  android:layout_marginStart="@dimen/dp20"
+                  android:textSize="@dimen/sp14"
+                  tools:drawableStart="@drawable/ic_hua_gray"
+                  android:textColor="@{itemArticleVm.hua?@color/colorPrimary:@color/color_888}"
+                  android:drawablePadding="@dimen/dp2"
+                  android:gravity="center"
+                  android:drawableStart="@{itemArticleVm.hua?@drawable/ic_hua:@drawable/ic_hua_gray}"
+                  android:text="化"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+              <TextView
+                  android:padding="@dimen/dp2"
+                  android:background="?android:attr/selectableItemBackground"
+                  android:onClick="@{()->ItemHomePresenter.INSTANCE.jhf(itemHomeVm,itemArticleVm,ItemHomePresenter.FA)}"
+                  android:drawableStart="@{itemArticleVm.fa?@drawable/ic_fa:@drawable/ic_fa_gray}"
+                  android:layout_marginStart="@dimen/dp20"
+                  android:textSize="@dimen/sp14"
+                  android:textColor="@{itemArticleVm.fa?@color/colorPrimary:@color/color_888}"
+                  android:gravity="center"
+                  tools:drawableStart="@drawable/ic_fa_gray"
+                  android:text="发"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"/>
+
+          </LinearLayout>
 
 
             <TextView
                 android:text='@{itemArticleVm.random}'
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 android:layout_marginStart="@dimen/dp8"
                 android:layout_marginTop="@dimen/dp12"
                 android:layout_marginBottom="@dimen/dp12"
                 android:textColor="@color/black"
                 android:textSize="@dimen/sp12"
-                tools:text="222222" />
+                tools:text="22222" />
 
 
             <ImageView

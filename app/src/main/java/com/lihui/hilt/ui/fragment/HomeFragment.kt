@@ -1,6 +1,7 @@
 package com.lihui.hilt.ui.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.fragment.app.viewModels
@@ -12,7 +13,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.BannerDataModel
+import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
+import com.lihui.hilt.ui.presenter.ItemHomePresenter
 import com.lihui.hilt.ui.vm.HomeVm
 import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.indiamall.util.ClickUtil
@@ -32,19 +35,19 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
 
     /**
      * fastmock接口不保存数据!!!  不保存数据!!!  不保存数据!!!
-     *
      * 仅仅是为了演示
      */
 
-    @Inject
-    lateinit var adapter: ArticleAdapter
+    private lateinit var adapter: ArticleAdapter
+
     private var pageNumber = 1
 
-   public override val viewModelConfig: ViewModelConfig<HomeVm>
+    public override val viewModelConfig: ViewModelConfig<HomeVm>
         get() = ViewModelConfig<HomeVm>(R.layout.fragment_home)
                 .addViewModel(viewModels<HomeVm>().value, BR.homeVm)
 
     override fun init(savedInstanceState: Bundle?) {
+
         initView()
         initAdapter()
         initVm()
@@ -52,6 +55,7 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
     }
 
     private fun initAdapter() {
+        adapter = ArticleAdapter(viewModel, this)
         //加载更多 loadMore = getArticleList()   在扩展里面
         adapter.initLoadMore { getArticleList() }
         rcvArticle.adapter = adapter
@@ -67,6 +71,15 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
                     }
                 }
             }
+        }
+
+        adapter?.setOnItemClickListener { ada, view, position ->
+            val item = adapter.getItem(position)
+            val intent = Intent(activity,JhfActivity::class.java)
+            val bundle = Bundle()
+            bundle.putParcelable(JhfActivity.JHA_DATA,item)
+            intent.putExtras(bundle)
+            startActivity(intent)
         }
 
     }
