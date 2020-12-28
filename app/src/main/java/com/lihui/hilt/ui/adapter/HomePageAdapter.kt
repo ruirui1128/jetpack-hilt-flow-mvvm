@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -14,7 +15,7 @@ import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.BaseViewModel
 
 class HomePageAdapter (private val mFm: FragmentManager,
-                       private val list: MutableList<BaseFragment<out BaseViewModel>>) :
+                       private val list: MutableList<BaseFragment<out BaseViewModel,out ViewDataBinding>>) :
     FragmentPagerAdapter(mFm) {
 
     private val titles = arrayOf("主页", "项目", "我的")

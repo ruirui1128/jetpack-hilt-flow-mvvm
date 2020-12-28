@@ -22,4 +22,7 @@
     <dimen name="dp12">12dp</dimen>
     <dimen name="dp80">80dp</dimen>
     <dimen name="sp12">12sp</dimen>
+    <dimen name="sp17">17sp</dimen>
+    <dimen name="dp60">60dp</dimen>
+    <dimen name="dp13">13dp</dimen>
 </resources>

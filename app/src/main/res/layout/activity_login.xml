@@ -26,10 +26,10 @@
         android:orientation="vertical"
         tools:context="com.lihui.hilt.ui.act.LoginActivity">
 
-        <com.rui.libray.widget.HeaderBar
-            app:titleText="登录"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+<!--        <com.rui.libray.widget.HeaderBar-->
+<!--            app:titleText="登录"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
 
         <TextView
             android:text="fastmock不验证随便输"

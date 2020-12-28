@@ -3,23 +3,23 @@ package com.lihui.hilt.ui.act
 
 import android.util.Log
 import androidx.activity.viewModels
+
 import androidx.lifecycle.Observer
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
+import com.lihui.hilt.databinding.ActivityLoginBinding
 import com.lihui.hilt.ui.presenter.LoginPresenter
 import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.hilt.ui.vm.LoginVm
 import com.rui.libray.base.BaseActivity
 
 import com.rui.libray.base.ViewModelConfig
-import com.rui.libray.ext.onClick
-import com.rui.libray.util.NetworkHelper
+
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.coroutines.flow.collect
+
 import javax.inject.Inject
 
-@AndroidEntryPoint class LoginActivity : BaseActivity<LoginVm>() {
+@AndroidEntryPoint class LoginActivity : BaseActivity<LoginVm,ActivityLoginBinding>() {
 
     @Inject lateinit var loginPresenter: LoginPresenter
     override val viewModelConfig: ViewModelConfig<LoginVm>

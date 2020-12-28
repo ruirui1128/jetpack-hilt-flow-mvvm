@@ -3,35 +3,35 @@ package com.rui.libray.base
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.kingja.loadsir.callback.Callback.OnReloadListener
 import com.kingja.loadsir.core.LoadService
 import com.kingja.loadsir.core.LoadSir
 import com.rui.libray.R
-
 import com.rui.libray.data.net.ResCode
+import com.rui.libray.databinding.ActivityBaseBinding
 import com.rui.libray.util.AppManager
-import com.rui.libray.util.StatusBarUtils
 import com.rui.libray.widget.loadsir.EmptyCallback
 import com.rui.libray.widget.loadsir.ErrorCallback
 import com.rui.libray.widget.loadsir.LoadingCallback
-
 import javax.inject.Inject
 
-abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
+abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCompatActivity() {
 
     protected lateinit var viewModel:  VM
 
-    private var mBinding: ViewDataBinding? = null
+    protected lateinit var bind : DB
 
-    //界面状态管理者
-    private  var loadService: LoadService<Any> ? = null
+    protected var baseBindView: ActivityBaseBinding? = null
+
 
     var reloadListener:()->Unit = {}
 
@@ -49,29 +49,12 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 禁用横屏
         initViewDataBinding()
         registerUIChange()
-        initLoadSir()
         initBar()
         init()
     }
 
-    private fun initLoadSir() {
-        val view = setStatusLayoutAndListener()
-        if (view!=null){
-            loadService = LoadSir.getDefault().register(view) {
-                loadSirShowLoading()
-                reloadListener()
-            }
-        }
-    }
 
-    /**
-     * 子类需要加载页面，需要复写此方法，并重新赋值reloadListener
-     * override fun setStatusLayout(): View? {
-        reloadListener = { refresh(true) }
-        return swipeRefreshLayout
-        }
-     *
-     */
+
     protected open fun setStatusLayoutAndListener(): View? {
         return null
     }
@@ -85,21 +68,42 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
 
     private fun initViewDataBinding() {
         val config = viewModelConfig
+        baseBindView = DataBindingUtil.inflate(
+            LayoutInflater.from(this),
+            R.layout.activity_base,
+            null,
+            false
+        )
+        bind = DataBindingUtil.inflate(
+            LayoutInflater.from(this),
+            config.getLayout(),
+            null,
+            false
+        )
+        bind?.lifecycleOwner = this
 
-        mBinding = DataBindingUtil.setContentView(this, config.getLayout())
-        mBinding?.lifecycleOwner = this
+        // content
+        val params = FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        bind?.root?.layoutParams = params
+        baseBindView?.root?.findViewById<FrameLayout>(R.id.container)?.addView(bind?.root)
+        setContentView(baseBindView?.root)
+
+
 
         val variableId = config.getVmVariableId()
         viewModel = config.getViewModel()?:return
         if (variableId!=ViewModelConfig.VM_NO_BIND){
-            mBinding?.setVariable(variableId, viewModel)
+            bind?.setVariable(variableId, viewModel)
         }
         val bindingParams = config.getBindingParams()
         run {
             var i = 0
             val length = bindingParams.size()
             while (i < length) {
-                mBinding?.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
+                bind?.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
                 i++
             }
         }
@@ -122,15 +126,15 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
             handleEvent(it)
         })
 
-        viewModel.uiChange.statueShowLoading.observe(this,{
+        viewModel.uiChange.statueShowLoading.observe(this, {
             loadSirShowLoading()
         })
 
-        viewModel.uiChange.statueSuccess.observe(this,{
+        viewModel.uiChange.statueSuccess.observe(this, {
             loadSirShowSuccess()
         })
 
-        viewModel.uiChange.statueError.observe(this,{
+        viewModel.uiChange.statueError.observe(this, {
             loadSirShowError()
         })
 
@@ -151,25 +155,22 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
 
 
     private fun loadSirShowSuccess(){
-        loadService?.showSuccess()
     }
 
     private fun loadSirShowLoading(){
-        loadService?.showCallback(LoadingCallback::class.java)
     }
 
     private fun loadSirShowError(){
-        loadService?.showCallback(ErrorCallback::class.java)
     }
 
     open fun loadSirShowEmpty(){
-        loadService?.showCallback(EmptyCallback::class.java)
     }
 
     private fun dismissLoading() {
     }
 
     private fun showLoadingDialog() {
+
 
     }
 
@@ -186,8 +187,8 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
     }
 
     open fun goTo(
-            aClass: Class<out AppCompatActivity?>?,
-            bundle: Bundle?
+        aClass: Class<out AppCompatActivity?>?,
+        bundle: Bundle?
     ) {
         val intent = Intent(this, aClass)
         if (null != bundle) intent.putExtras(bundle)
@@ -195,9 +196,9 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
     }
 
     open fun goTo(
-            aClass: Class<out AppCompatActivity?>?,
-            bundle: Bundle?,
-            requestCode: Int
+        aClass: Class<out AppCompatActivity?>?,
+        bundle: Bundle?,
+        requestCode: Int
     ) {
         val intent = Intent(this, aClass)
         if (null != bundle) intent.putExtras(bundle)
@@ -210,8 +211,8 @@ abstract class BaseActivity<VM : BaseViewModel>() : AppCompatActivity() {
     }
 
     open fun goToAndFinish(
-            aClass: Class<out AppCompatActivity?>?,
-            bundle: Bundle?
+        aClass: Class<out AppCompatActivity?>?,
+        bundle: Bundle?
     ) {
         goTo(aClass, bundle)
         finish()

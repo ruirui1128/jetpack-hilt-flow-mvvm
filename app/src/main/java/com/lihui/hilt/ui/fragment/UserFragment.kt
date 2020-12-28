@@ -1,21 +1,22 @@
 package com.lihui.hilt.ui.fragment
 
 import android.os.Bundle
-import androidx.activity.viewModels
+
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
+import com.lihui.hilt.databinding.FragmentUserBinding
 import com.lihui.hilt.ui.vm.UserVm
-import com.rui.libray.base.BaseActivity
+
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.ViewModelConfig
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.WithFragmentBindings
-import kotlinx.android.synthetic.main.fragment_user.*
+
+
 
 @AndroidEntryPoint
-class UserFragment : BaseFragment<UserVm> (){
+class UserFragment : BaseFragment<UserVm,FragmentUserBinding> (){
 
     override val viewModelConfig: ViewModelConfig<UserVm>
         get() = ViewModelConfig<UserVm>(R.layout.fragment_user)

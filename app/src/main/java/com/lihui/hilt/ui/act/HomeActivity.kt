@@ -3,9 +3,11 @@ package com.lihui.hilt.ui.act
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.databinding.ViewDataBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.lihui.hilt.R
+import com.lihui.hilt.databinding.ActivityHomeBinding
 import com.lihui.hilt.ui.adapter.HomePageAdapter
 import com.lihui.hilt.ui.fragment.DashboardFragment
 import com.lihui.hilt.ui.fragment.HomeFragment
@@ -15,10 +17,11 @@ import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.base.ViewModelConfig
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_home.*
+
+
 
 @AndroidEntryPoint
-class HomeActivity : BaseActivity<BaseViewModel>() {
+class HomeActivity : BaseActivity<BaseViewModel,ActivityHomeBinding>() {
 
     private val SELECTED_INDEX = "selected_index"
 
@@ -28,7 +31,7 @@ class HomeActivity : BaseActivity<BaseViewModel>() {
     private var mCurrentPosition: Int = 0
 
 
-    private val list: MutableList<BaseFragment<out BaseViewModel>>
+    private val list: MutableList<BaseFragment<out BaseViewModel,out ViewDataBinding>>
             = arrayListOf(HomeFragment(), DashboardFragment(), UserFragment())
 
     override val viewModelConfig: ViewModelConfig<BaseViewModel>
@@ -39,17 +42,17 @@ class HomeActivity : BaseActivity<BaseViewModel>() {
     }
 
     private fun initBottomNav() {
-        homeViewPage.offscreenPageLimit = 3
+        bind.homeViewPage.offscreenPageLimit = 3
         val adapter = HomePageAdapter(supportFragmentManager,list)
-        homeViewPage.adapter = adapter
+        bind.homeViewPage.adapter = adapter
 
         for (i in list.indices) {
-            homeTablaLayout.addTab(homeTablaLayout.newTab())
-            val tab = homeTablaLayout.getTabAt(i)
+            bind.homeTablaLayout.addTab(bind.homeTablaLayout.newTab())
+            val tab = bind.homeTablaLayout.getTabAt(i)
             tab?.customView = adapter?.getTabView(baseContext, i)
         }
 
-        homeTablaLayout.addOnTabSelectedListener(object :OnTabSelectedListener{
+        bind.homeTablaLayout.addOnTabSelectedListener(object :OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 switchTab(tab?.position?:0)
             }
@@ -65,7 +68,7 @@ class HomeActivity : BaseActivity<BaseViewModel>() {
      * 切换Tab，切换对应的Fragment
      */
     private fun switchTab(position: Int) {
-        homeViewPage.currentItem = position
+        bind.homeViewPage.currentItem = position
         mCurrentPosition = position
     }
 
@@ -78,7 +81,7 @@ class HomeActivity : BaseActivity<BaseViewModel>() {
         super.onRestoreInstanceState(savedInstanceState)
         if (savedInstanceState != null) {
             mCurrentPosition = savedInstanceState.getInt(SELECTED_INDEX)
-            homeTablaLayout.getTabAt(mCurrentPosition)?.select()
+            bind.homeTablaLayout.getTabAt(mCurrentPosition)?.select()
         }
     }
 }

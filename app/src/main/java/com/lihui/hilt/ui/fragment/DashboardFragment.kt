@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
+import com.lihui.hilt.databinding.FragmentDashboardBinding
 import com.lihui.hilt.ui.vm.HomeVm
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.BaseViewModel
@@ -15,7 +16,7 @@ import com.rui.libray.base.ViewModelConfig
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DashboardFragment : BaseFragment<BaseViewModel>() {
+class DashboardFragment : BaseFragment<BaseViewModel,FragmentDashboardBinding>() {
 
     override val viewModelConfig: ViewModelConfig<BaseViewModel>
         get() = ViewModelConfig<BaseViewModel>(R.layout.fragment_dashboard)

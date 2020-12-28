@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.BannerDataModel
+import com.lihui.hilt.databinding.FragmentHomeBinding
 import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.ui.vm.HomeVm
@@ -19,14 +20,15 @@ import com.lihui.indiamall.util.ClickUtil
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.ViewModelConfig
 import com.rui.libray.ext.init
+
 import com.rui.libray.ext.initLoadMore
 import com.rui.libray.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home.*
+
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, BannerDataModel>,
+class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Delegate<ImageView, BannerDataModel>,
         BGABanner.Adapter<ImageView, BannerDataModel> {
 
     /**
@@ -54,7 +56,7 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
         adapter = ArticleAdapter(viewModel, this)
         //加载更多 loadMore = getArticleList()   在扩展里面
         adapter.initLoadMore { getArticleList() }
-        rcvArticle.adapter = adapter
+        bind.rcvArticle.adapter = adapter
         adapter.setOnItemChildClickListener { ada, view, position ->
             if (ClickUtil.isFastDoubleClick) return@setOnItemChildClickListener
             when (view.id) {
@@ -82,7 +84,7 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
 
     private fun initData(firstLoad: Boolean = false) {
         pageNumber = 1
-        viewModel.getBanner { banner.setData(it, null) }
+        viewModel.getBanner { bind.banner.setData(it, null) }
         getArticleList(firstLoad)
     }
 
@@ -99,9 +101,9 @@ class HomeFragment : BaseFragment<HomeVm>(), BGABanner.Delegate<ImageView, Banne
     }
 
     private fun initView() {
-        swipe.init { initData(false) }
-        banner.setAdapter(this)
-        banner.setDelegate(this)
+        bind.swipe.init { initData(false) }
+//        bind.banner.setAdapter(this)
+//        bind.banner.setDelegate(this)
     }
 
     override fun onBannerItemClick(
