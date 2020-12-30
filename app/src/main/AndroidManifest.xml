@@ -18,8 +18,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.act.svg.SvgPlayActivity"/>
         <activity android:name=".ui.act.JhfActivity" />
-<!--        <activity android:name=".ui.act.HomeActivity" />-->
-        <activity android:name=".ui.act.HomeActivity">
+        <activity android:name=".ui.act.HomeActivity" />
+        <activity android:name=".ui.act.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
