@@ -71,6 +71,8 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
             }
         }
 
+
+
         adapter?.setOnItemClickListener { ada, view, position ->
             val item = adapter.getItem(position)
             val intent = Intent(activity,JhfActivity::class.java)
@@ -96,14 +98,14 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
     private fun initVm() {
         //文章数据返回
         viewModel.articleResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it.list, pageNumber) { loadSirShowEmpty() }
+            pageNumber = adapter.loadMore(it.list, pageNumber) {  }
         })
     }
 
     private fun initView() {
         bind.swipe.init { initData(false) }
-//        bind.banner.setAdapter(this)
-//        bind.banner.setDelegate(this)
+        bind.banner.setAdapter(this)
+        bind.banner.setDelegate(this)
     }
 
     override fun onBannerItemClick(

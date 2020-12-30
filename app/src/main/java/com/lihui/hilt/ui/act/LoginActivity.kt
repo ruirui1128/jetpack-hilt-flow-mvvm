@@ -35,7 +35,7 @@ import javax.inject.Inject
     private fun initVm() {
         //登录成功 操作
         viewModel.loginResult.observe(this, Observer {
-            ToastUtil.toast("登录成功")
+             ToastUtil.toast("登录成功")
             Log.d("-----", it.token)
             goToAndFinish(HomeActivity::class.java)
         })

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="svgVm"
+            type="com.lihui.hilt.ui.vm.SvgPlayVm" />
+
+        <variable
+            name="svgOwner"
+            type="androidx.lifecycle.LifecycleOwner" />
+
+
+        <import type="com.lihui.hilt.ui.act.svg.SvgPresenter"/>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.act.svg.SvgPlayActivity">
+
+        <com.opensource.svgaplayer.SVGAImageView
+            svgPlayVm="@{svgVm}"
+            owner="@{svgOwner}"
+            android:id="@+id/sVGAImageView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            app:autoPlay="true"
+            app:loopCount="1"
+            android:background="#fff" />
+
+
+        <LinearLayout
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                sizeSvgPlayVm="@{svgVm}"
+                sizeOwner="@{svgOwner}"
+                android:id="@+id/tvSize"
+                android:layout_marginStart="@dimen/dp15"
+                android:gravity="center"
+                tools:text="队列中的动画数目"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dp30" />
+
+            <Button
+                android:onClick="@{()->SvgPresenter.INSTANCE.putQueue(svgVm)}"
+                android:layout_marginStart="@dimen/dp15"
+                android:id="@+id/btnPlay"
+                android:text="插入Svg动画"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

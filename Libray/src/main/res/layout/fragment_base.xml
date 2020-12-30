@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
+    <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center">
+
 
         <!--加载失败-->
         <ViewStub
@@ -24,9 +25,10 @@
 
         <!--数据为空-->
         <ViewStub
+            android:visibility="gone"
             android:id="@+id/vs_empty"
             android:layout="@layout/layout_error"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </FrameLayout>
+    </RelativeLayout>
 </layout>

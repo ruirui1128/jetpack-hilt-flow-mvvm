@@ -1,14 +1,12 @@
 package com.lihui.hilt.ui.bindadapter
 
-import android.text.Selection
-import android.text.Spannable
+
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.lihui.hilt.ui.ext.createTextWatcher
 import com.lihui.hilt.ui.vm.LoginVm
 
 

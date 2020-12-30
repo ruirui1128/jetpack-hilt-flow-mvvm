@@ -1,28 +1,39 @@
 package com.lihui.hilt.ui.ext
 
-import android.text.Editable
-import android.text.TextWatcher
+
+
+import com.lihui.hilt.data.model.SvgModel
+import com.lihui.hilt.enums.SvgPlayEnums
+import com.opensource.svgaplayer.SVGADrawable
+import com.opensource.svgaplayer.SVGAImageView
+import com.opensource.svgaplayer.SVGAParser
+import com.opensource.svgaplayer.SVGAParser.ParseCompletion
+import com.opensource.svgaplayer.SVGAVideoEntity
 
 /**
  *Created by Rui
  *on 2020/12/25
  */
-inline fun createTextWatcher(
-        crossinline afterTextChanged: (s: Editable?) -> Unit = {},
-        crossinline beforeTextChanged: (s: CharSequence?, start: Int, count: Int, after: Int) -> Unit = { _, _, _, _ -> },
-        crossinline onTextChanged: (s: CharSequence?, start: Int, before: Int, count: Int) -> Unit = { _, _, _, _ -> }
-) = object : TextWatcher {
 
-    override fun afterTextChanged(s: Editable?) {
-        afterTextChanged(s)
+fun SVGAImageView.start(model:SvgModel  ,complete:()->Unit = {},error:()->Unit={}) {
+    val parser = SVGAParser(this.context)
+    //"2.svga" 内存过高
+    val name = if (model.type==SvgPlayEnums.NORMAL.type){
+        "1.svga"
+    }else{
+        "1.svga"
     }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        beforeTextChanged(s, start, count, after)
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        onTextChanged(s, start, before, count)
-    }
+    parser.decodeFromAssets(name, object : ParseCompletion {
+        override fun onError() {
+           //  Toast.makeText(this, "失败", Toast.LENGTH_SHORT).show()
+            error()
+        }
+        override fun onComplete(entity: SVGAVideoEntity) {
+            val drawable = SVGADrawable(entity)
+            setImageDrawable(drawable)
+            startAnimation()
+            complete()
+        }
+    })
 
 }

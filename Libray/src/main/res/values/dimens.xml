@@ -18,6 +18,9 @@
     <dimen name="dp5">5dp</dimen>
     <dimen name="dp50">50dp</dimen>
     <dimen name="dp210">210dp</dimen>
+    <dimen name="dp190">190dp</dimen>
+    <dimen name="dp180">180dp</dimen>
+    <dimen name="dp150">150dp</dimen>
     <dimen name="dp17">17dp</dimen>
     <dimen name="dp12">12dp</dimen>
     <dimen name="dp80">80dp</dimen>

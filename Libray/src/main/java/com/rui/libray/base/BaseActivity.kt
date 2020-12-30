@@ -6,36 +6,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
+import androidx.lifecycle.observe
+import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.data.net.ResCode
 import com.rui.libray.databinding.ActivityBaseBinding
 import com.rui.libray.util.AppManager
-import com.rui.libray.widget.loadsir.EmptyCallback
-import com.rui.libray.widget.loadsir.ErrorCallback
-import com.rui.libray.widget.loadsir.LoadingCallback
+import com.rui.libray.util.BaseDialogUtil
 import javax.inject.Inject
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCompatActivity() {
 
-    protected lateinit var viewModel:  VM
+    protected lateinit var viewModel: VM
 
-    protected lateinit var bind : DB
+    protected lateinit var bind: DB
 
     protected var baseBindView: ActivityBaseBinding? = null
 
+    private var showLoadingDialog: MaterialDialog? = null
 
-    var reloadListener:()->Unit = {}
+    var reloadListener: () -> Unit = {}
 
-    @Inject lateinit var appManager: AppManager
+    @Inject
+    lateinit var appManager: AppManager
 
 
     /**
@@ -54,10 +54,10 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     }
 
 
-
     protected open fun setStatusLayoutAndListener(): View? {
         return null
     }
+
     private fun initBar() {
 //        StatusBarUtils.with(this)
 //            .setColor(resources.getColor(R.color.white))
@@ -80,22 +80,21 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
             null,
             false
         )
-        bind?.lifecycleOwner = this
+        bind.lifecycleOwner = this
 
         // content
         val params = FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
-        bind?.root?.layoutParams = params
-        baseBindView?.root?.findViewById<FrameLayout>(R.id.container)?.addView(bind?.root)
+        bind.root.layoutParams = params
+        baseBindView?.root?.findViewById<FrameLayout>(R.id.container)?.addView(bind.root)
         setContentView(baseBindView?.root)
 
 
-
         val variableId = config.getVmVariableId()
-        viewModel = config.getViewModel()?:return
-        if (variableId!=ViewModelConfig.VM_NO_BIND){
+        viewModel = config.getViewModel() ?: return
+        if (variableId != ViewModelConfig.VM_NO_BIND) {
             bind?.setVariable(variableId, viewModel)
         }
         val bindingParams = config.getBindingParams()
@@ -107,36 +106,20 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
                 i++
             }
         }
-        if (viewModel!=null){
+        if (viewModel != null) {
             lifecycle.addObserver(viewModel)
         }
 
     }
 
     private fun registerUIChange() {
-        if (viewModel==null)return
-        viewModel.uiChange.showDialog.observe(this, Observer {
-            showLoadingDialog()
-        })
-        viewModel.uiChange.dismissDialog.observe(this, Observer {
-            dismissLoading()
-        })
-
-        viewModel.uiChange.msgEvent.observe(this, Observer {
-            handleEvent(it)
-        })
-
-        viewModel.uiChange.statueShowLoading.observe(this, {
-            loadSirShowLoading()
-        })
-
-        viewModel.uiChange.statueSuccess.observe(this, {
-            loadSirShowSuccess()
-        })
-
-        viewModel.uiChange.statueError.observe(this, {
-            loadSirShowError()
-        })
+        if (viewModel == null) return
+        viewModel.uiChange.showDialog.observe(this, Observer { showLoadingDialog() })
+        viewModel.uiChange.dismissDialog.observe(this, Observer { dismissLoading()})
+        viewModel.uiChange.msgEvent.observe(this, Observer {  handleEvent(it)})
+        viewModel.uiChange.statueShowLoading.observe(this, Observer { statueShowLoading()})
+        viewModel.uiChange.statueSuccess.observe(this, Observer { statueSuccess()})
+        viewModel.uiChange.statueError.observe(this, Observer {statueError() })
 
     }
 
@@ -153,28 +136,69 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
 
     }
 
+    // 加载中
+    private var loadingView: View? = null
 
-    private fun loadSirShowSuccess(){
+    // 加载失败
+    private var errorView: View? = null
+
+    // 空布局
+    private val emptyView: View? = null
+
+
+    private fun statueShowLoading() {
+        if (errorView?.visibility != View.GONE) {
+            errorView?.visibility = View.GONE
+        }
+        if (bind.root.visibility != View.GONE){
+            bind.root.visibility = View.GONE
+        }
+        if (loadingView==null){
+            val viewStub =
+                findViewById<View>(R.id.vs_loading) as ViewStub
+            loadingView = viewStub.inflate()
+        }else{
+            loadingView?.visibility = View.VISIBLE
+        }
+
     }
 
-    private fun loadSirShowLoading(){
+    private fun statueError() {
+        if (loadingView?.visibility != View.GONE) {
+            loadingView?.visibility = View.GONE
+        }
+
+        if (errorView==null){
+            val viewStub =
+                findViewById<View>(R.id.vs_error_refresh) as ViewStub
+            errorView = viewStub.inflate()
+        }else{
+            errorView?.visibility = View.VISIBLE
+        }
+
     }
 
-    private fun loadSirShowError(){
+    private fun statueSuccess() {
+        if (loadingView?.visibility != View.GONE) {
+            loadingView?.visibility = View.GONE
+        }
+        if (errorView?.visibility != View.GONE) {
+            errorView?.visibility = View.GONE
+        }
+        if (bind.root.visibility != View.VISIBLE){
+            bind.root.visibility = View.VISIBLE
+        }
+
     }
 
-    open fun loadSirShowEmpty(){
-    }
 
     private fun dismissLoading() {
+        showLoadingDialog?.dismiss()
     }
 
-    private fun showLoadingDialog() {
-
-
+    protected fun showLoadingDialog() {
+        showLoadingDialog = BaseDialogUtil.showLoadingDialog(this, this)
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -217,10 +241,6 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         goTo(aClass, bundle)
         finish()
     }
-
-
-
-
 
 
 }

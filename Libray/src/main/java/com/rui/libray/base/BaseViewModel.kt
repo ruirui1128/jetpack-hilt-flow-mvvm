@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 open class BaseViewModel() : ViewModel(), LifecycleObserver {
 
-    private var networkHelper : NetworkHelper? = null
+    private var networkHelper: NetworkHelper? = null
 
     constructor(networkHelper: NetworkHelper) : this() {
         this.networkHelper = networkHelper
@@ -39,15 +39,17 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
      * @param isToastFore 是否自行处理res.message ,默认基类处理
      * @param isStatueLayout 是否有加载替换的布局
      */
-    fun <T> launchFlow(block: suspend CoroutineScope.() -> Res<T>,
-                       success: (T?) -> Unit,
-                       error: (String) -> Unit = {},
-                       loadMoreError: () -> Unit = {},
-                       complete: () -> Unit = {},
-                       isShowDialog: Boolean = false,
-                       isStatueLayout: Boolean = false,
-                       isLoadMore: Boolean = false,
-                       isToastFore: Boolean = false) {
+    fun <T> launchFlow(
+        block: suspend CoroutineScope.() -> Res<T>,
+        success: (T?) -> Unit,
+        error: (String) -> Unit = {},
+        loadMoreError: () -> Unit = {},
+        complete: () -> Unit = {},
+        isShowDialog: Boolean = false,
+        isStatueLayout: Boolean = false,
+        isLoadMore: Boolean = false,
+        isToastFore: Boolean = false
+    ) {
         //是否显示对话框
         if (isShowDialog) {
             uiChange.showDialog.call()
@@ -58,45 +60,64 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         } //数据加载完成 界面切换}
         //网络监测
         if (networkHelper?.isNetworkConnected() == false) {
-            uiChange.msgEvent.postValue(Message(code = ResCode.NETWORK_ERROR.getCode(), msg = ResCode.NETWORK_ERROR.getMessage()))
+            uiChange.msgEvent.postValue(
+                Message(
+                    code = ResCode.NETWORK_ERROR.getCode(),
+                    msg = ResCode.NETWORK_ERROR.getMessage()
+                )
+            )
             return
         }
-       viewModelScope.launch {
+        viewModelScope.launch {
             flow { emit(block()) }    //网络请求
-                    .flowOn(Dispatchers.IO)  //指定网络请求的线程
-                    .catch { t: Throwable ->   //异常捕获处理
-                        error(t.message ?: "")   //有基类自行处理,业务层也可以自行处理
-                        if (isLoadMore) {   //isLoadMore 为true 表示数据已经加载第二条数据 则不需要显示statueError
-                            loadMoreError()  //交由业务层自行处理
+                .flowOn(Dispatchers.IO)  //指定网络请求的线程
+                .catch { t: Throwable ->   //异常捕获处理
+                    error(t.message ?: "")   //有基类自行处理,业务层也可以自行处理
+                    if (isLoadMore) {   //isLoadMore 为true 表示数据已经加载第二条数据 则不需要显示statueError
+                        loadMoreError()  //交由业务层自行处理
+                    } else {
+                        if (isStatueLayout) {
+                            uiChange.statueError.call()   //显示数据加载失败界面
                         } else {
+                            uiChange.msgEvent.postValue(
+                                Message(
+                                    code = ResCode.OTHER_ERROR.getCode(), msg = t.message
+                                        ?: ""
+                                )
+                            )
+                        }
+                    }
+                }
+                //数据请求返回处理  emit(block()) 返回的数据
+                .collect {
+                    when (it.status) {     //网络响应解析
+                        ResCode.OK.getCode() -> {
                             if (isStatueLayout) {
-                                uiChange.statueError.call()   //显示数据加载失败界面
-                            } else {
-                                uiChange.msgEvent.postValue(Message(code = ResCode.OTHER_ERROR.getCode(), msg = t.message
-                                        ?: ""))
+                                uiChange.statueSuccess.call()
+                            } //数据加载完成 界面切换}
+                            success(it.data)  //数据加载完成交由业务层处理
+                        }
+                        //token 失效
+                        ResCode.TOKEN_ERROR.getCode() -> uiChange.msgEvent.postValue(
+                            Message(
+                                code = ResCode.TOKEN_ERROR.getCode(),
+                                msg = ResCode.TOKEN_ERROR.getMessage()
+                            )
+                        )
+                        else -> {
+                            error(it.message)
+                            if (!isToastFore) { //toast 是否有业务层自行处理
+                                uiChange.msgEvent.postValue(
+                                    Message(
+                                        code = it.status,
+                                        msg = it.message
+                                    )
+                                )
                             }
                         }
-                    }
-                    //数据请求返回处理  emit(block()) 返回的数据
-                    .collect {
-                        when (it.status) {     //网络响应解析
-                            ResCode.OK.getCode()          -> {
-                                if (isStatueLayout) {
-                                    uiChange.statueSuccess.call()
-                                } //数据加载完成 界面切换}
-                                success(it.data)  //数据加载完成交由业务层处理
-                            }
-                            //token 失效
-                            ResCode.TOKEN_ERROR.getCode() -> uiChange.msgEvent.postValue(Message(code = ResCode.TOKEN_ERROR.getCode(), msg = ResCode.TOKEN_ERROR.getMessage()))
-                            else                          -> {
-                                error(it.message)
-                                if (!isToastFore) { //toast 是否有业务层自行处理
-                                    uiChange.msgEvent.postValue(Message(code = it.status, msg = it.message))
-                                }
-                            }
 
-                        }
                     }
+                }
         }
         if (isShowDialog) {
             uiChange.dismissDialog.call()
@@ -108,49 +129,57 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
     /**
      * 数据直接返回
      */
-    fun <T> launchData(block: suspend CoroutineScope.() -> Res<T>,
-                       ok: (T?) -> Unit,
-                       error: (String) -> Unit = {},
-                       isShowDialog: Boolean = false, ) {
+    fun <T> launchData(
+        block: suspend CoroutineScope.() -> Res<T>,
+        ok: (T?) -> Unit,
+        error: (String) -> Unit = {},
+        isShowDialog: Boolean = false, ) {
         //是否显示对话框
         if (isShowDialog) {
             uiChange.showDialog.call()
         }
         //网络监测
         if (networkHelper?.isNetworkConnected() == false) {
-            uiChange.msgEvent.postValue(Message(code = ResCode.NETWORK_ERROR.getCode(), msg = ResCode.NETWORK_ERROR.getMessage()))
+            uiChange.msgEvent.postValue(
+                Message(
+                    code = ResCode.NETWORK_ERROR.getCode(),
+                    msg = ResCode.NETWORK_ERROR.getMessage()
+                )
+            )
             return
         }
-         viewModelScope.launch {
-            flow { emit(block()) }    //网络请求
-                    .flowOn(Dispatchers.IO)  //指定网络请求的线程
-                    .catch { t: Throwable ->   //异常捕获处理
-                        error(t.message ?: "")   //有基类自行处理,业务层也可以自行处理
-                        uiChange.msgEvent.postValue(Message(code = ResCode.OTHER_ERROR.getCode(), msg = t.message ?: ""))
-                    }
-                    //数据请求返回处理  emit(block()) 返回的数据
-                    .collect {
-                        when (it.status) {     //网络响应解析
-                            ResCode.OK.getCode()          -> {
-                                ok(it.data)  //数据加载完成交由业务层处理
-                            }
-                            //token 失效
-                            ResCode.TOKEN_ERROR.getCode() -> uiChange.msgEvent.postValue(Message(code = ResCode.TOKEN_ERROR.getCode(), msg = ResCode.TOKEN_ERROR.getMessage()))
-                            else                          -> {
-                                error("")
-                                uiChange.msgEvent.postValue(Message(code = it.status, msg = it.message))
-                            }
-
+        viewModelScope.launch {
+            flow { emit(block()) }
+                .flowOn(Dispatchers.IO)
+                .catch { t: Throwable ->
+                    error(t.message ?: "")
+                    uiChange.msgEvent.postValue(Message(code = ResCode.OTHER_ERROR.getCode(), msg = t.message ?: ""))
+                }
+                .collect {
+                    when (it.status) {
+                        ResCode.OK.getCode() -> {
+                            ok(it.data)
                         }
+                        //token 失效
+                        ResCode.TOKEN_ERROR.getCode() -> uiChange.msgEvent.postValue(
+                            Message(
+                                code = ResCode.TOKEN_ERROR.getCode(),
+                                msg = ResCode.TOKEN_ERROR.getMessage()
+                            )
+                        )
+                        else -> {
+                            error("")
+                            uiChange.msgEvent.postValue(Message(code = it.status, msg = it.message))
+                        }
+
                     }
+                }
         }
         if (isShowDialog) {
             uiChange.dismissDialog.call()
         }
 
     }
-
-
 
 
     inner class UIChange {

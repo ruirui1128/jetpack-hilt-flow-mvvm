@@ -5,6 +5,13 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="white">#ffffff</color>
+    <color name="white90">#1Affffff</color>
+    <color name="white80">#33ffffff</color>
+    <color name="white70">#4Dffffff</color>
+    <color name="white60">#66ffffff</color>
+    <color name="white50">#80ffffff</color>
+    <color name="white40">#99ffffff</color>
+    <color name="white30">#B3ffffff</color>
     <color name="color_999">#999</color>
     <color name="color_ededed">#ededed</color>
     <color name="color_e6e6e6">#e6e6ed</color>

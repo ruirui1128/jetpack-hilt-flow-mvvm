@@ -5,7 +5,6 @@ import androidx.activity.viewModels
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.ArticleModel
-import com.lihui.hilt.databinding.ActivityInfoBinding
 import com.lihui.hilt.databinding.ActivityJhfBinding
 import com.lihui.hilt.event.MessageEvent
 import com.lihui.hilt.ui.vm.JhfVm
@@ -13,6 +12,7 @@ import com.rui.libray.base.BaseActivity
 
 import com.rui.libray.base.ViewModelConfig
 import com.rui.libray.ext.onClick
+
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,15 +41,21 @@ class JhfActivity : BaseActivity<JhfVm,ActivityJhfBinding>() {
 
         bind.tvJie.onClick {
             model?.isJie = !(model?.isJie?:false)
+            model?.isHua = false
+            model?.isFa  = false
             LiveEventBus.get(MessageEvent.ITEM_JHF_EVENT).post(model)
         }
 
         bind.tvHua.onClick {
             model?.isHua = !(model?.isHua?:false)
+            model?.isJie = false
+            model?.isFa  = false
             LiveEventBus.get(MessageEvent.ITEM_JHF_EVENT).post(model)
         }
         bind.tvFa.onClick {
             model?.isFa = !(model?.isFa?:false)
+            model?.isJie = false
+            model?.isHua  = false
             LiveEventBus.get(MessageEvent.ITEM_JHF_EVENT).post(model)
         }
 

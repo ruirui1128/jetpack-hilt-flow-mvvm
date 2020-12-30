@@ -9,10 +9,12 @@ import androidx.fragment.app.viewModels
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.FragmentDashboardBinding
+import com.lihui.hilt.ui.act.svg.SvgPlayActivity
 import com.lihui.hilt.ui.vm.HomeVm
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.base.ViewModelConfig
+import com.rui.libray.ext.onClick
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +25,10 @@ class DashboardFragment : BaseFragment<BaseViewModel,FragmentDashboardBinding>()
             .addViewModel(viewModels<BaseViewModel>().value)
 
     override fun init(savedInstanceState: Bundle?) {
+
+        bind.btn1.onClick {
+            goTo(SvgPlayActivity::class.java)
+        }
 
     }
 }

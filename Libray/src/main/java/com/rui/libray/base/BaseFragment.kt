@@ -2,13 +2,13 @@ package com.rui.libray.base
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewStub
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -17,13 +17,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.kingja.loadsir.core.LoadService
-import com.kingja.loadsir.core.LoadSir
+import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.data.net.ResCode
-import com.rui.libray.widget.loadsir.EmptyCallback
-import com.rui.libray.widget.loadsir.ErrorCallback
-import com.rui.libray.widget.loadsir.LoadingCallback
+import com.rui.libray.util.BaseDialogUtil
 
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment() {
@@ -32,11 +29,13 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     private var mActivity: AppCompatActivity? = null
 
-    protected  lateinit var bind: DB
+    protected lateinit var bind: DB
 
     protected abstract val viewModelConfig: ViewModelConfig<VM>
 
+    private var showLoadingDialog: MaterialDialog? = null
 
+    private var bootView:View ? = null
 
     var reloadListener: () -> Unit = {}
 
@@ -55,16 +54,16 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         savedInstanceState: Bundle?
     ): View? {
         val config = viewModelConfig
-        val inflate = inflater.inflate(R.layout.fragment_base, null)
+        bootView = inflater.inflate(R.layout.fragment_base, null)
         bind = DataBindingUtil.inflate(layoutInflater, config.getLayout(), null, false)
 
-        val params = FrameLayout.LayoutParams(
+        val params = RelativeLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         bind.root.layoutParams = params
-        val mContainer = inflate.findViewById<FrameLayout>(R.id.container)
-        mContainer.addView(bind.root)
+        val mContainer = bootView?.findViewById<RelativeLayout>(R.id.container)
+        mContainer?.addView(bind.root)
 
         bind.lifecycleOwner = this
         val variableId = config.getVmVariableId()
@@ -95,52 +94,15 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         return null
     }
 
-    open fun dismissLoading() {
-    }
-
-    open fun showLoadingDialog() {
-    }
-
-    private fun loadSirShowSuccess() {
-
-    }
-
-    private fun loadSirShowLoading() {
-
-    }
-
-    private fun loadSirShowError() {
-
-    }
-
-    open fun loadSirShowEmpty() {
-
-    }
-
 
     private fun registerUIChange() {
-        viewModel.uiChange.showDialog.observe(viewLifecycleOwner, Observer {
-            showLoadingDialog()
-        })
-        viewModel.uiChange.dismissDialog.observe(viewLifecycleOwner, Observer {
-            dismissLoading()
-        })
-
-        viewModel.uiChange.msgEvent.observe(viewLifecycleOwner, Observer {
-            handleEvent(it)
-        })
-
-
-        viewModel.uiChange.statueShowLoading.observe(this, Observer {
-            loadSirShowLoading()
-        })
-        viewModel.uiChange.statueSuccess.observe(this, Observer {
-            loadSirShowSuccess()
-        })
-
-        viewModel.uiChange.statueError.observe(this, Observer {
-            loadSirShowError()
-        })
+        if (viewModel == null) return
+        viewModel.uiChange.showDialog.observe(this, Observer { showLoadingDialog() })
+        viewModel.uiChange.dismissDialog.observe(this, Observer { dismissLoading() })
+        viewModel.uiChange.msgEvent.observe(this, Observer { handleEvent(it) })
+        viewModel.uiChange.statueShowLoading.observe(this, Observer { statueShowLoading() })
+        viewModel.uiChange.statueSuccess.observe(this, Observer { statueSuccess() })
+        viewModel.uiChange.statueError.observe(this, Observer { statueError() })
 
     }
 
@@ -152,10 +114,85 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
             ResCode.TOKEN_ERROR.getCode() -> {
 //                LiveEventBus.get(MsgBusEvent.TOKEN_OUT_EVENT).post("")
             }
-            else                            -> Toast.makeText(activity, msg.msg, Toast.LENGTH_LONG).show()
+            else -> Toast.makeText(activity, msg.msg, Toast.LENGTH_LONG).show()
         }
 
     }
+
+
+    // 加载中
+    private var loadingView: View? = null
+
+    // 加载失败
+    private var errorView: View? = null
+
+    // 空布局
+    private val emptyView: View? = null
+
+
+    private fun statueShowLoading() {
+        if (errorView?.visibility != View.GONE) {
+            errorView?.visibility = View.GONE
+        }
+        if (bind.root.visibility != View.GONE) {
+            bind.root.visibility = View.GONE
+        }
+        if (loadingView == null) {
+            val viewStub = bootView?.findViewById<ViewStub>(R.id.vs_loading)
+            loadingView = viewStub?.inflate()
+            loadingView?.visibility = View.VISIBLE
+        } else {
+            loadingView?.visibility = View.VISIBLE
+        }
+
+     //   statueError()
+    }
+
+    private fun statueError() {
+        if (loadingView?.visibility != View.GONE) {
+            loadingView?.visibility = View.GONE
+        }
+        if (bind.root.visibility != View.GONE) {
+            bind.root.visibility = View.GONE
+        }
+
+        if (errorView == null) {
+            val viewStub =
+                bootView?.findViewById<ViewStub>(R.id.vs_error_refresh)
+
+            errorView = viewStub?.inflate()
+        } else {
+            errorView?.visibility = View.VISIBLE
+        }
+
+    }
+
+    private fun statueSuccess() {
+        if (loadingView?.visibility != View.GONE) {
+            loadingView?.visibility = View.GONE
+        }
+        if (errorView?.visibility != View.GONE) {
+            errorView?.visibility = View.GONE
+        }
+        if (bind.root.visibility != View.VISIBLE) {
+            bind.root.visibility = View.VISIBLE
+        }
+
+    }
+
+
+    private fun dismissLoading() {
+        showLoadingDialog?.dismiss()
+    }
+
+    protected fun showLoadingDialog() {
+        showLoadingDialog = BaseDialogUtil.showLoadingDialog(activity, this)
+    }
+
+    protected open fun <T : View?> getView(id: Int): T {
+        return view?.findViewById<View>(id) as T
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -163,5 +200,30 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     }
 
     abstract fun init(savedInstanceState: Bundle?)
+
+
+    open fun goTo(aClass: Class<out AppCompatActivity?>?) {
+        startActivity(Intent(activity, aClass))
+    }
+
+    open fun goTo(
+        aClass: Class<out AppCompatActivity?>?,
+        bundle: Bundle?
+    ) {
+        val intent = Intent(activity, aClass)
+        if (null != bundle) intent.putExtras(bundle)
+        startActivity(intent)
+    }
+
+    open fun goTo(
+        aClass: Class<out AppCompatActivity?>?,
+        bundle: Bundle?,
+        requestCode: Int
+    ) {
+        val intent = Intent(activity, aClass)
+        if (null != bundle) intent.putExtras(bundle)
+        startActivityForResult(intent, requestCode)
+    }
+
 
 }
