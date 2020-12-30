@@ -90,6 +90,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                 }
                 //数据请求返回处理  emit(block()) 返回的数据
                 .collect {
+
                     when (it.status) {     //网络响应解析
                         ResCode.OK.getCode() -> {
                             if (isStatueLayout) {
@@ -133,7 +134,8 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         block: suspend CoroutineScope.() -> Res<T>,
         ok: (T?) -> Unit,
         error: (String) -> Unit = {},
-        isShowDialog: Boolean = false, ) {
+        isShowDialog: Boolean = false,
+    ) {
         //是否显示对话框
         if (isShowDialog) {
             uiChange.showDialog.call()
@@ -153,7 +155,12 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                 .flowOn(Dispatchers.IO)
                 .catch { t: Throwable ->
                     error(t.message ?: "")
-                    uiChange.msgEvent.postValue(Message(code = ResCode.OTHER_ERROR.getCode(), msg = t.message ?: ""))
+                    uiChange.msgEvent.postValue(
+                        Message(
+                            code = ResCode.OTHER_ERROR.getCode(),
+                            msg = t.message ?: ""
+                        )
+                    )
                 }
                 .collect {
                     when (it.status) {

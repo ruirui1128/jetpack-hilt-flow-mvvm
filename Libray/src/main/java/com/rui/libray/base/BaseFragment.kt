@@ -1,6 +1,7 @@
 package com.rui.libray.base
 
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +28,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     protected lateinit var viewModel: VM
 
-    private var mActivity: AppCompatActivity? = null
+    private var mActivity: Activity? = null
 
     protected lateinit var bind: DB
 
@@ -35,7 +36,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     private var showLoadingDialog: MaterialDialog? = null
 
-    private var bootView:View ? = null
 
     var reloadListener: () -> Unit = {}
 
@@ -53,17 +53,28 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mActivity ?: return null
         val config = viewModelConfig
-        bootView = inflater.inflate(R.layout.fragment_base, null)
-        bind = DataBindingUtil.inflate(layoutInflater, config.getLayout(), null, false)
 
-        val params = RelativeLayout.LayoutParams(
+        val inflate = inflater.inflate(R.layout.fragment_base, null)
+
+        bind = DataBindingUtil.inflate(
+            layoutInflater,
+            config.getLayout(),
+            null,
+            false
+        )
+
+        val params = FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.MATCH_PARENT
         )
         bind.root.layoutParams = params
-        val mContainer = bootView?.findViewById<RelativeLayout>(R.id.container)
-        mContainer?.addView(bind.root)
+        inflate.findViewById<FrameLayout>(R.id.container)?.addView(bind.root)
+
+
+
+
 
         bind.lifecycleOwner = this
         val variableId = config.getVmVariableId()
@@ -79,8 +90,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
             bind.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
             i++
         }
-
-        return bind.root
+        return inflate
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -131,21 +141,21 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
 
     private fun statueShowLoading() {
+
+        if (loadingView == null) {
+            val viewStub = view?.findViewById<ViewStub>(R.id.vs_loading)
+            loadingView = viewStub?.inflate()
+        }
+        loadingView?.visibility = View.VISIBLE
+
         if (errorView?.visibility != View.GONE) {
             errorView?.visibility = View.GONE
         }
         if (bind.root.visibility != View.GONE) {
             bind.root.visibility = View.GONE
         }
-        if (loadingView == null) {
-            val viewStub = bootView?.findViewById<ViewStub>(R.id.vs_loading)
-            loadingView = viewStub?.inflate()
-            loadingView?.visibility = View.VISIBLE
-        } else {
-            loadingView?.visibility = View.VISIBLE
-        }
 
-     //   statueError()
+        //   statueError()
     }
 
     private fun statueError() {
@@ -158,7 +168,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
         if (errorView == null) {
             val viewStub =
-                bootView?.findViewById<ViewStub>(R.id.vs_error_refresh)
+                view?.findViewById<ViewStub>(R.id.vs_error_refresh)
 
             errorView = viewStub?.inflate()
         } else {

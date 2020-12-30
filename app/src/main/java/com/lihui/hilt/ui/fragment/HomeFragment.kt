@@ -98,7 +98,7 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
     private fun initVm() {
         //文章数据返回
         viewModel.articleResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it.list, pageNumber) {  }
+            pageNumber = adapter.loadMore(it?.list, pageNumber) {  }
         })
     }
 

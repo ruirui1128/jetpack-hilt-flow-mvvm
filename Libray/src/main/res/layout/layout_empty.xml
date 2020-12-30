@@ -10,7 +10,7 @@
         android:id="@+id/loading_emptyimg"
         android:layout_width="@dimen/dp80"
         android:layout_height="@dimen/dp80"
-        android:background="@drawable/ic_dissatisfied_24" />
+        android:background="@color/colorPrimary" />
 
     <TextView
         android:layout_width="wrap_content"

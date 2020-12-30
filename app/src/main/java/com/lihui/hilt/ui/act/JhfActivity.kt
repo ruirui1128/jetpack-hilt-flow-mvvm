@@ -30,6 +30,7 @@ class JhfActivity : BaseActivity<JhfVm,ActivityJhfBinding>() {
                 .addViewModel(viewModels<JhfVm>().value)
 
     override fun init() {
+
         model = intent?.extras?.getParcelable<ArticleModel>(JHA_DATA)
         viewModel.collection.value = model?.isCollect?:false
         bind.tvCollect.onClick {

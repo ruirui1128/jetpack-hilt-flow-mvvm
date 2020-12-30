@@ -29,7 +29,7 @@ fun View.onClick(listener: View.OnClickListener):View{
 
 //adapter加载更多
 fun <T,BD: ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loadMore(
-                                        list: MutableList<T>, pageNumber: Int,emptyListener:()->Unit = {}) :Int{
+                                        list: MutableList<T>?, pageNumber: Int,emptyListener:()->Unit = {}) :Int{
         loadMoreModule.isEnableLoadMore = true
         loadMoreModule.isEnableLoadMore = true
         if (pageNumber==1) {
@@ -41,10 +41,10 @@ fun <T,BD: ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loadM
             }
 
         } else {
-           addData(list)
+           addData(list as MutableList<T>)
         }
         val page = pageNumber+1
-        if (list.size ?: 0 < BaseConstant.PAGESIZE_20) {
+        if (list?.size ?: 0 < BaseConstant.PAGESIZE_20) {
            loadMoreModule.loadMoreEnd()
         } else {
            loadMoreModule.loadMoreComplete()
