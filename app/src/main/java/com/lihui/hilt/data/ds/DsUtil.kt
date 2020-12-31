@@ -25,14 +25,15 @@ object DsUtil {
     /**
      * 存储数据
      */
-    fun <T> put(
+    inline  fun <reified T : Any> put(
         scope: CoroutineScope = GlobalScope,
-        key: Preferences.Key<T>,
+        key: String,
         value: T
     ) {
         scope.launch {
+            val preferences = preferencesKey<T>(key)
             dataStore.edit {
-                it[key] = value
+                it[preferences] = value
             }
         }
     }

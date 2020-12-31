@@ -16,6 +16,7 @@ import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.ui.vm.HomeVm
 import com.lihui.hilt.uitl.ToastUtil
+import com.lihui.hilt.uitl.loginObserver
 import com.lihui.indiamall.util.ClickUtil
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.ViewModelConfig
@@ -61,11 +62,13 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
             if (ClickUtil.isFastDoubleClick) return@setOnItemChildClickListener
             when (view.id) {
                 R.id.ivCollect -> {
-                    //数据请求成功 更新状态
-                    viewModel.getCollect {
-                        val item = adapter.getItem(position)
-                        item.isCollect = !item.isCollect
-                        item.notifyChange()
+                    //是否登录
+                    loginObserver(this){
+                        viewModel.getCollect {  //数据请求成功 更新状态
+                            val item = adapter.getItem(position)
+                            item.isCollect = !item.isCollect
+                            item.notifyChange()
+                        }
                     }
                 }
             }
@@ -127,5 +130,10 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
         Glide.with(itemView.context)
                 .load(model?.imagePath)
                 .into(itemView)
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
