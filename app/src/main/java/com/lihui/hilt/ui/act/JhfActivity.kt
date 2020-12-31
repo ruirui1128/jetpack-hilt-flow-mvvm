@@ -60,6 +60,8 @@ class JhfActivity : BaseActivity<JhfVm,ActivityJhfBinding>() {
             LiveEventBus.get(MessageEvent.ITEM_JHF_EVENT).post(model)
         }
 
+
+        viewModel.jhf {  }
     }
 
 

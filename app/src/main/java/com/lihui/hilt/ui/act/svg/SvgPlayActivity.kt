@@ -20,8 +20,6 @@ class SvgPlayActivity : BaseActivity<SvgPlayVm, ActivitySvgPlayBinding>() {
             .addViewModel(viewModels<SvgPlayVm>().value,BR.svgVm)
             .addBindingParam(BR.svgOwner,this)
 
-    override fun init() {
-
-    }
+    override fun init() {}
 
 }

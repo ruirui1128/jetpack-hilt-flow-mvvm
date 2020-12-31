@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.data.net.ResCode
 import com.rui.libray.databinding.ActivityBaseBinding
+import com.rui.libray.ext.onClick
 import com.rui.libray.util.AppManager
 import com.rui.libray.util.BaseDialogUtil
 import javax.inject.Inject
@@ -58,40 +60,17 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         return null
     }
 
-    private fun initBar() {
-//        StatusBarUtils.with(this)
-//            .setColor(resources.getColor(R.color.white))
-//            .init()
-    }
+    private fun initBar() {}
 
     abstract fun init()
 
     private fun initViewDataBinding() {
         val config = viewModelConfig
-        baseBindView = DataBindingUtil.inflate(
-            LayoutInflater.from(this),
-            R.layout.activity_base,
-            null,
-            false
-        )
-        bind = DataBindingUtil.inflate(
-            LayoutInflater.from(this),
-            config.getLayout(),
-            null,
-            false
-        )
-        bind.lifecycleOwner = this
-
-        // content
-        val params = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        bind.root.layoutParams = params
+        baseBindView = DataBindingUtil.inflate(layoutInflater, R.layout.activity_base, null, false)
+        bind = DataBindingUtil.inflate(layoutInflater, config.getLayout(), null, false)
         baseBindView?.root?.findViewById<FrameLayout>(R.id.container)?.addView(bind.root)
         setContentView(baseBindView?.root)
-
-
+        bind.lifecycleOwner = this
         val variableId = config.getVmVariableId()
         viewModel = config.getViewModel() ?: return
         if (variableId != ViewModelConfig.VM_NO_BIND) {
@@ -115,11 +94,11 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     private fun registerUIChange() {
         if (viewModel == null) return
         viewModel.uiChange.showDialog.observe(this, Observer { showLoadingDialog() })
-        viewModel.uiChange.dismissDialog.observe(this, Observer { dismissLoading()})
-        viewModel.uiChange.msgEvent.observe(this, Observer {  handleEvent(it)})
-        viewModel.uiChange.statueShowLoading.observe(this, Observer { statueShowLoading()})
-        viewModel.uiChange.statueSuccess.observe(this, Observer { statueSuccess()})
-        viewModel.uiChange.statueError.observe(this, Observer {statueError() })
+        viewModel.uiChange.dismissDialog.observe(this, Observer { dismissLoading() })
+        viewModel.uiChange.msgEvent.observe(this, Observer { handleEvent(it) })
+        viewModel.uiChange.statueShowLoading.observe(this, Observer { statueShowLoading() })
+        viewModel.uiChange.statueSuccess.observe(this, Observer { statueSuccess() })
+        viewModel.uiChange.statueError.observe(this, Observer { statueError() })
 
     }
 
@@ -150,14 +129,14 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         if (errorView?.visibility != View.GONE) {
             errorView?.visibility = View.GONE
         }
-        if (bind.root.visibility != View.GONE){
+        if (bind.root.visibility != View.GONE) {
             bind.root.visibility = View.GONE
         }
-        if (loadingView==null){
+        if (loadingView == null) {
             val viewStub =
                 findViewById<View>(R.id.vs_loading) as ViewStub
             loadingView = viewStub.inflate()
-        }else{
+        } else {
             loadingView?.visibility = View.VISIBLE
         }
 
@@ -168,11 +147,12 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
             loadingView?.visibility = View.GONE
         }
 
-        if (errorView==null){
+        if (errorView == null) {
             val viewStub =
                 findViewById<View>(R.id.vs_error_refresh) as ViewStub
             errorView = viewStub.inflate()
-        }else{
+
+        } else {
             errorView?.visibility = View.VISIBLE
         }
 
@@ -185,7 +165,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         if (errorView?.visibility != View.GONE) {
             errorView?.visibility = View.GONE
         }
-        if (bind.root.visibility != View.VISIBLE){
+        if (bind.root.visibility != View.VISIBLE) {
             bind.root.visibility = View.VISIBLE
         }
 

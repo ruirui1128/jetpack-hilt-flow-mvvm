@@ -4,6 +4,8 @@ package com.lihui.hilt.di
 import android.content.Context
 import android.os.Build
 import com.lihui.hilt.BuildConfig
+import com.lihui.hilt.data.ds.DataStoreValue
+import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.uitl.AppPrefsUtils
 import com.rui.libray.util.NetworkHelper
 
@@ -38,7 +40,9 @@ class NetModule {
                .newBuilder()
                .addHeader("version", BuildConfig.VERSION_NAME)
                .addHeader("model", Build.MODEL)
-               .addHeader("Token", AppPrefsUtils.getString(AppPrefsUtils.TOKEN))
+//               .addHeader("token", AppPrefsUtils.getString(AppPrefsUtils.TOKEN))
+                   //  去除SharedPreferences 改用 dataStore
+               .addHeader(DataStoreValue.TOKEN,DsUtil.getToken())
                .build()
            chain.proceed(request)
        }

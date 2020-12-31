@@ -2,6 +2,7 @@ package com.lihui.hilt.ui.adapter
 
 
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
@@ -26,7 +27,7 @@ class ArticleAdapter(
         addChildClickViewIds(R.id.ivCollect)
     }
 
-    override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>,  item: ArticleModel) {
+    override fun convert(holder: BaseDataBindingHolder<ItemArticleBinding>, item: ArticleModel) {
         if (item.random.length > 8) {
             item.random = item.random.substring(0, 8)
         }
@@ -37,7 +38,7 @@ class ArticleAdapter(
         LiveEventBus.get(
             MessageEvent.ITEM_JHF_EVENT,
             ArticleModel::class.java
-        ).observe(owner) {
+        ).observe(owner, Observer {
             if (item.random == it?.random) {
                 item.isCollect = it.isCollect
                 item.isFa = it.isFa
@@ -45,7 +46,7 @@ class ArticleAdapter(
                 item.isHua = it.isHua
                 item.notifyChange()
             }
-        }
+        })
     }
 
 

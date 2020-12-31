@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -21,6 +22,8 @@ import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.data.net.ResCode
+import com.rui.libray.databinding.FragmentBaseBinding
+import com.rui.libray.ext.onClick
 import com.rui.libray.util.BaseDialogUtil
 
 
@@ -55,27 +58,9 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     ): View? {
         mActivity ?: return null
         val config = viewModelConfig
-
         val inflate = inflater.inflate(R.layout.fragment_base, null)
-
-        bind = DataBindingUtil.inflate(
-            layoutInflater,
-            config.getLayout(),
-            null,
-            false
-        )
-
-        val params = FrameLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
-        bind.root.layoutParams = params
+        bind = DataBindingUtil.inflate(layoutInflater, config.getLayout(), null, false)
         inflate.findViewById<FrameLayout>(R.id.container)?.addView(bind.root)
-
-
-
-
-
         bind.lifecycleOwner = this
         val variableId = config.getVmVariableId()
         viewModel = config.getViewModel() ?: return null
@@ -129,7 +114,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     }
 
-
     // 加载中
     private var loadingView: View? = null
 
@@ -141,7 +125,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
 
     private fun statueShowLoading() {
-
         if (loadingView == null) {
             val viewStub = view?.findViewById<ViewStub>(R.id.vs_loading)
             loadingView = viewStub?.inflate()
@@ -155,10 +138,9 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
             bind.root.visibility = View.GONE
         }
 
-        //   statueError()
     }
 
-    private fun statueError() {
+    protected fun statueError() {
         if (loadingView?.visibility != View.GONE) {
             loadingView?.visibility = View.GONE
         }
@@ -169,10 +151,13 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         if (errorView == null) {
             val viewStub =
                 view?.findViewById<ViewStub>(R.id.vs_error_refresh)
-
             errorView = viewStub?.inflate()
         } else {
             errorView?.visibility = View.VISIBLE
+        }
+
+        errorView?.findViewById<Button>(R.id.btnReLoad)?.onClick {
+//            Toast.makeText(activity,"dianlellll",Toast.LENGTH_SHORT).show()
         }
 
     }
@@ -187,7 +172,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         if (bind.root.visibility != View.VISIBLE) {
             bind.root.visibility = View.VISIBLE
         }
-
     }
 
 
@@ -202,7 +186,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     protected open fun <T : View?> getView(id: Int): T {
         return view?.findViewById<View>(id) as T
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

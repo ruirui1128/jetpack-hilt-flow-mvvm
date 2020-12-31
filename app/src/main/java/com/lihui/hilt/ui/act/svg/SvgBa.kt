@@ -78,17 +78,11 @@ object SvgBa {
 
             }
 
-            override fun onPause() {
+            override fun onPause() {}
 
-            }
+            override fun onRepeat() {}
 
-            override fun onRepeat() {
-
-            }
-
-            override fun onStep(frame: Int, percentage: Double) {
-
-            }
+            override fun onStep(frame: Int, percentage: Double) {}
         }
     }
 }

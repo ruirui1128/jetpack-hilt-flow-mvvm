@@ -61,7 +61,6 @@ object CommonBA {
     }
 
 
-
     @JvmStatic
     @BindingAdapter(
         value = [
@@ -119,7 +118,8 @@ object CommonBA {
             RequestOptions.circleCropTransform()
         } else {
 
-            val roundedCorners = RoundedCorners( DensityUtil.dp2px(corners?.toFloat()?:1f,imageView.context))
+            val roundedCorners =
+                RoundedCorners(DensityUtil.dp2px(corners?.toFloat() ?: 1f, imageView.context))
             RequestOptions.bitmapTransform(roundedCorners)
         }
 
@@ -129,13 +129,13 @@ object CommonBA {
         if (width > 0 && height > 0) {
             builder.override(width, height)
         }
-        if (errorHolder!=null){
+        if (errorHolder != null) {
             builder
                 .apply(options)
                 .placeholder(R.color.white)
                 .error(errorHolder)
                 .into(imageView)
-        }else{
+        } else {
             builder.apply(options).placeholder(R.color.white).error(R.color.color_ededed)
                 .into(imageView)
         }
@@ -161,7 +161,7 @@ object CommonBA {
         errorHolder: Drawable?
 
     ) {
-        imageView.setBackgroundResource(imageUrl?:R.color.color_999)
+        imageView.setBackgroundResource(imageUrl ?: R.color.color_999)
     }
 
     /**
@@ -175,15 +175,13 @@ object CommonBA {
     )
     fun swipeRefresh(
         swipeRefresh: SwipeRefreshLayout,
-        isRefreshing:Boolean = false
+        isRefreshing: Boolean = false
     ) {
-        if (swipeRefresh.isRefreshing){
+        if (swipeRefresh.isRefreshing) {
             swipeRefresh.isRefreshing = false
         }
 
     }
-
-
 
 
 }

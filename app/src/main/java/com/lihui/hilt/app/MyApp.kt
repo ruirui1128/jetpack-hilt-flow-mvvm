@@ -1,11 +1,11 @@
 package com.lihui.hilt.app
 
 import android.app.Application
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.createDataStore
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.kingja.loadsir.core.LoadSir
-import com.rui.libray.widget.loadsir.EmptyCallback
-import com.rui.libray.widget.loadsir.ErrorCallback
-import com.rui.libray.widget.loadsir.LoadingCallback
+
 
 import dagger.hilt.android.HiltAndroidApp
 
@@ -17,21 +17,20 @@ class MyApp:Application(){
             return mApplication
         }
 
+        private lateinit var dataStore :DataStore<Preferences>
+        fun getDataStore():DataStore<Preferences> {
+            return dataStore
+        }
     }
+
+
+
     override fun onCreate() {
         super.onCreate()
         mApplication = this
         LiveEventBus.config().lifecycleObserverAlwaysActive(true)
-        initLoadSir()
-
+        dataStore =createDataStore(name = "hilt_app")
     }
 
-    private fun initLoadSir() {
-        LoadSir.beginBuilder()
-            .addCallback(LoadingCallback())
-            .addCallback(ErrorCallback())
-            .addCallback(EmptyCallback())
-            .setDefaultCallback(LoadingCallback::class.java)
-            .commit()
-    }
+
 }
