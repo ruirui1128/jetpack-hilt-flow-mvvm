@@ -37,24 +37,16 @@ fun afterLogin(method: () -> Unit, login: () -> Unit) {
  * 已经登录或者登录之后执行 logined()
  */
 fun loginObserver(
-    owner: LifecycleOwner? = null,
-    logined: () -> Unit
+    owner: LifecycleOwner,
+    logined: () -> Unit,
+    observer: Observer<String> = Observer { logined() }
 ) {
 
-    val observer = Observer<String> {
-        //这里接收登录消息 执行 logined()方法
-        logined()
-    }
     if (isLogined()) {
         logined()
     } else {
         val liveData: LiveData<String>? = LoginHandler.get().login(MyApp.getApp())
-        if (owner == null) {
-            //不关联生命周期
-            liveData?.observeForever(loginObserver(observer, liveData))
-        } else {
-            liveData?.observe(owner, loginObserver(observer, liveData))
-        }
+        liveData?.observe(owner, observer)
     }
 
 }

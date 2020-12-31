@@ -34,27 +34,25 @@ object ItemHomePresenter {
      * 接化发       接 化  发 三者互斥
      */
     fun jhf(viewModel: HomeVm, model: ArticleModel,jfa:Int){
-        loginObserver {
-            viewModel.jhf {
-                when(jfa){
-                    JIE->{
-                        model.isHua = false
-                        model.isFa  = false
-                        model.isJie = !model.isJie
-                    }
-                    HUA->{
-                        model.isJie = false
-                        model.isFa  = false
-                        model.isHua = !model.isJie
-                    }
-                    FA->{
-                        model.isJie = false
-                        model.isHua  = false
-                        model.isFa = !model.isJie
-                    }
+        viewModel.jhf {
+            when(jfa){
+                JIE->{
+                    model.isHua = false
+                    model.isFa  = false
+                    model.isJie = !model.isJie
                 }
-                model.notifyChange()
+                HUA->{
+                    model.isJie = false
+                    model.isFa  = false
+                    model.isHua = !model.isJie
+                }
+                FA->{
+                    model.isJie = false
+                    model.isHua  = false
+                    model.isFa = !model.isJie
+                }
             }
+            model.notifyChange()
         }
     }
 
