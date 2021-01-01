@@ -55,7 +55,7 @@ object SvgBa {
         svgPlayVm.queueSize.observe(owner, Observer {
             if (it > 0 && svgPlayVm.isPlaying.value == false) {
                 svgPlayVm.isPlaying.postValue(true)
-                val model = svgPlayVm.queue.value?.take()
+                val model = svgPlayVm.queue.value?.poll()
                 model?:return@Observer
                 sVGAImageView.start(model)
             }
@@ -71,7 +71,7 @@ object SvgBa {
                     svgPlayVm.isPlaying.postValue(false)
                 }else{
                     //说明队列中还有 继续播放
-                    val model = svgPlayVm.queue.value?.take()
+                    val model = svgPlayVm.queue.value?.poll()
                     model?:return
                     sVGAImageView.start(model)
                 }

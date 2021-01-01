@@ -19,7 +19,7 @@ object SvgPresenter {
         val randomType = (0..1).random()
         val id = UUID.randomUUID().toString()
         val svgModel = SvgModel(id = id, name = "", type = randomType)
-        viewModel.queue.value?.put(svgModel)
+        viewModel.queue.value?.offer(svgModel)
         viewModel.queueSize.postValue(viewModel.queue.value?.size)
     }
 

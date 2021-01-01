@@ -61,7 +61,6 @@ class JhfActivity : BaseActivity<JhfVm,ActivityJhfBinding>() {
         }
 
 
-        viewModel.jhf {  }
     }
 
 

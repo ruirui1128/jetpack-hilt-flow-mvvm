@@ -196,7 +196,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         val statueError by lazy { ViewModelEvent<Void>() }     //加载错误，初次加载数据失败显示,后续如有adapter显示加载失败
     }
 
-    
+
 
 
 }

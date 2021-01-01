@@ -27,10 +27,8 @@ class JhfVm @ViewModelInject constructor(
     /**
      * 接化发
      */
-    fun jhf(ok:(String?)->Unit){
-        //launchData({userService.jhf()},{ok(it)})
-
-        launchFlow({userService.jhf()},{},isStatueLayout = true)
+    fun jhf(ok:(String?)->Unit,error: ()->Unit){
+        launchData({userService.jhf()},ok ={ok(it)},error = {error()})
     }
 
 

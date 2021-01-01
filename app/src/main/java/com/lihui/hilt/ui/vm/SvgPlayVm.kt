@@ -6,6 +6,7 @@ import com.lihui.hilt.data.api.ApiService
 import com.lihui.hilt.data.model.SvgModel
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
+import java.util.*
 import java.util.concurrent.LinkedBlockingQueue
 
 
@@ -30,8 +31,8 @@ class SvgPlayVm @ViewModelInject constructor(
     /**
      * 动画队列
      */
-    val queue = MutableLiveData<LinkedBlockingQueue<SvgModel>>().apply {
-        this.value = LinkedBlockingQueue<SvgModel>()
+    val queue = MutableLiveData<LinkedList<SvgModel>>().apply {
+        this.value = LinkedList<SvgModel>()
     }
 
 }
