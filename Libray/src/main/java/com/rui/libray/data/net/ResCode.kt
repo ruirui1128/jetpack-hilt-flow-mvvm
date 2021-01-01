@@ -8,7 +8,7 @@ enum class ResCode(private val code: Int, private val message:String) {
     /**
      * 响应成功
      */
-    OK(0,"响应成功"),
+    OK(110,"响应成功"),
 
     /**
      * 加载更多失败

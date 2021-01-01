@@ -6,11 +6,13 @@ import androidx.activity.viewModels
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.data.ds.DataStoreValue
 import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.databinding.ActivityLoginBinding
+import com.lihui.hilt.event.MessageEvent
 import com.lihui.hilt.ui.presenter.LoginPresenter
 import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.hilt.ui.vm.LoginVm
@@ -41,15 +43,23 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
         initVm()
     }
 
+    var token = ""
     private fun initVm() {
         //登录成功 操作
         viewModel.loginResult.observe(this, Observer {
             ToastUtil.toast("登录成功")
+            LoginHandler.get().postLoginHandler(token)
             DsUtil.put(lifecycleScope, DataStoreValue.TOKEN, it.token)
-            LoginHandler.get().postLoginHandler(it.token)
             finish()
-        //    goToAndFinish(HomeActivity::class.java)
         })
-
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LiveEventBus.get(MessageEvent.LOGIN_TOKEN_EVENT).post("")
+    }
+
+
+
+
 }

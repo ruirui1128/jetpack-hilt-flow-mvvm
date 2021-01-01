@@ -11,6 +11,9 @@ import retrofit2.http.POST
  * 用户相关
  */
 interface UserApi {
+    /**
+     * 登录
+     */
     @POST("api/login")
     suspend fun login(@Body map: HashMap<String,String>):Res<LoginModel?>
 

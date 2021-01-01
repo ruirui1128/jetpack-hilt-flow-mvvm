@@ -23,6 +23,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
 
     val uiChange: UIChange by lazy { UIChange() }
 
+    //当组件结束时，会取消协程内的任务
     override fun onCleared() {
         viewModelScope.cancel()
     }
@@ -81,8 +82,8 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                         } else {
                             uiChange.msgEvent.postValue(
                                 Message(
-                                    code = ResCode.OTHER_ERROR.getCode(), msg = t.message
-                                        ?: ""
+                                    code = ResCode.OTHER_ERROR.getCode(),
+                                    msg = t.message ?: ""
                                 )
                             )
                         }
@@ -91,7 +92,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                 //数据请求返回处理  emit(block()) 返回的数据
                 .collect {
 
-                    when (it.status) {     //网络响应解析
+                    when (it.code) {     //网络响应解析
                         ResCode.OK.getCode() -> {
                             if (isStatueLayout) {
                                 uiChange.statueSuccess.call()
@@ -109,10 +110,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                             error(it.message)
                             if (!isToastFore) { //toast 是否有业务层自行处理
                                 uiChange.msgEvent.postValue(
-                                    Message(
-                                        code = it.status,
-                                        msg = it.message
-                                    )
+                                    Message(code = it.code, msg = it.message)
                                 )
                             }
                         }
@@ -163,7 +161,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                     )
                 }
                 .collect {
-                    when (it.status) {
+                    when (it.code) {
                         ResCode.OK.getCode() -> {
                             ok(it.data)
                         }
@@ -176,7 +174,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
                         )
                         else -> {
                             error("")
-                            uiChange.msgEvent.postValue(Message(code = it.status, msg = it.message))
+                            uiChange.msgEvent.postValue(Message(code = it.code, msg = it.message))
                         }
 
                     }
@@ -196,6 +194,20 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         val statueShowLoading by lazy { ViewModelEvent<Void>() } // 显示加载布局
         val statueSuccess by lazy { ViewModelEvent<Void>() }    //加载完成
         val statueError by lazy { ViewModelEvent<Void>() }     //加载错误，初次加载数据失败显示,后续如有adapter显示加载失败
+    }
+
+
+    fun <T> scopeHttp(
+        scope: CoroutineScope = GlobalScope,
+        block: suspend CoroutineScope.() -> Res<T>,
+        ok: (T?) -> Unit
+    ) {
+        scope.launch {
+            flow { emit(block()) }      //网络请求
+                .flowOn(Dispatchers.IO) //指定请求线程
+                .catch { }              // 异常处理
+                .collect { ok(it.data) } //数据返回
+        }
     }
 
 

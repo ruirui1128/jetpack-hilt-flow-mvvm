@@ -3,8 +3,11 @@ package com.lihui.hilt.uitl
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.app.MyApp
 import com.lihui.hilt.data.ds.DsUtil
+import com.lihui.hilt.data.model.ArticleModel
+import com.lihui.hilt.event.MessageEvent
 
 /**
  *Created by Rui
@@ -37,28 +40,20 @@ fun afterLogin(method: () -> Unit, login: () -> Unit) {
  * 已经登录或者登录之后执行 logined()
  */
 fun loginObserver(
-    owner: LifecycleOwner,
+    owner: LifecycleOwner ,
     logined: () -> Unit,
-    observer: Observer<String> = Observer { logined() }
 ) {
 
     if (isLogined()) {
         logined()
     } else {
         val liveData: LiveData<String>? = LoginHandler.get().login(MyApp.getApp())
-        liveData?.observe(owner, observer)
+        val observer: Observer<String> = Observer { logined() }
+        liveData?.observe(owner,observer)
+        LiveEventBus.get(MessageEvent.LOGIN_TOKEN_EVENT, String::class.java).observe(owner, Observer {
+            liveData?.removeObserver(observer)
+        })
     }
 
 }
 
-
-private fun loginObserver(
-    observer: Observer<String>,
-    liveData: LiveData<String>
-): Observer<String> {
-    return Observer<String> { str ->
-        //登录成功以后这里接受消息 发送至 observer
-        observer.onChanged(str)
-        liveData.removeObserver(observer)
-    }
-}
