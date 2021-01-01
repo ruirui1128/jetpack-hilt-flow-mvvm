@@ -196,19 +196,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         val statueError by lazy { ViewModelEvent<Void>() }     //加载错误，初次加载数据失败显示,后续如有adapter显示加载失败
     }
 
-
-    fun <T> scopeHttp(
-        scope: CoroutineScope = GlobalScope,
-        block: suspend CoroutineScope.() -> Res<T>,
-        ok: (T?) -> Unit
-    ) {
-        scope.launch {
-            flow { emit(block()) }      //网络请求
-                .flowOn(Dispatchers.IO) //指定请求线程
-                .catch { }              // 异常处理
-                .collect { ok(it.data) } //数据返回
-        }
-    }
+    
 
 
 }
