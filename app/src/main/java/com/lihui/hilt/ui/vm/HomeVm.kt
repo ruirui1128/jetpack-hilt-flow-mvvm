@@ -1,9 +1,9 @@
 package com.lihui.hilt.ui.vm
 
-import android.util.Log
+
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+
 import com.lihui.hilt.data.api.ApiService
 import com.lihui.hilt.data.api.UserApi
 import com.lihui.hilt.data.model.ArticleModel
@@ -11,21 +11,13 @@ import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.data.model.PageList
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.FlowCollector
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class HomeVm @ViewModelInject constructor(
     private val apiService: ApiService,
     private val userService: UserApi,
     networkHelper: NetworkHelper
 ) : BaseViewModel(networkHelper) {
-//    networkHelper: NetworkHelper
 
     /**
      * 界面刷新

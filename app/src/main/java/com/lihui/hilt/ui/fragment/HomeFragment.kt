@@ -31,8 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Delegate<ImageView, BannerDataModel>,
-        BGABanner.Adapter<ImageView, BannerDataModel> {
+class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
 
     /**
      * fastmock接口不保存数据!!!  不保存数据!!!  不保存数据!!!
@@ -66,7 +65,8 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
                 R.id.ivCollect -> {
                     //是否登录
                     loginObserver(this){
-                        viewModel.getCollect {  //数据请求成功 更新状态
+                        //数据请求成功 更新状态
+                        viewModel.getCollect {
                             val item = adapter.getItem(position)
                             item.isCollect = !item.isCollect
                             item.notifyChange()
@@ -75,9 +75,6 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
                 }
             }
         }
-
-
-
         adapter?.setOnItemClickListener { ada, view, position ->
             val item = adapter.getItem(position)
             val intent = Intent(activity,JhfActivity::class.java)
@@ -91,7 +88,6 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
 
     private fun initData(firstLoad: Boolean = false) {
         pageNumber = 1
-        viewModel.getBanner { bind.banner.setData(it, null) }
         getArticleList(firstLoad)
     }
 
@@ -109,33 +105,6 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(), BGABanner.Deleg
 
     private fun initView() {
         bind.swipe.init { initData(false) }
-        bind.banner.setAdapter(this)
-        bind.banner.setDelegate(this)
     }
 
-    override fun onBannerItemClick(
-            banner: BGABanner?,
-            itemView: ImageView?,
-            model: BannerDataModel?,
-            position: Int
-    ) {
-        ToastUtil.toast("点击了$position")
-    }
-
-    override fun fillBannerItem(
-            banner: BGABanner?,
-            itemView: ImageView?,
-            model: BannerDataModel?,
-            position: Int
-    ) {
-        itemView?.context ?: return
-        Glide.with(itemView.context)
-                .load(model?.imagePath)
-                .into(itemView)
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 }

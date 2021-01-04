@@ -34,6 +34,7 @@ fun <T,BD: ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loadM
         loadMoreModule.isEnableLoadMore = true
         if (pageNumber==1) {
             if (list==null){
+                setList(null)
                 emptyListener()
                 return 1
             }else{

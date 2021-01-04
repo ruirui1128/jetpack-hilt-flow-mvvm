@@ -17,38 +17,44 @@
     android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvArticle"
+        android:layout_marginTop="@dimen/dp10"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <cn.bingoogolapple.bgabanner.BGABanner
-            android:layout_marginTop="@dimen/dp_10"
-            android:layout_marginEnd="@dimen/dp15"
-            android:layout_marginStart="@dimen/dp15"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp210"
-            android:id="@+id/banner"
-            style="@style/BannerDefaultStyle"
-            app:banner_pointTopBottomMargin="@dimen/dp17"
-            app:banner_pointContainerBackground="@android:color/transparent"
-            app:banner_indicatorGravity="bottom|center_horizontal"
-            app:banner_transitionEffect="zoom"
-            />
+        android:layout_height="wrap_content"/>
+<!--<androidx.core.widget.NestedScrollView-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+<!--    <LinearLayout-->
+<!--        android:focusable="true"-->
+<!--        android:focusableInTouchMode="true"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content">-->
+<!--        <cn.bingoogolapple.bgabanner.BGABanner-->
+<!--            android:layout_marginTop="@dimen/dp_10"-->
+<!--            android:layout_marginEnd="@dimen/dp15"-->
+<!--            android:layout_marginStart="@dimen/dp15"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/dp210"-->
+<!--            android:id="@+id/banner"-->
+<!--            style="@style/BannerDefaultStyle"-->
+<!--            app:banner_pointTopBottomMargin="@dimen/dp17"-->
+<!--            app:banner_pointContainerBackground="@android:color/transparent"-->
+<!--            app:banner_indicatorGravity="bottom|center_horizontal"-->
+<!--            app:banner_transitionEffect="zoom"-->
+<!--            />-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcvArticle"
-            android:layout_marginTop="@dimen/dp10"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rcvArticle"-->
+<!--            android:layout_marginTop="@dimen/dp10"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"/>-->
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+<!--    </LinearLayout>-->
+<!--</androidx.core.widget.NestedScrollView>-->
 
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
