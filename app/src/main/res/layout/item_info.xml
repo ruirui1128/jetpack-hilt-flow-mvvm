@@ -7,7 +7,7 @@
     <data>
         <variable
             name="infoVm"
-            type="com.lihui.hilt.data.model.InfoModel" />
+            type="com.lihui.hilt.data.model.ArticleModel" />
 
     </data>
 
@@ -34,7 +34,7 @@
 
         <TextView
             tools:text="作者:张三丰"
-            android:text='@{infoVm.shareUser}'
+            android:text='@{infoVm.title}'
             android:layout_marginStart="@dimen/dp_10"
             app:layout_constraintTop_toTopOf="@id/iv"
             app:layout_constraintStart_toEndOf="@id/iv"
@@ -44,7 +44,7 @@
 
         <TextView
             tools:text="时间: 宋末元初"
-            android:text='@{infoVm.niceShareDate}'
+            android:text='@{infoVm.title}'
             android:layout_marginStart="@dimen/dp_10"
             app:layout_constraintBottom_toBottomOf="@id/iv"
             app:layout_constraintStart_toEndOf="@id/iv"
@@ -57,7 +57,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="@dimen/dp_10"
-            android:text="@{infoVm.superChapterName}"
+            android:text="@{infoVm.subTitle}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

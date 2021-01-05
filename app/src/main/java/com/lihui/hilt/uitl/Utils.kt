@@ -12,7 +12,7 @@ object Utils {
     fun dp2px(dp: Float):Float{
         return  TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
-            150f,
+            dp,
             Resources.getSystem().displayMetrics)
     }
 }

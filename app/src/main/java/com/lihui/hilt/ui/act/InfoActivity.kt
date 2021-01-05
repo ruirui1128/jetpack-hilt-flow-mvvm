@@ -35,7 +35,7 @@ class InfoActivity : BaseActivity<InfoVm,ActivityInfoBinding>() {
         adapter.initLoadMore{refresh(false)}
         bind.recyclerView.adapter = adapter
         viewModel.infoResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it.list,pageNumber){}
+            pageNumber = adapter.loadMore(it.list,pageNumber)
         })
         refresh(true, firstLoad = true)
     }

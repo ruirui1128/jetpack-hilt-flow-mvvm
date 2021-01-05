@@ -3,6 +3,7 @@ package com.lihui.hilt.ui.vm
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.ApiService
+import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.data.model.InfoModel
 import com.lihui.hilt.data.model.PageList
 import com.rui.libray.base.BaseViewModel
@@ -17,10 +18,10 @@ class InfoVm @ViewModelInject constructor(
         this.value = false
     }
 
-    val infoResult = MutableLiveData<PageList<InfoModel>>()
+    val infoResult = MutableLiveData<PageList<ArticleModel>>()
 
     fun getInfoList(pageNumber: Int,firstLoad : Boolean,loadMoreError:()->Unit) {
-        launchFlow({apiService.getPageList(pageNumber.toString())},
+        launchFlow({apiService.getArticle(hashMapOf())},
             {infoResult.postValue(it)},
             isStatueLayout = firstLoad,
             isLoadMore = (pageNumber!=1),
