@@ -10,6 +10,7 @@ import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.FragmentDashboardBinding
 import com.lihui.hilt.ui.act.svg.SvgPlayActivity
+import com.lihui.hilt.ui.act.view.ViewActivity
 import com.lihui.hilt.ui.vm.HomeVm
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.BaseViewModel
@@ -28,6 +29,10 @@ class DashboardFragment : BaseFragment<BaseViewModel,FragmentDashboardBinding>()
 
         bind.btn1.onClick {
             goTo(SvgPlayActivity::class.java)
+        }
+
+        bind.btn2.onClick {
+            goTo(ViewActivity::class.java)
         }
 
     }

@@ -26,6 +26,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <Button
+                android:id="@+id/btn2"
+                android:text="View"
+                android:layout_marginTop="@dimen/dp15"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_marginEnd="@dimen/dp15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
         </LinearLayout>
 
 

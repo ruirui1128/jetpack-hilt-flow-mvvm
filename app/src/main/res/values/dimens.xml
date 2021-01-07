@@ -46,4 +46,5 @@
     <dimen name="dp2">2dp</dimen>
     <dimen name="dp118">118dp</dimen>
     <dimen name="sp10">10sp</dimen>
+    <dimen name="dp375">375dp</dimen>
 </resources>

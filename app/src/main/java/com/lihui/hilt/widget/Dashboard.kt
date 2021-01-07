@@ -14,8 +14,8 @@ class Dashboard @JvmOverloads constructor(
 ) : View(context, attrs, defStyleAttr) {
 
     private val ANGLE = 120f
-    private val RADIUS = Utils.dp2px(150f)
-    private val LENGTH = Utils.dp2px(120f)
+    private var RADIUS = Utils.dp2px(150f)
+    private var LENGTH = Utils.dp2px(120f)
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val dash = Path()
     private lateinit var pathEffect: PathDashPathEffect
