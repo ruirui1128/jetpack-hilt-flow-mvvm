@@ -91,7 +91,6 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
 
     private fun registerUIChange() {
-        if (viewModel == null) return
         viewModel.uiChange.showDialog.observe(this, Observer { showLoadingDialog() })
         viewModel.uiChange.dismissDialog.observe(this, Observer { dismissLoading() })
         viewModel.uiChange.msgEvent.observe(this, Observer { handleEvent(it) })
@@ -101,17 +100,8 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     }
 
-    open fun handleEvent(msg: Message) {
-        when (msg.code) {
-            ResCode.NETWORK_ERROR.getCode() -> {
-                Toast.makeText(activity, msg.msg, Toast.LENGTH_LONG).show()
-            }
-            ResCode.TOKEN_ERROR.getCode() -> {
-//                LiveEventBus.get(MsgBusEvent.TOKEN_OUT_EVENT).post("")
-            }
-            else -> Toast.makeText(activity, msg.msg, Toast.LENGTH_LONG).show()
-        }
-
+    open fun handleEvent(msg: String) {
+        Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
     }
 
     // 加载中
@@ -157,10 +147,12 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         }
 
         errorView?.findViewById<Button>(R.id.btnReLoad)?.onClick {
-//            Toast.makeText(activity,"dianlellll",Toast.LENGTH_SHORT).show()
+            reLoad()
         }
 
     }
+
+    open fun reLoad() {}
 
     private fun statueSuccess() {
         if (loadingView?.visibility != View.GONE) {

@@ -51,7 +51,6 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 禁用横屏
         initViewDataBinding()
         registerUIChange()
-        initBar()
         init()
     }
 
@@ -60,8 +59,11 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         return null
     }
 
-    private fun initBar() {}
 
+
+    /**
+     * 初始化
+     */
     abstract fun init()
 
     private fun initViewDataBinding() {
@@ -74,25 +76,22 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         val variableId = config.getVmVariableId()
         viewModel = config.getViewModel() ?: return
         if (variableId != ViewModelConfig.VM_NO_BIND) {
-            bind?.setVariable(variableId, viewModel)
+            bind.setVariable(variableId, viewModel)
         }
         val bindingParams = config.getBindingParams()
         run {
             var i = 0
             val length = bindingParams.size()
             while (i < length) {
-                bind?.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
+                bind.setVariable(bindingParams.keyAt(i), bindingParams.valueAt(i))
                 i++
             }
         }
-        if (viewModel != null) {
-            lifecycle.addObserver(viewModel)
-        }
+        lifecycle.addObserver(viewModel)
 
     }
 
     private fun registerUIChange() {
-        if (viewModel == null) return
         viewModel.uiChange.showDialog.observe(this, Observer { showLoadingDialog() })
         viewModel.uiChange.dismissDialog.observe(this, Observer { dismissLoading() })
         viewModel.uiChange.msgEvent.observe(this, Observer { handleEvent(it) })
@@ -103,16 +102,8 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     }
 
 
-    open fun handleEvent(msg: Message) {
-        when (msg.code) {
-            ResCode.NETWORK_ERROR.getCode() -> {
-                Toast.makeText(this, msg.msg, Toast.LENGTH_LONG).show()
-            }
-            ResCode.TOKEN_ERROR.getCode() -> {
-            }
-            else -> Toast.makeText(this, msg.msg, Toast.LENGTH_LONG).show()
-        }
-
+    open fun handleEvent(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 
     // 加载中
@@ -155,8 +146,13 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         } else {
             errorView?.visibility = View.VISIBLE
         }
+        errorView?.findViewById<Button>(R.id.btnReLoad)?.onClick {
+            reLoad()
+        }
 
     }
+
+    open fun reLoad() {}
 
     private fun statueSuccess() {
         if (loadingView?.visibility != View.GONE) {
@@ -176,7 +172,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         showLoadingDialog?.dismiss()
     }
 
-    protected fun showLoadingDialog() {
+    private fun showLoadingDialog() {
         showLoadingDialog = BaseDialogUtil.showLoadingDialog(this, this)
     }
 

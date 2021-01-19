@@ -9,30 +9,27 @@ import com.rui.libray.util.NetworkHelper
 class JhfVm @ViewModelInject constructor(
     private val userService: UserApi,
     networkHelper: NetworkHelper
-):BaseViewModel(networkHelper) {
-    val  collection =  MutableLiveData<Boolean>()
-    val  jie =  MutableLiveData<Boolean>()
-    val  hua =  MutableLiveData<Boolean>()
-    val  fa =  MutableLiveData<Boolean>()
+) : BaseViewModel(networkHelper) {
+    val collection = MutableLiveData<Boolean>()
+    val jie = MutableLiveData<Boolean>()
+    val hua = MutableLiveData<Boolean>()
+    val fa = MutableLiveData<Boolean>()
 
 
     /**
      * 收藏
      */
-    fun getCollect(ok:()->Unit){
-        launchData({userService.getCollect()},{ ok() })
+    fun getCollect(ok: () -> Unit) {
+        launchFlow({ userService.getCollect() }, { ok() })
     }
 
 
     /**
      * 接化发
      */
-    fun jhf(ok:(String?)->Unit,error: ()->Unit){
-        launchData({userService.jhf()},ok ={ok(it)},error = {error()})
+    fun jhf(ok: (String?) -> Unit, error: () -> Unit) {
+        launchFlow({ userService.jhf() }, ok = { ok(it) }, error = { error() })
     }
-
-
-
 
 
 }

@@ -6,6 +6,8 @@ import android.os.Build
 import com.lihui.hilt.BuildConfig
 import com.lihui.hilt.data.ds.DataStoreValue
 import com.lihui.hilt.data.ds.DsUtil
+import com.lihui.hilt.di.interceptor.RequestInterceptor
+import com.lihui.hilt.di.interceptor.ResponseInterceptor
 import com.lihui.hilt.uitl.AppPrefsUtils
 import com.rui.libray.util.NetworkHelper
 
@@ -35,19 +37,10 @@ class NetModule {
     fun provideOkHttpClient():OkHttpClient{
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val interceptor = Interceptor { chain ->
-           val request = chain.request()
-               .newBuilder()
-               .addHeader("version", BuildConfig.VERSION_NAME)
-               .addHeader("model", Build.MODEL)
-//               .addHeader("token", AppPrefsUtils.getString(AppPrefsUtils.TOKEN))
-                   //  去除SharedPreferences 改用 dataStore
-               .addHeader(DataStoreValue.TOKEN,DsUtil.getToken())
-               .build()
-           chain.proceed(request)
-       }
+
        return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
+            .addInterceptor(RequestInterceptor())
+            .addInterceptor(ResponseInterceptor())
             .addInterceptor(loggingInterceptor)
             .connectTimeout(10, TimeUnit.SECONDS)
             .readTimeout(10, TimeUnit.SECONDS)

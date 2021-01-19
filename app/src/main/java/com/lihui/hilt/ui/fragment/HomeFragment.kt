@@ -54,6 +54,10 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
         initData(true)
     }
 
+    override fun reLoad() {
+        initData(true)
+    }
+
     private fun initAdapter() {
         adapter = ArticleAdapter(viewModel, this)
         //加载更多 loadMore = getArticleList()   在扩展里面

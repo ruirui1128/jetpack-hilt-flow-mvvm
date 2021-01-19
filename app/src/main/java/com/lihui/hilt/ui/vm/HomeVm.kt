@@ -27,7 +27,7 @@ class HomeVm @ViewModelInject constructor(
     }
 
     fun getBanner(ok: (MutableList<BannerDataModel>?) -> Unit) {
-        launchData({ apiService.getBanner() }, { ok(it) })
+        launchFlow({ apiService.getBanner() }, { ok(it) })
     }
 
     /**
@@ -53,54 +53,22 @@ class HomeVm @ViewModelInject constructor(
      * 注意区分场景
      */
     fun getCollect(ok: (String?) -> Unit) {
-        launchData({ userService.getCollect() }, { ok(it) })
+        launchFlow({ userService.getCollect() }, { ok(it) })
     }
 
     /**
      * 更换头像
      */
     fun changeHeader(ok: (String?) -> Unit) {
-        launchData({ userService.changeHeader() }, { ok(it) })
+        launchFlow({ userService.changeHeader() }, { ok(it) })
     }
 
     /**
      * 接化发
      */
     fun jhf(ok: (String?) -> Unit) {
-        launchData({ userService.jhf() }, { ok(it) })
+        launchFlow({ userService.jhf() }, { ok(it) })
     }
-
-
-
-//    fun test() {
-//
-//        val name = Thread.currentThread().name
-//        val id = Thread.currentThread().id
-//        Log.e("HomeVm", "调用者------当前线程名称:$name---------id:---$id")
-//
-//
-//        viewModelScope.launch {
-//            //   f1()
-//            val a = withContext(Dispatchers.IO) {
-//                f1()
-//            }
-//            val names = Thread.currentThread().name
-//            val ids = Thread.currentThread().id
-//            Log.e("HomeVm", "返回------当前线程名称:$names---------id:---$ids--------$a---------------")
-//
-//        }
-//
-//
-//    }
-//
-//
-//    suspend fun f1(): String {
-//        delay(100L)
-//        val name = Thread.currentThread().name
-//        val id = Thread.currentThread().id
-//        Log.e("HomeVm", "协程-------当前线程名称:$name---------id:---$id")
-//        return "3333333333333333333333"
-//    }
 
 
 }

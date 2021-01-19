@@ -6,12 +6,15 @@ import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityHomeBinding
+import com.lihui.hilt.event.MessageEvent.TOKEN_OUT
 import com.lihui.hilt.ui.adapter.HomePageAdapter
 import com.lihui.hilt.ui.fragment.DashboardFragment
 import com.lihui.hilt.ui.fragment.HomeFragment
 import com.lihui.hilt.ui.fragment.UserFragment
+import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseActivity
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.BaseViewModel
@@ -39,6 +42,13 @@ class HomeActivity : BaseActivity<BaseViewModel,ActivityHomeBinding>() {
             .addViewModel(viewModels<BaseViewModel>().value)
     override fun init() {
         initBottomNav()
+        initBus()
+    }
+
+    private fun initBus() {
+        LiveEventBus.get(TOKEN_OUT).observe(this){
+            ToastUtil.toast(Thread.currentThread().name)
+        }
     }
 
     private fun initBottomNav() {
