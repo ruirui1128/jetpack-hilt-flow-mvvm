@@ -1,13 +1,9 @@
 package com.lihui.hilt.di.interceptor
 
-import android.widget.Toast
 import com.google.gson.Gson
 import com.jeremyliao.liveeventbus.LiveEventBus
-import com.lihui.hilt.event.MessageEvent
 import com.lihui.hilt.event.MessageEvent.TOKEN_OUT
-import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.data.bean.Res
-import com.rui.libray.data.net.ResCode
 import okhttp3.Interceptor
 import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody

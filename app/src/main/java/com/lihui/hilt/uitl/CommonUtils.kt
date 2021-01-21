@@ -18,7 +18,7 @@ import com.lihui.hilt.event.MessageEvent
  * 是否登录
  */
 fun isLogined(): Boolean {
-    return DsUtil.getToken().isNotEmpty()
+    return  CacheManager.instance.getToken().isNotEmpty()
 }
 
 /**

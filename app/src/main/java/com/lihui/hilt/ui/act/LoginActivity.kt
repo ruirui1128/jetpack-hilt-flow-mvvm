@@ -49,7 +49,7 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
         viewModel.loginResult.observe(this, Observer {
             ToastUtil.toast("登录成功")
             LoginHandler.get().postLoginHandler(token)
-            DsUtil.put(lifecycleScope, DataStoreValue.TOKEN, it.token)
+            DsUtil.putToken(lifecycleScope, it.token)
             finish()
         })
     }

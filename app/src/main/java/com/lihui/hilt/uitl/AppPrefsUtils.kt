@@ -8,7 +8,7 @@ import com.rui.libray.base.BaseConstant
 
 
 /*
-  SP工具类
+  SP工具类(废弃不建议使用  建议使用dataStore dada/ds/DsUtil)
  */
 object AppPrefsUtils {
     private var sp = MyApp.getApp().getSharedPreferences(BaseConstant.TABLE_PREFS, Context.MODE_PRIVATE)

@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.preferencesKey
 import com.lihui.hilt.app.MyApp
+import com.lihui.hilt.uitl.CacheManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -62,6 +63,11 @@ object DsUtil {
 
 
     fun getToken() = read(DataStoreValue.TOKEN, "")?:""
+
+    fun putToken(scope: CoroutineScope = GlobalScope,value:String){
+        put(scope,DataStoreValue.TOKEN,value)
+        CacheManager.instance.putToken(value)
+    }
 
 
 }
