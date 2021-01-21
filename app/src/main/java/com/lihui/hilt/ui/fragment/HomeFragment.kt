@@ -54,6 +54,9 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
         initData(true)
     }
 
+    /**
+     * 初次加载失败 点击重新加载
+     */
     override fun reLoad() {
         initData(true)
     }
@@ -67,7 +70,7 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
             if (ClickUtil.isFastDoubleClick) return@setOnItemChildClickListener
             when (view.id) {
                 R.id.ivCollect -> {
-                    //是否登录
+                    //是否登录   这个操作也可以放在itemHomePresenter中 具体场景具体实现，没有固定要求
                     loginObserver(this){
                         //数据请求成功 更新状态
                         viewModel.getCollect {

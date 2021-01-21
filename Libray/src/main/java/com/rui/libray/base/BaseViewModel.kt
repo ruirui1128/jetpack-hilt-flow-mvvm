@@ -31,7 +31,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
     /**
      * 过滤请求结果，其他全抛异常
      * @param block 请求体
-     * @param success 成功回调
+     * @param ok 成功回调
      * @param error 失败回调
      * @param loadMoreError 加载更多失败
      * @param complete  完成回调（无论成功失败都会调用）
@@ -112,9 +112,8 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         } else {
             if (isStatueLayout) {
                 uiChange.statueError.call()   //显示数据加载失败界面
-            } else {
-                uiChange.msgEvent.postValue(t.message ?: "")
             }
+            uiChange.msgEvent.postValue(t.message ?: "")
         }
     }
 
