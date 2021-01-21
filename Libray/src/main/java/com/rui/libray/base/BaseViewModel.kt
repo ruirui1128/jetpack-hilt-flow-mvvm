@@ -1,16 +1,20 @@
 package com.rui.libray.base
 
+
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rui.libray.data.bean.Res
 import com.rui.libray.data.net.ResCode
 import com.rui.libray.util.NetworkHelper
-
-
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
-import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
 
 
 open class BaseViewModel() : ViewModel(), LifecycleObserver {

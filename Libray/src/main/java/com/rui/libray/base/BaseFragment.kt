@@ -12,7 +12,6 @@ import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -21,8 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
-import com.rui.libray.data.net.ResCode
-import com.rui.libray.databinding.FragmentBaseBinding
 import com.rui.libray.ext.onClick
 import com.rui.libray.util.BaseDialogUtil
 

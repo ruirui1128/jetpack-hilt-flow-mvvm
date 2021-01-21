@@ -3,9 +3,7 @@ package com.rui.libray.base
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.Button
 import android.widget.FrameLayout
@@ -14,10 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
-import androidx.lifecycle.observe
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
-import com.rui.libray.data.net.ResCode
 import com.rui.libray.databinding.ActivityBaseBinding
 import com.rui.libray.ext.onClick
 import com.rui.libray.util.AppManager

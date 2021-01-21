@@ -4,7 +4,6 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.ApiService
 import com.lihui.hilt.data.model.ArticleModel
-import com.lihui.hilt.data.model.InfoModel
 import com.lihui.hilt.data.model.PageList
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper

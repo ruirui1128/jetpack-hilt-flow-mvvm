@@ -3,13 +3,9 @@ package com.lihui.hilt.ui.vm
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.UserApi
-import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.data.model.LoginModel
-import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 
 class LoginVm @ViewModelInject constructor(
          private val userApi: UserApi,

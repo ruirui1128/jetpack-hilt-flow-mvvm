@@ -2,28 +2,22 @@ package com.lihui.hilt.di
 
 
 import android.content.Context
-import android.os.Build
 import com.lihui.hilt.BuildConfig
-import com.lihui.hilt.data.ds.DataStoreValue
-import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.di.interceptor.RequestInterceptor
 import com.lihui.hilt.di.interceptor.ResponseInterceptor
-import com.lihui.hilt.uitl.AppPrefsUtils
 import com.rui.libray.util.NetworkHelper
-
 import dagger.Module
 import dagger.Provides
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import javax.inject.Singleton
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import okhttp3.Interceptor
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.net.Proxy
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)

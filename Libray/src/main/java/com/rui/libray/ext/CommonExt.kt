@@ -7,8 +7,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.loadmore.BaseLoadMoreView
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.rui.libray.R
-import com.rui.libray.widget.loadmore.CustomLoadMoreView
 import com.rui.libray.base.BaseConstant
+import com.rui.libray.widget.loadmore.CustomLoadMoreView
 
 
 /**

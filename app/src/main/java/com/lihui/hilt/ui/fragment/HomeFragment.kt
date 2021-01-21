@@ -3,31 +3,22 @@ package com.lihui.hilt.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.widget.ImageView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
-import cn.bingoogolapple.bgabanner.BGABanner
-import com.bumptech.glide.Glide
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
-import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.databinding.FragmentHomeBinding
 import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.ui.vm.HomeVm
-import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.hilt.uitl.loginObserver
 import com.lihui.indiamall.util.ClickUtil
 import com.rui.libray.base.BaseFragment
 import com.rui.libray.base.ViewModelConfig
 import com.rui.libray.ext.init
-
 import com.rui.libray.ext.initLoadMore
 import com.rui.libray.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
-
 
 
 @AndroidEntryPoint

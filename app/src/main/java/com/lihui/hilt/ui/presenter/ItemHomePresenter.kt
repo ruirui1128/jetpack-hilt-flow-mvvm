@@ -3,11 +3,6 @@ package com.lihui.hilt.ui.presenter
 import com.lihui.hilt.BR
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.ui.vm.HomeVm
-import com.lihui.hilt.uitl.ToastUtil
-import com.lihui.hilt.uitl.loginObserver
-import java.util.concurrent.BlockingQueue
-import java.util.concurrent.LinkedBlockingQueue
-import javax.inject.Inject
 
 /**
  *Created by Rui

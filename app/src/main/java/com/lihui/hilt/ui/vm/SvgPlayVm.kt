@@ -7,7 +7,6 @@ import com.lihui.hilt.data.model.SvgModel
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
 import java.util.*
-import java.util.concurrent.LinkedBlockingQueue
 
 
 /**
