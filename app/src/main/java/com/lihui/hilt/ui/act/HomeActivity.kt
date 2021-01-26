@@ -4,6 +4,7 @@ package com.lihui.hilt.ui.act
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.jeremyliao.liveeventbus.LiveEventBus
@@ -22,9 +23,8 @@ import com.rui.libray.base.ViewModelConfig
 import dagger.hilt.android.AndroidEntryPoint
 
 
-
 @AndroidEntryPoint
-class HomeActivity : BaseActivity<BaseViewModel,ActivityHomeBinding>() {
+class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
 
     private val SELECTED_INDEX = "selected_index"
 
@@ -34,26 +34,26 @@ class HomeActivity : BaseActivity<BaseViewModel,ActivityHomeBinding>() {
     private var mCurrentPosition: Int = 0
 
 
-    private val list: MutableList<BaseFragment<out BaseViewModel,out ViewDataBinding>>
-            = arrayListOf(HomeFragment(), DashboardFragment(), UserFragment())
+    private val list: MutableList<BaseFragment<out BaseViewModel, out ViewDataBinding>> =
+        arrayListOf(HomeFragment(), DashboardFragment(), UserFragment())
 
     override val viewModelConfig: ViewModelConfig<BaseViewModel>
         get() = ViewModelConfig<BaseViewModel>(R.layout.activity_home)
             .addViewModel(viewModels<BaseViewModel>().value)
+
     override fun init() {
         initBottomNav()
         initBus()
     }
 
     private fun initBus() {
-        LiveEventBus.get(TOKEN_OUT).observe(this){
-            ToastUtil.toast(Thread.currentThread().name)
-        }
+        LiveEventBus.get(TOKEN_OUT)
+            .observe(this, Observer { ToastUtil.toast(Thread.currentThread().name) })
     }
 
     private fun initBottomNav() {
         bind.homeViewPage.offscreenPageLimit = 3
-        val adapter = HomePageAdapter(supportFragmentManager,list)
+        val adapter = HomePageAdapter(supportFragmentManager, list)
         bind.homeViewPage.adapter = adapter
 
         for (i in list.indices) {
@@ -62,9 +62,9 @@ class HomeActivity : BaseActivity<BaseViewModel,ActivityHomeBinding>() {
             tab?.customView = adapter?.getTabView(baseContext, i)
         }
 
-        bind.homeTablaLayout.addOnTabSelectedListener(object :OnTabSelectedListener{
+        bind.homeTablaLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                switchTab(tab?.position?:0)
+                switchTab(tab?.position ?: 0)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {}

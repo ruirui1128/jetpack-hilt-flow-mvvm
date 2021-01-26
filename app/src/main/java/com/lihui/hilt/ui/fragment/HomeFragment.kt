@@ -3,14 +3,19 @@ package com.lihui.hilt.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
+import com.lihui.hilt.data.ds.DataStoreValue
+import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.databinding.FragmentHomeBinding
 import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.ui.vm.HomeVm
+import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.hilt.uitl.loginObserver
 import com.lihui.indiamall.util.ClickUtil
 import com.rui.libray.base.BaseFragment
@@ -19,10 +24,17 @@ import com.rui.libray.ext.init
 import com.rui.libray.ext.initLoadMore
 import com.rui.libray.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
+class HomeFragment : BaseFragment<HomeVm, FragmentHomeBinding>() {
 
     /**
      * fastmock接口不保存数据!!!  不保存数据!!!  不保存数据!!!
@@ -35,9 +47,23 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
 
     public override val viewModelConfig: ViewModelConfig<HomeVm>
         get() = ViewModelConfig<HomeVm>(R.layout.fragment_home)
-                .addViewModel(viewModels<HomeVm>().value, BR.homeVm)
+            .addViewModel(viewModels<HomeVm>().value, BR.homeVm)
 
     override fun init(savedInstanceState: Bundle?) {
+        //协程取dataStore 数据  数据改变会立即更新   三种方式任选其一
+        // 注意 第一种有协程类型限制 详见说明
+        lifecycleScope.launch {
+            DsUtil.readSuspend<String>(DataStoreValue.TOKEN) {
+                bind.tvToken.text = "token改变会立即更新:$it"
+            }
+        }
+//        DsUtil.readScope<String>(key = DataStoreValue.TOKEN){
+//            bind.tvToken.text = "token改变会立即更新:$it"
+//        }
+//
+//        DsUtil.readScope<String>(lifecycleScope,DataStoreValue.TOKEN){
+//            bind.tvToken.text = "token改变会立即更新:$it"
+//        }
 
         initView()
         initAdapter()
@@ -62,7 +88,7 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
             when (view.id) {
                 R.id.ivCollect -> {
                     //是否登录   这个操作也可以放在itemHomePresenter中 具体场景具体实现，没有固定要求
-                    loginObserver(this){
+                    loginObserver(this) {
                         //数据请求成功 更新状态
                         viewModel.getCollect {
                             val item = adapter.getItem(position)
@@ -75,9 +101,9 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
         }
         adapter?.setOnItemClickListener { ada, view, position ->
             val item = adapter.getItem(position)
-            val intent = Intent(activity,JhfActivity::class.java)
+            val intent = Intent(activity, JhfActivity::class.java)
             val bundle = Bundle()
-            bundle.putParcelable(JhfActivity.JHA_DATA,item)
+            bundle.putParcelable(JhfActivity.JHA_DATA, item)
             intent.putExtras(bundle)
             startActivity(intent)
         }
@@ -97,7 +123,7 @@ class HomeFragment : BaseFragment<HomeVm,FragmentHomeBinding>(){
     private fun initVm() {
         //文章数据返回
         viewModel.articleResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it?.list, pageNumber) {  }
+            pageNumber = adapter.loadMore(it?.list, pageNumber) { }
         })
     }
 

@@ -31,6 +31,7 @@ class MyApp : Application() {
         mApplication = this
         LiveEventBus.config().lifecycleObserverAlwaysActive(true)
         dataStore = createDataStore(name = "hilt_app")
+        //赋值给缓存 这是同步取的数据
         CacheManager.instance.putToken(DsUtil.getToken())
     }
 

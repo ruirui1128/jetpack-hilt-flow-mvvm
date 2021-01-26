@@ -15,7 +15,7 @@ class CacheManager private constructor() {
     /**
      * 存入
      */
-     fun  put(
+    fun put(
         key: String, value: String
     ) {
         this.map[key] = value
@@ -24,22 +24,22 @@ class CacheManager private constructor() {
     /**
      * 取数据
      */
-      fun get(key: String):String? {
-       return map[key]
+    fun get(key: String): String? {
+        return map[key]
     }
 
     /**
      * 放入token
      */
-    fun putToken(value: String){
+    fun putToken(value: String) {
         map[TOKEN] = value
     }
 
     /**
      * 取出Token
      */
-    fun getToken():String {
-       return map[TOKEN]?:""
+    fun getToken(): String {
+        return map[TOKEN] ?: ""
     }
 
 }

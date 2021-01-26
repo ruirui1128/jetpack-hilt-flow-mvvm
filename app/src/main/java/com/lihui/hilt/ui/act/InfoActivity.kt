@@ -22,27 +22,30 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class InfoActivity : BaseActivity<InfoVm,ActivityInfoBinding>() {
+class InfoActivity : BaseActivity<InfoVm, ActivityInfoBinding>() {
 
-    @Inject lateinit var adapter:InfoAdapter
+    @Inject
+    lateinit var adapter: InfoAdapter
     private var pageNumber = 1
     override val viewModelConfig: ViewModelConfig<InfoVm>
         get() = ViewModelConfig<InfoVm>(R.layout.activity_info)
-            .addViewModel(viewModels<InfoVm>().value,BR.infoVm)
+            .addViewModel(viewModels<InfoVm>().value, BR.infoVm)
 
     override fun init() {
-        bind.swipeRefreshLayout.init{refresh(true)}
-        adapter.initLoadMore{refresh(false)}
+        bind.swipeRefreshLayout.init { refresh(true) }
+        adapter.initLoadMore { refresh(false) }
         bind.recyclerView.adapter = adapter
         viewModel.infoResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it.list,pageNumber)
+            pageNumber = adapter.loadMore(it.list, pageNumber)
         })
         refresh(true, firstLoad = true)
     }
 
-    private fun refresh(isRefresh: Boolean,firstLoad : Boolean = false) {
-        if (isRefresh){  pageNumber = 1}
-        viewModel.getInfoList(pageNumber,firstLoad){adapter.loadMoreModule.loadMoreFail()}
+    private fun refresh(isRefresh: Boolean, firstLoad: Boolean = false) {
+        if (isRefresh) {
+            pageNumber = 1
+        }
+        viewModel.getInfoList(pageNumber, firstLoad) { adapter.loadMoreModule.loadMoreFail() }
     }
 
 }
