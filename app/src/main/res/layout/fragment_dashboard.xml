@@ -17,21 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <Button
-                android:text="svga播放"
-                android:id="@+id/btn1"
-                android:layout_marginTop="@dimen/dp15"
-                android:layout_marginStart="@dimen/dp15"
-                android:layout_marginEnd="@dimen/dp15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:id="@+id/btn2"
-                android:text="View"
-                android:layout_marginTop="@dimen/dp15"
-                android:layout_marginStart="@dimen/dp15"
-                android:layout_marginEnd="@dimen/dp15"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

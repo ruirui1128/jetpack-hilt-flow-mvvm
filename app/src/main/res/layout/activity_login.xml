@@ -72,7 +72,6 @@
                 change="@{loginVm}"
                 android:hint="输入密码"
                 android:paddingStart="@dimen/dp15"
-
                 android:textSize="@dimen/sp14"
                 android:layout_width="0dp"
                 android:layout_weight="1"

@@ -99,14 +99,7 @@ class HomeFragment : BaseFragment<HomeVm, FragmentHomeBinding>() {
                 }
             }
         }
-        adapter?.setOnItemClickListener { ada, view, position ->
-            val item = adapter.getItem(position)
-            val intent = Intent(activity, JhfActivity::class.java)
-            val bundle = Bundle()
-            bundle.putParcelable(JhfActivity.JHA_DATA, item)
-            intent.putExtras(bundle)
-            startActivity(intent)
-        }
+
 
     }
 

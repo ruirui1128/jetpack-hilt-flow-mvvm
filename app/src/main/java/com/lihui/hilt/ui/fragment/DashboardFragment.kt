@@ -27,13 +27,7 @@ class DashboardFragment : BaseFragment<BaseViewModel,FragmentDashboardBinding>()
 
     override fun init(savedInstanceState: Bundle?) {
 
-        bind.btn1.onClick {
-            goTo(SvgPlayActivity::class.java)
-        }
 
-        bind.btn2.onClick {
-            goTo(ViewActivity::class.java)
-        }
 
     }
 }

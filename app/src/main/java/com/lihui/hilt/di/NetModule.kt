@@ -52,8 +52,8 @@ class NetModule {
             .addInterceptor(RequestInterceptor())
             .addInterceptor(ResponseInterceptor())
             .addInterceptor(loggingInterceptor)
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
             .proxy(Proxy.NO_PROXY)
             .build()
     }

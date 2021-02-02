@@ -51,7 +51,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         complete: () -> Unit = {},
         isShowDialog: Boolean = false,
         isStatueLayout: Boolean = false,
-        isLoadMore: Boolean = false,
+        isLoadMore: Boolean = false
     ) {
          //请求之前操作
         if (prepare(isShowDialog, isStatueLayout)) {
@@ -79,7 +79,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
      */
     private fun prepare(
         isShowDialog: Boolean,
-        isStatueLayout: Boolean,
+        isStatueLayout: Boolean
     ): Boolean {
         if (isShowDialog) {
             uiChange.showDialog.call()
@@ -138,7 +138,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         it: Res<T>,
         isStatueLayout: Boolean,
         success: (T?) -> Unit,
-        error: (String) -> Unit,
+        error: (String) -> Unit
     ) {
         when (it.code) {     //网络响应解析
             ResCode.OK.getCode() -> {
