@@ -23,9 +23,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.ext.onClick
-import com.rui.libray.factory.ViewModelFactory
 import com.rui.libray.util.BaseDialogUtil
 import java.lang.reflect.ParameterizedType
+import javax.inject.Inject
 
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment() {
@@ -79,15 +79,15 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         return inflate
     }
 
+
     private fun getViewModel() {
         val type = javaClass.genericSuperclass
         viewModel = if (type is ParameterizedType) {
             val tp = type.actualTypeArguments[0]
             val tClass = tp as? Class<VM> ?: BaseViewModel::class.java
-            ViewModelProvider(this, ViewModelFactory()).get(tClass) as VM
+            ViewModelProvider(this).get(tClass) as VM
         } else {
-
-            activity?.viewModels<BaseViewModel>()!!.value as VM
+            activity?.viewModels<BaseViewModel>()?.value as VM
         }
 
     }
@@ -199,30 +199,5 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
     }
 
     abstract fun init(savedInstanceState: Bundle?)
-
-
-    open fun goTo(aClass: Class<out AppCompatActivity?>?) {
-        startActivity(Intent(activity, aClass))
-    }
-
-    open fun goTo(
-        aClass: Class<out AppCompatActivity?>?,
-        bundle: Bundle?
-    ) {
-        val intent = Intent(activity, aClass)
-        if (null != bundle) intent.putExtras(bundle)
-        startActivity(intent)
-    }
-
-    open fun goTo(
-        aClass: Class<out AppCompatActivity?>?,
-        bundle: Bundle?,
-        requestCode: Int
-    ) {
-        val intent = Intent(activity, aClass)
-        if (null != bundle) intent.putExtras(bundle)
-        startActivityForResult(intent, requestCode)
-    }
-
 
 }

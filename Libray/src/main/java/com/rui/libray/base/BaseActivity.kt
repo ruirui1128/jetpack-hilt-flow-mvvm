@@ -3,7 +3,6 @@ package com.rui.libray.base
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.ViewStub
 import android.widget.Button
@@ -19,7 +18,6 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.databinding.ActivityBaseBinding
 import com.rui.libray.ext.onClick
-import com.rui.libray.factory.ViewModelFactory
 import com.rui.libray.util.AppManager
 import com.rui.libray.util.BaseDialogUtil
 import java.lang.reflect.ParameterizedType
@@ -97,7 +95,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         viewModel = if (type is ParameterizedType) {
             val tp = type.actualTypeArguments[0]
             val tClass = tp as? Class<VM> ?: BaseViewModel::class.java
-            ViewModelProvider(this, ViewModelFactory()).get(tClass) as VM
+            ViewModelProvider(this).get(tClass) as VM
         } else {
             viewModels<BaseViewModel>().value as VM
         }
@@ -194,42 +192,6 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         appManager.remove(this)
     }
 
-
-    open fun goTo(aClass: Class<out AppCompatActivity?>?) {
-        startActivity(Intent(this, aClass))
-    }
-
-    open fun goTo(
-        aClass: Class<out AppCompatActivity?>?,
-        bundle: Bundle?
-    ) {
-        val intent = Intent(this, aClass)
-        if (null != bundle) intent.putExtras(bundle)
-        startActivity(intent)
-    }
-
-    open fun goTo(
-        aClass: Class<out AppCompatActivity?>?,
-        bundle: Bundle?,
-        requestCode: Int
-    ) {
-        val intent = Intent(this, aClass)
-        if (null != bundle) intent.putExtras(bundle)
-        startActivityForResult(intent, requestCode)
-    }
-
-    open fun goToAndFinish(aClass: Class<out AppCompatActivity?>?) {
-        goTo(aClass)
-        finish()
-    }
-
-    open fun goToAndFinish(
-        aClass: Class<out AppCompatActivity?>?,
-        bundle: Bundle?
-    ) {
-        goTo(aClass, bundle)
-        finish()
-    }
 
 
 }

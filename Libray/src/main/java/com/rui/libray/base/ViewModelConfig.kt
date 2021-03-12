@@ -1,10 +1,6 @@
 package com.rui.libray.base
 
 import android.util.SparseArray
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
-import com.rui.libray.factory.ViewModelFactory
-import java.lang.reflect.ParameterizedType
 
 
 class ViewModelConfig(private var layout: Int){
