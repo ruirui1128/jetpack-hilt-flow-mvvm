@@ -3,21 +3,26 @@ package com.rui.libray.base
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewStub
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.databinding.ActivityBaseBinding
 import com.rui.libray.ext.onClick
+import com.rui.libray.factory.ViewModelFactory
 import com.rui.libray.util.AppManager
 import com.rui.libray.util.BaseDialogUtil
+import java.lang.reflect.ParameterizedType
 import javax.inject.Inject
 
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCompatActivity() {
@@ -39,7 +44,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     /**
      * 获取DataBinding配置
      */
-    protected abstract val viewModelConfig: ViewModelConfig<VM>
+    protected abstract val viewModelConfig: ViewModelConfig
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +61,6 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     }
 
 
-
     /**
      * 初始化
      */
@@ -70,7 +74,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         setContentView(baseBindView?.root)
         bind.lifecycleOwner = this
         val variableId = config.getVmVariableId()
-        viewModel = config.getViewModel() ?: return
+        getViewModel()
         if (variableId != ViewModelConfig.VM_NO_BIND) {
             bind.setVariable(variableId, viewModel)
         }
@@ -84,6 +88,19 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
             }
         }
         lifecycle.addObserver(viewModel)
+
+
+    }
+
+    private fun getViewModel() {
+        val type = javaClass.genericSuperclass
+        viewModel = if (type is ParameterizedType) {
+            val tp = type.actualTypeArguments[0]
+            val tClass = tp as? Class<VM> ?: BaseViewModel::class.java
+            ViewModelProvider(this, ViewModelFactory()).get(tClass) as VM
+        } else {
+            viewModels<BaseViewModel>().value as VM
+        }
 
     }
 

@@ -13,15 +13,19 @@ import android.view.ViewStub
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.ext.onClick
+import com.rui.libray.factory.ViewModelFactory
 import com.rui.libray.util.BaseDialogUtil
+import java.lang.reflect.ParameterizedType
 
 
 abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment() {
@@ -32,7 +36,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
 
     protected lateinit var bind: DB
 
-    protected abstract val viewModelConfig: ViewModelConfig<VM>
+    protected abstract val viewModelConfig: ViewModelConfig
 
     private var showLoadingDialog: MaterialDialog? = null
 
@@ -60,7 +64,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
         inflate.findViewById<FrameLayout>(R.id.container)?.addView(bind.root)
         bind.lifecycleOwner = this
         val variableId = config.getVmVariableId()
-        viewModel = config.getViewModel() ?: return null
+        getViewModel()
         if (variableId != ViewModelConfig.VM_NO_BIND) {
             bind.setVariable(variableId, viewModel)
         }
@@ -73,6 +77,19 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : Fragment
             i++
         }
         return inflate
+    }
+
+    private fun getViewModel() {
+        val type = javaClass.genericSuperclass
+        viewModel = if (type is ParameterizedType) {
+            val tp = type.actualTypeArguments[0]
+            val tClass = tp as? Class<VM> ?: BaseViewModel::class.java
+            ViewModelProvider(this, ViewModelFactory()).get(tClass) as VM
+        } else {
+
+            activity?.viewModels<BaseViewModel>()!!.value as VM
+        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

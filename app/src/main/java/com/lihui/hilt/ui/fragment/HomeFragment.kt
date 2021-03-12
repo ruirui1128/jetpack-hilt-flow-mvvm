@@ -1,9 +1,7 @@
 package com.lihui.hilt.ui.fragment
 
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +13,6 @@ import com.lihui.hilt.databinding.FragmentHomeBinding
 import com.lihui.hilt.ui.act.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.ui.vm.HomeVm
-import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.hilt.uitl.loginObserver
 import com.lihui.indiamall.util.ClickUtil
 import com.rui.libray.base.BaseFragment
@@ -24,13 +21,7 @@ import com.rui.libray.ext.init
 import com.rui.libray.ext.initLoadMore
 import com.rui.libray.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 @AndroidEntryPoint
@@ -45,9 +36,9 @@ class HomeFragment : BaseFragment<HomeVm, FragmentHomeBinding>() {
 
     private var pageNumber = 1
 
-    public override val viewModelConfig: ViewModelConfig<HomeVm>
-        get() = ViewModelConfig<HomeVm>(R.layout.fragment_home)
-            .addViewModel(viewModels<HomeVm>().value, BR.homeVm)
+    public override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.fragment_home)
+            .bindViewModel(BR.homeVm)
 
     override fun init(savedInstanceState: Bundle?) {
         //协程取dataStore 数据  数据改变会立即更新   三种方式任选其一
@@ -98,6 +89,11 @@ class HomeFragment : BaseFragment<HomeVm, FragmentHomeBinding>() {
                     }
                 }
             }
+        }
+
+        adapter.setOnItemClickListener { _, _, position ->
+            val item = adapter.getItem(position)
+            JhfActivity.start(context, item)
         }
 
 

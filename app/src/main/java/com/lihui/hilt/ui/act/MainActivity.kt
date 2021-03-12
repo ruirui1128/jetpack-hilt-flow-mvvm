@@ -15,9 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
 
-    override val viewModelConfig: ViewModelConfig<MainViewModel>
-    get() = ViewModelConfig<MainViewModel>(R.layout.activity_main)
-            .addViewModel(viewModels<MainViewModel>().value)
+    override val viewModelConfig: ViewModelConfig
+
+    get() = ViewModelConfig(R.layout.activity_main)
+
     override fun init() {
 
         viewModel.fetchUsers(){

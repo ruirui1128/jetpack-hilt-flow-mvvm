@@ -37,9 +37,8 @@ class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
     private val list: MutableList<BaseFragment<out BaseViewModel, out ViewDataBinding>> =
         arrayListOf(HomeFragment(), DashboardFragment(), UserFragment())
 
-    override val viewModelConfig: ViewModelConfig<BaseViewModel>
-        get() = ViewModelConfig<BaseViewModel>(R.layout.activity_home)
-            .addViewModel(viewModels<BaseViewModel>().value)
+    override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.activity_home)
 
     override fun init() {
         initBottomNav()

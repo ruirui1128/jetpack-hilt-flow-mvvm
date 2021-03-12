@@ -21,9 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<BaseViewModel,FragmentDashboardBinding>() {
 
-    override val viewModelConfig: ViewModelConfig<BaseViewModel>
-        get() = ViewModelConfig<BaseViewModel>(R.layout.fragment_dashboard)
-            .addViewModel(viewModels<BaseViewModel>().value)
+    override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.fragment_dashboard)
 
     override fun init(savedInstanceState: Bundle?) {
 

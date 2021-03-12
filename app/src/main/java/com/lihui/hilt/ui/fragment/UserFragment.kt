@@ -17,10 +17,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UserFragment : BaseFragment<UserVm,FragmentUserBinding> (){
 
-    override val viewModelConfig: ViewModelConfig<UserVm>
-        get() = ViewModelConfig<UserVm>(R.layout.fragment_user)
-            .addViewModel(viewModels<UserVm>().value,BR.userVm)
-
+    override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.fragment_user)
+            .bindViewModel(BR.userVm)
     override fun init(savedInstanceState: Bundle?) {
         bind.btn.onClick {
             DsUtil.putToken(lifecycleScope,"")

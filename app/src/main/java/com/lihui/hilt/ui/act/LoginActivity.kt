@@ -30,14 +30,10 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
 
     @Inject
     lateinit var loginPresenter: LoginPresenter
-    override val viewModelConfig: ViewModelConfig<LoginVm>
-        get() = ViewModelConfig<LoginVm>(R.layout.activity_login)
-            .addViewModel(
-                viewModels<LoginVm>()
-                    .value, BR.loginVm
-            )
-            .addBindingParam(BR.loginPresenter, loginPresenter)
-            .addBindingParam(BR.loginOwner, this)
+    override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.activity_login)
+            .bindingParam(BR.loginPresenter, loginPresenter)
+            .bindingParam(BR.loginOwner, this)
 
     override fun init() {
         initVm()

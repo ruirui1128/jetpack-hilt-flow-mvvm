@@ -27,9 +27,9 @@ class InfoActivity : BaseActivity<InfoVm, ActivityInfoBinding>() {
     @Inject
     lateinit var adapter: InfoAdapter
     private var pageNumber = 1
-    override val viewModelConfig: ViewModelConfig<InfoVm>
-        get() = ViewModelConfig<InfoVm>(R.layout.activity_info)
-            .addViewModel(viewModels<InfoVm>().value, BR.infoVm)
+    override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.activity_info)
+            .bindViewModel(BR.infoVm)
 
     override fun init() {
         bind.swipeRefreshLayout.init { refresh(true) }

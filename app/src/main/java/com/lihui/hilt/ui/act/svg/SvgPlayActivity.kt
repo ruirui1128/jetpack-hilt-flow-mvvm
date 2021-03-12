@@ -15,10 +15,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class SvgPlayActivity : BaseActivity<SvgPlayVm, ActivitySvgPlayBinding>() {
 
 
-    override val viewModelConfig: ViewModelConfig<SvgPlayVm>
-        get() = ViewModelConfig<SvgPlayVm>(R.layout.activity_svg_play)
-            .addViewModel(viewModels<SvgPlayVm>().value,BR.svgVm)
-            .addBindingParam(BR.svgOwner,this)
+    override val viewModelConfig: ViewModelConfig
+        get() = ViewModelConfig(R.layout.activity_svg_play)
+            .bindViewModel(BR.svgVm)
+            .bindingParam(BR.svgOwner,this)
 
     override fun init() {}
 

@@ -16,51 +16,53 @@ import com.rui.libray.widget.loadmore.CustomLoadMoreView
  */
 
 //点击事件
-fun View.onClick(method:()->Unit):View{
+fun View.onClick(method: () -> Unit): View {
     setOnClickListener { method() }
     return this
 }
 
 
-fun View.onClick(listener: View.OnClickListener):View{
+fun View.onClick(listener: View.OnClickListener): View {
     setOnClickListener(listener)
     return this
 }
 
 //adapter加载更多
-fun <T,BD: ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loadMore(
-                                        list: MutableList<T>?, pageNumber: Int,emptyListener:()->Unit = {}) :Int{
-        loadMoreModule.isEnableLoadMore = true
-        loadMoreModule.isEnableLoadMore = true
-        if (pageNumber==1) {
-            if (list==null){
-                setList(null)
-                emptyListener()
-                return 1
-            }else{
-                setList(list)
-            }
+fun <T, BD : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loadMore(
+    list: MutableList<T>?, pageNumber: Int, emptyListener: () -> Unit = {}
+): Int {
+    loadMoreModule.isEnableLoadMore = true
+    loadMoreModule.isEnableLoadMore = true
+    if (pageNumber == 1) {
+        if (list == null || list.size == 0) {
+            setList(null)
+            emptyListener()
+            return 1
+        } else {
+            setList(list)
+        }
 
-        } else {
-           addData(list as MutableList<T>)
-        }
-        val page = pageNumber+1
-        if (list?.size ?: 0 < BaseConstant.PAGESIZE_20) {
-           loadMoreModule.loadMoreEnd()
-        } else {
-           loadMoreModule.loadMoreComplete()
-        }
-        return page
+    } else {
+        addData(list as MutableList<T>)
+    }
+    val page = pageNumber + 1
+    if (list?.size ?: 0 < BaseConstant.PAGESIZE_20) {
+        loadMoreModule.loadMoreEnd()
+    } else {
+        loadMoreModule.loadMoreComplete()
+    }
+    return page
 }
 
 //初始化adapter
-fun <T,BD: ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.initLoadMore(
-                                                    loadMoreView: BaseLoadMoreView = CustomLoadMoreView(),
-                                                    loadMore:()->Unit) {
-        loadMoreModule.loadMoreView = loadMoreView
-        loadMoreModule.setOnLoadMoreListener { loadMore() }
-        loadMoreModule.isAutoLoadMore = true
-        loadMoreModule.isEnableLoadMoreIfNotFullPage = false
+fun <T, BD : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.initLoadMore(
+    loadMoreView: BaseLoadMoreView = CustomLoadMoreView(),
+    loadMore: () -> Unit
+) {
+    loadMoreModule.loadMoreView = loadMoreView
+    loadMoreModule.setOnLoadMoreListener { loadMore() }
+    loadMoreModule.isAutoLoadMore = true
+    loadMoreModule.isEnableLoadMoreIfNotFullPage = false
 }
 
 
@@ -70,6 +72,6 @@ fun SwipeRefreshLayout.init(refreshListener: () -> Unit) {
         setOnRefreshListener {
             refreshListener()
         }
-      setColorSchemeResources(R.color.colorPrimary)
+        setColorSchemeResources(R.color.colorPrimary)
     }
 }
