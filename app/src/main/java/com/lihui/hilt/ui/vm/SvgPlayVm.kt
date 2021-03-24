@@ -1,19 +1,21 @@
 package com.lihui.hilt.ui.vm
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.ApiService
 import com.lihui.hilt.data.model.SvgModel
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
+import javax.inject.Inject
 
 
 /**
  *Created by Rui
  *on 2020/12/30
  */
-class SvgPlayVm @ViewModelInject constructor(
+@HiltViewModel
+class SvgPlayVm  @Inject constructor(
     private val api: ApiService,
     networkHelper: NetworkHelper
 ) : BaseViewModel(networkHelper) {

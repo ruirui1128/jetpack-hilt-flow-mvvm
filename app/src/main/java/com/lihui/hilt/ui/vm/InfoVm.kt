@@ -1,14 +1,16 @@
 package com.lihui.hilt.ui.vm
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.ApiService
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.data.model.PageList
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class InfoVm @ViewModelInject constructor(
+@HiltViewModel
+class InfoVm @Inject constructor(
     private val apiService: ApiService,
     networkHelper: NetworkHelper):BaseViewModel(networkHelper)
  {

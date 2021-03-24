@@ -40,7 +40,6 @@ android {
 
 dependencies {
     implementation project(path: ':Libray')
-    implementation 'com.google.dagger:hilt-android:2.28-alpha'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.material:material:1.2.1'
@@ -49,9 +48,11 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    kapt 'com.google.dagger:hilt-android-compiler:2.28-alpha'
-    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
-    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
+
+
+
+    implementation 'com.google.dagger:hilt-android:2.33-beta'
+    kapt 'com.google.dagger:hilt-compiler:2.33-beta'
 
     //banner
     implementation 'cn.bingoogolapple:bga-banner:2.2.6@aar'

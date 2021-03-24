@@ -40,7 +40,7 @@ class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
     override val viewModelConfig: ViewModelConfig
         get() = ViewModelConfig(R.layout.activity_home)
 
-    override fun init() {
+    override fun initialize() {
         initBottomNav()
         initBus()
     }

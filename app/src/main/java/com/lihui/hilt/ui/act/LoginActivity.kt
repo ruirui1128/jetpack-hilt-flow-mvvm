@@ -30,7 +30,7 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
             .bindingParam(BR.loginPresenter, loginPresenter)
             .bindingParam(BR.loginOwner, this)
 
-    override fun init() {
+    override fun initialize() {
         initVm()
     }
 

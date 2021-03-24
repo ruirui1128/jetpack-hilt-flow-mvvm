@@ -31,7 +31,7 @@ class InfoActivity : BaseActivity<InfoVm, ActivityInfoBinding>() {
         get() = ViewModelConfig(R.layout.activity_info)
             .bindViewModel(BR.infoVm)
 
-    override fun init() {
+    override fun initialize() {
         bind.swipeRefreshLayout.init { refresh(true) }
         adapter.initLoadMore { refresh(false) }
         bind.recyclerView.adapter = adapter

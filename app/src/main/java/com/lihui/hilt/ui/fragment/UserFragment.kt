@@ -1,7 +1,6 @@
 package com.lihui.hilt.ui.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.lihui.hilt.BR
 import com.lihui.hilt.R

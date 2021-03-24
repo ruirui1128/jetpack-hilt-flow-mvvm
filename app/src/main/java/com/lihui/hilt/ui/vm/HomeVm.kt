@@ -1,9 +1,7 @@
 package com.lihui.hilt.ui.vm
 
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
-
 import com.lihui.hilt.data.api.ApiService
 import com.lihui.hilt.data.api.UserApi
 import com.lihui.hilt.data.model.ArticleModel
@@ -11,9 +9,11 @@ import com.lihui.hilt.data.model.BannerDataModel
 import com.lihui.hilt.data.model.PageList
 import com.rui.libray.base.BaseViewModel
 import com.rui.libray.util.NetworkHelper
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class HomeVm @ViewModelInject constructor(
+@HiltViewModel
+class HomeVm  @Inject constructor(
     private val apiService: ApiService,
     private val userService: UserApi,
     networkHelper: NetworkHelper

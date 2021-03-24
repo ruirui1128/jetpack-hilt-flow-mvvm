@@ -50,7 +50,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 禁用横屏
         initViewDataBinding()
         registerUIChange()
-        init()
+        initialize()
     }
 
 
@@ -62,7 +62,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     /**
      * 初始化
      */
-    abstract fun init()
+    abstract fun initialize()
 
     private fun initViewDataBinding() {
         val config = viewModelConfig

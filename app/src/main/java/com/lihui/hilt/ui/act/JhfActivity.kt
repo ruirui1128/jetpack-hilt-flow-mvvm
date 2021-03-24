@@ -35,7 +35,7 @@ class JhfActivity : BaseActivity<JhfVm, ActivityJhfBinding>() {
     override val viewModelConfig: ViewModelConfig
         get() = ViewModelConfig(R.layout.activity_jhf)
 
-    override fun init() {
+    override fun initialize() {
         viewModels<JhfVm>().value
         model = intent?.getParcelableExtra(JHA_DATA)
         viewModel.collection.value = model?.isCollect ?: false

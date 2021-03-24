@@ -3,17 +3,17 @@ package com.lihui.hilt.di
 
 import android.content.Context
 import com.lihui.hilt.BuildConfig
-import com.lihui.hilt.app.MyApp
+
 import com.lihui.hilt.di.interceptor.RequestInterceptor
 import com.lihui.hilt.di.interceptor.ResponseInterceptor
-import com.rui.libray.base.BaseConstant
-import com.rui.libray.util.HttpsUtils
+
 import com.rui.libray.util.NetworkHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -25,8 +25,8 @@ import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLSession
 
 @Module
-@InstallIn(ApplicationComponent::class)
-class NetModule {
+@InstallIn(SingletonComponent::class)
+object NetModule {
 
     @Provides
     fun provideBaseUrl() = BuildConfig.BASE_URL

@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
 
     get() = ViewModelConfig(R.layout.activity_main)
 
-    override fun init() {
+    override fun initialize() {
 
         viewModel.fetchUsers(){
             Toast.makeText(this,it,Toast.LENGTH_LONG).show()
