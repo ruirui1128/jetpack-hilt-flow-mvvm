@@ -43,7 +43,6 @@ class UserInfoView2 @JvmOverloads constructor(
         ivLevel = findViewById(R.id.ivLevel)
         tvName = findViewById(R.id.tvName)
         tvAge = findViewById(R.id.tvAge)
-        ivHeader?.onClick { ToastUtil.toast("别摸我...") }
     }
 
     private fun setDataView(model: UserModel) {
