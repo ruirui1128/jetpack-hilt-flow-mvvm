@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_10"
         android:layout_marginTop="2dp"
-        android:text="@{userModel.name}"
         android:textColor="@color/color_333"
         android:textSize="@dimen/sp13"
         app:layout_constraintStart_toEndOf="@id/ivHeader"
@@ -33,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp5"
-        android:text='@{userModel.age+@string/age}'
         android:textColor="@color/color_333"
         android:textSize="@dimen/sp14"
         app:layout_constraintBottom_toBottomOf="@id/ivHeader"
