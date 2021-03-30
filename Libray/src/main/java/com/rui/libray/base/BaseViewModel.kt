@@ -53,8 +53,11 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         isStatueLayout: Boolean = false,
         isLoadMore: Boolean = false
     ) {
-         //请求之前操作
+        //请求之前操作
         if (prepare(isShowDialog, isStatueLayout)) {
+            if (isLoadMore) {
+                loadMoreError()
+            }
             end(isShowDialog, complete)
             return
         }
@@ -92,7 +95,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         if (networkHelper?.isNetworkConnected() == false) {
             uiChange.msgEvent.postValue(ResCode.NETWORK_ERROR.getMessage())
             //关闭页面loading
-            if (isStatueLayout){
+            if (isStatueLayout) {
                 uiChange.statueError.call()
             }
             return true
