@@ -28,4 +28,5 @@
     <dimen name="sp17">17sp</dimen>
     <dimen name="dp60">60dp</dimen>
     <dimen name="dp13">13dp</dimen>
+    <dimen name="dp90">90dp</dimen>
 </resources>

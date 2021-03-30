@@ -7,4 +7,5 @@
     <string name="title_home">首页</string>
     <string name="title_dashboard">广场</string>
     <string name="title_notifications">用户</string>
+    <string name="age">岁</string>
 </resources>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="ItemSetting">
+        <!--   左边图片是否显示-->
+        <attr name="leftIvShow" format="boolean" />
+        <!--   右边边图片是否显示-->
+        <attr name="rightIvShow" format="boolean" />
+        <!--   左边文字-->
+        <attr name="leftText" format="string" />
+        <!--   右边文字-->
+        <attr name="rightTexts" format="string" />
+        <!--   右边文字颜色-->
+        <attr name="rightTextColor" format="color|reference" />
+        <!--   右边文字粗体-->
+        <attr name="rightTextBold" format="boolean" />
+        <!--   右边文字文字是否显示-->
+        <attr name="rightTextShow" format="boolean" />
+        <!--   右边箭头是否显示-->
+        <attr name="rightShowNext" format="boolean" />
+        <!--  底部View是否显示-->
+        <attr name="bottomViewShow" format="boolean"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="TabLayout">
+        <attr name="indicatorStartColor" format="color|reference" />
+        <attr name="indicatorEndColor" format="color|reference" />
+        <attr name="indicatorMarginStart" format="dimension|reference" />
+        <attr name="indicatorMarginEnd" format="dimension|reference" />
+        <attr name="indicatorMarginBottom" format="dimension|reference" />
+    </declare-styleable>
+
+</resources>

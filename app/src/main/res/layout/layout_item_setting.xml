@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ripple_bg_white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_marginStart="@dimen/dp15"
+        android:layout_marginEnd="@dimen/dp15"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp60">
+
+        <ImageView
+            android:layout_marginEnd="@dimen/dp12"
+            tools:src="@color/c_333"
+            android:id="@+id/ivLeft"
+            android:scaleType="centerCrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tvLeft"
+            tools:text="设置"
+            android:textSize="@dimen/sp13"
+            android:textColor="@color/c_333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Space
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="0.1dp"/>
+
+        <ImageView
+            tools:src="@color/c_333"
+            android:id="@+id/ivRight"
+            android:scaleType="centerCrop"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"/>
+
+        <TextView
+            android:textStyle="bold"
+            tools:text="设置"
+            android:id="@+id/tvRight"
+            android:textSize="@dimen/sp13"
+            android:textColor="@color/c_333"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/ivNext"
+            android:layout_marginStart="@dimen/dp_10"
+            android:src="@drawable/ic_mini_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+
+
+    <View
+        android:background="@color/c_de"
+        android:id="@+id/vBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"/>
+
+</LinearLayout>

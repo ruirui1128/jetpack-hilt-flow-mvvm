@@ -14,6 +14,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewTreeLifecycleOwner
 import com.afollestad.materialdialogs.MaterialDialog
 import com.rui.libray.R
 import com.rui.libray.databinding.ActivityBaseBinding
@@ -46,6 +47,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ViewTreeLifecycleOwner.set(window.decorView, this)
         appManager.addActivity(this)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT // 禁用横屏
         initViewDataBinding()

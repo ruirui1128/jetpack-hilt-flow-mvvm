@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.lihui.hilt.widget.ItemSettingView
+        android:id="@+id/llService"
+        app:leftText="在线客服"
+        app:rightTextShow = "false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.lihui.hilt.widget.ItemSettingView
+        android:id="@+id/llProtocol"
+        app:leftText="用户协议"
+        app:rightTextShow = "false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.lihui.hilt.widget.ItemSettingView
+        android:id="@+id/llAd"
+        app:leftText="广告投放"
+        app:rightTextShow = "false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.lihui.hilt.widget.ItemSettingView
+        android:id="@+id/llFeedback"
+        app:leftText="用户反馈"
+        app:rightTextShow = "false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <com.lihui.hilt.widget.ItemSettingView
+        android:id="@+id/llAboutUs"
+        app:leftText="关于我们"
+        app:rightTextShow = "false"
+        app:bottomViewShow = "false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+
+</LinearLayout>

@@ -14,18 +14,25 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class UserFragment : BaseFragment<UserVm,FragmentUserBinding> (){
+class UserFragment : BaseFragment<UserVm, FragmentUserBinding>() {
 
+    // 实现方式多样 , 没有固定要求!!!!
     override val viewModelConfig: ViewModelConfig
         get() = ViewModelConfig(R.layout.fragment_user)
             .bindViewModel(BR.userVm)
+
     override fun init(savedInstanceState: Bundle?) {
-        bind.btn.onClick {
-            DsUtil.putToken(lifecycleScope,"")
-        }
+        initView()
+        initData()
+    }
 
+    private fun initData() {
+        viewModel.getUserInfo()
+    }
 
-
-
+    private fun initView() {
+        bind.btn.onClick { DsUtil.putToken(lifecycleScope, "") }
+        bind.btn2.onClick { viewModel.changeHeader() }
+        bind.btn3.onClick { viewModel.level.value = (0..4).random() }
     }
 }

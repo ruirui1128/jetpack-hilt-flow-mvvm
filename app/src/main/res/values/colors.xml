@@ -12,7 +12,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
+    <color name="c_333">#333333</color>
+    <color name="c_de">#DEDEDE</color>
     <color name="color_999">#999</color>
     <color name="color_ededed">#ededed</color>
     <color name="color_e6e6e6">#e6e6ed</color>
@@ -59,4 +60,5 @@
     <color name="ma20">#8d4bbb</color>
     <color name="ma30">#804000</color>
     <color name="color_888">#888888</color>
+    <color name="c_f5">#f5f5f5</color>
 </resources>
