@@ -29,12 +29,13 @@
                 android:text="清除Token"
                 app:layout_constraintTop_toTopOf="parent" />
 
-<!--     三种方式  举出使用例子，具体场景  自由选择-->
+            <!--     三种方式  举出使用例子，具体场景  自由选择-->
 
             <!--  数据与layout直接绑定-->
             <include
                 layout="@layout/layout_user_info"
-                app:layoutUserModel="@{userVm.userInfoResult}" />
+                app:layoutUserModel="@{userVm.userInfoResult}"
+                app:layoutUserVm="@{userVm}" />
 
             <!--   自定义View 界面无法预览 相当蛋疼-->
             <com.lihui.hilt.widget.user.UserInfoView
@@ -45,39 +46,40 @@
             <com.lihui.hilt.widget.user.UserInfoView2
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:userInfoVm = "@{userVm}"
+                app:userInfoVm="@{userVm}"
                 app:userModelData2="@{userVm.userInfoResult}" />
 
 
             <com.lihui.hilt.widget.user.UserActionView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <LinearLayout
-                android:layout_marginTop="@dimen/dp20"
-                android:layout_marginBottom="@dimen/dp20"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp40">
+                android:layout_height="@dimen/dp40"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginBottom="@dimen/dp20">
+
                 <Button
-                    android:textSize="@dimen/sp12"
-                    android:layout_marginStart="@dimen/dp15"
-                    android:layout_marginEnd="@dimen/dp_10"
-                    android:layout_weight="1"
                     android:id="@+id/btn2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp_10"
+                    android:layout_weight="1"
                     android:text="这里也可以改变头像"
+                    android:textSize="@dimen/sp12"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:textSize="@dimen/sp12"
-                    android:layout_marginStart="@dimen/dp10"
-                    android:layout_marginEnd="@dimen/dp15"
-                    android:layout_weight="1"
                     android:id="@+id/btn3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp10"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:layout_weight="1"
                     android:text="这里也可以改变等级"
+                    android:textSize="@dimen/sp12"
                     app:layout_constraintTop_toTopOf="parent" />
             </LinearLayout>
 

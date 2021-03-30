@@ -9,6 +9,10 @@
             name="layoutUserModel"
             type="com.lihui.hilt.data.model.UserModel" />
 
+        <variable
+            name="layoutUserVm"
+            type="com.lihui.hilt.ui.vm.UserVm" />
+
 
     </data>
 
@@ -20,6 +24,7 @@
             android:id="@+id/ivHeader"
             imageUrl="@{layoutUserModel.avatar}"
             isCircle="@{true}"
+            userHeaderVm="@{layoutUserVm}"
             android:layout_width="@dimen/dp60"
             android:layout_height="@dimen/dp60"
             android:layout_marginStart="@dimen/dp15"
@@ -54,6 +59,7 @@
             tools:text="120岁" />
 
         <ImageView
+            userLevelVm="@{layoutUserVm}"
             android:id="@+id/ivLevel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,6 +69,17 @@
             app:layout_constraintTop_toTopOf="@id/tvAge"
             app:userLevel="@{layoutUserModel.level}"
             tools:src="@drawable/ic_star_level_1" />
+
+        <TextView
+            android:gravity="center"
+            android:text="头像可点击\n 等级图片可点击"
+            android:textColor="@color/black"
+            android:layout_marginEnd="@dimen/dp15"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
