@@ -1,6 +1,7 @@
 package com.lihui.hilt.ui.act.room
 
 import androidx.lifecycle.MutableLiveData
+import com.lihui.hilt.data.room.dao.UserDao
 import com.lihui.hilt.data.room.dao.WordDao
 import com.lihui.hilt.data.room.entity.WordEntity
 import com.rui.libray.base.BaseViewModel

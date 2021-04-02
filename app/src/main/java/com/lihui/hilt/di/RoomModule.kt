@@ -21,8 +21,18 @@ object RoomModule {
         Room.databaseBuilder(context, HiltRoomBase::class.java, "hilt_room").build()
 
 
+    /**
+     * 注入 WordDao
+     */
     @Provides
     @Singleton
-    fun provideWordDao(roomBase: HiltRoomBase)  = roomBase.wordDao()
+    fun provideWordDao(roomBase: HiltRoomBase) = roomBase.wordDao()
+
+    /**
+     * 注入 UserDao
+     */
+    @Provides
+    @Singleton
+    fun provideUserDao(roomBase: HiltRoomBase) = roomBase.userDao()
 
 }
