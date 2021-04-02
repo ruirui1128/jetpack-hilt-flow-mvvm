@@ -13,7 +13,7 @@
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.act.MainActivity">
+        tools:context=".ui.act.main.MainActivity">
 
 
         <Button

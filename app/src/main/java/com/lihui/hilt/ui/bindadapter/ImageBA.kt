@@ -5,7 +5,7 @@ import androidx.databinding.BindingAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.lihui.hilt.enums.StarLevelEnum
-import com.lihui.hilt.ui.vm.UserVm
+import com.lihui.hilt.ui.fragment.user.UserVm
 import com.lihui.hilt.uitl.GlideUtil
 import com.rui.libray.ext.onClick
 

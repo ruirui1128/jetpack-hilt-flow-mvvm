@@ -5,7 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lihui.hilt.ui.act.LoginActivity
+import com.lihui.hilt.ui.act.login.LoginActivity
 
 /**
  *Created by Rui

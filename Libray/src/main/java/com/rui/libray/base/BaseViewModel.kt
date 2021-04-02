@@ -1,6 +1,8 @@
 package com.rui.libray.base
 
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +17,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 
 open class BaseViewModel() : ViewModel(), LifecycleObserver {
@@ -153,6 +156,26 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
             else -> {
                 error(it.message)
                 uiChange.msgEvent.postValue(it.message)
+            }
+
+        }
+    }
+
+
+    /**
+     * 数据库插入
+     */
+    fun launchRoom(
+        block: suspend CoroutineScope.() -> Unit,
+        //   error: () -> Unit = {}
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                block()
+            } catch (e: Exception) {
+                //发生异常 也可以自行处理
+                uiChange.msgEvent.postValue(e.message)
+                // error()
             }
 
         }

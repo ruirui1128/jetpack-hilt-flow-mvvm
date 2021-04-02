@@ -7,10 +7,10 @@
     <data>
         <variable
             name="loginVm"
-            type="com.lihui.hilt.ui.vm.LoginVm" />
+            type="com.lihui.hilt.ui.act.login.LoginVm" />
         <variable
             name="loginPresenter"
-            type="com.lihui.hilt.ui.presenter.LoginPresenter" />
+            type="com.lihui.hilt.ui.act.login.LoginPresenter" />
 
         <variable
             name="loginOwner"
@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.lihui.hilt.ui.act.LoginActivity">
+        tools:context="com.lihui.hilt.ui.act.login.LoginActivity">
 
 <!--        <com.rui.libray.widget.HeaderBar-->
 <!--            app:titleText="登录"-->

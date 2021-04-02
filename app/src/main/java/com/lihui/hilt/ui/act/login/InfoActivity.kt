@@ -1,7 +1,4 @@
-package com.lihui.hilt.ui.act
-
-import android.view.View
-import androidx.activity.viewModels
+package com.lihui.hilt.ui.act.login
 
 import androidx.lifecycle.Observer
 import com.lihui.hilt.BR
@@ -9,7 +6,7 @@ import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityInfoBinding
 
 import com.lihui.hilt.ui.adapter.InfoAdapter
-import com.lihui.hilt.ui.vm.InfoVm
+import com.lihui.hilt.ui.act.info.InfoVm
 import com.rui.libray.base.BaseActivity
 
 import com.rui.libray.base.ViewModelConfig

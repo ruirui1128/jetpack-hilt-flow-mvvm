@@ -7,7 +7,7 @@ import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.lihui.hilt.ui.vm.LoginVm
+import com.lihui.hilt.ui.act.login.LoginVm
 
 
 object TextBA {

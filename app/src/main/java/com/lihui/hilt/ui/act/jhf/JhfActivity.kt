@@ -1,4 +1,4 @@
-package com.lihui.hilt.ui.act
+package com.lihui.hilt.ui.act.jhf
 
 
 import android.content.Context
@@ -9,7 +9,6 @@ import com.lihui.hilt.R
 import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.databinding.ActivityJhfBinding
 import com.lihui.hilt.event.MessageEvent
-import com.lihui.hilt.ui.vm.JhfVm
 import com.rui.libray.base.BaseActivity
 import com.rui.libray.base.ViewModelConfig
 import com.rui.libray.ext.onClick

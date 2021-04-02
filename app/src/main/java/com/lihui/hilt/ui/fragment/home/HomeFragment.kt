@@ -1,8 +1,7 @@
-package com.lihui.hilt.ui.fragment
+package com.lihui.hilt.ui.fragment.home
 
 
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.lihui.hilt.BR
@@ -10,9 +9,8 @@ import com.lihui.hilt.R
 import com.lihui.hilt.data.ds.DataStoreValue
 import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.databinding.FragmentHomeBinding
-import com.lihui.hilt.ui.act.JhfActivity
+import com.lihui.hilt.ui.act.jhf.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
-import com.lihui.hilt.ui.vm.HomeVm
 import com.lihui.hilt.uitl.loginObserver
 import com.lihui.indiamall.util.ClickUtil
 import com.rui.libray.base.BaseFragment

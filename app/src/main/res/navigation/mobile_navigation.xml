@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.lihui.hilt.ui.fragment.HomeFragment"
+        android:name="com.lihui.hilt.ui.fragment.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.lihui.hilt.ui.fragment.UserFragment"
+        android:name="com.lihui.hilt.ui.fragment.user.UserFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_user" />
 </navigation>

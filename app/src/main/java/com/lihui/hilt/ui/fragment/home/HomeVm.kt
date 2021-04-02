@@ -1,4 +1,4 @@
-package com.lihui.hilt.ui.vm
+package com.lihui.hilt.ui.fragment.home
 
 
 import androidx.lifecycle.MutableLiveData

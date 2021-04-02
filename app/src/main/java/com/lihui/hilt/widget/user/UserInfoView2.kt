@@ -6,20 +6,14 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.findViewTreeLifecycleOwner
-import com.bumptech.glide.Glide
 import com.lihui.hilt.R
 import com.lihui.hilt.data.model.UserModel
-import com.lihui.hilt.databinding.ViewUserInfoBinding
 import com.lihui.hilt.enums.StarLevelEnum
-import com.lihui.hilt.ui.vm.UserVm
+import com.lihui.hilt.ui.fragment.user.UserVm
 import com.lihui.hilt.uitl.GlideUtil
-import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.ext.onClick
 
 

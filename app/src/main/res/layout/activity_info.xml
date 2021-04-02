@@ -7,7 +7,7 @@
     <data>
         <variable
             name="infoVm"
-            type="com.lihui.hilt.ui.vm.InfoVm" />
+            type="com.lihui.hilt.ui.act.info.InfoVm" />
 
     </data>
 
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.act.InfoActivity">
+        tools:context=".ui.act.login.InfoActivity">
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             isRefreshing="@{infoVm.isRefreshing}"

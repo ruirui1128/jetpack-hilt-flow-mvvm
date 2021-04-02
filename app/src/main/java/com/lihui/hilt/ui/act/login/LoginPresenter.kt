@@ -1,6 +1,5 @@
-package com.lihui.hilt.ui.presenter
+package com.lihui.hilt.ui.act.login
 
-import com.lihui.hilt.ui.vm.LoginVm
 import com.lihui.hilt.uitl.ToastUtil
 import javax.inject.Inject
 
@@ -9,7 +8,7 @@ class LoginPresenter @Inject constructor() {
     /**
      * 登录
      */
-     fun login(viewModel:LoginVm){
+     fun login(viewModel: LoginVm){
         if (viewModel.username.value.isNullOrEmpty()){
             ToastUtil.toast("账号不能为空")
             return

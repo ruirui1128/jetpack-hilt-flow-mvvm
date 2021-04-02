@@ -6,7 +6,7 @@
     <data>
         <variable
             name="jhfVm"
-            type="com.lihui.hilt.ui.vm.JhfVm" />
+            type="com.lihui.hilt.ui.act.jhf.JhfVm" />
 
         <variable
             name="jhfOwner"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        tools:context=".ui.act.JhfActivity">
+        tools:context=".ui.act.jhf.JhfActivity">
 
         <TextView
             android:id="@+id/tvCollect"

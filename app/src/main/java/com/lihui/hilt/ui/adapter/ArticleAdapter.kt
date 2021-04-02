@@ -13,7 +13,7 @@ import com.lihui.hilt.databinding.ItemArticleBinding
 import com.lihui.hilt.event.MessageEvent
 
 
-import com.lihui.hilt.ui.vm.HomeVm
+import com.lihui.hilt.ui.fragment.home.HomeVm
 
 
 class ArticleAdapter(

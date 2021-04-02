@@ -1,8 +1,7 @@
-package com.lihui.hilt.ui.act
+package com.lihui.hilt.ui.act.home
 
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
@@ -13,8 +12,8 @@ import com.lihui.hilt.databinding.ActivityHomeBinding
 import com.lihui.hilt.event.MessageEvent.TOKEN_OUT
 import com.lihui.hilt.ui.adapter.HomePageAdapter
 import com.lihui.hilt.ui.fragment.DashboardFragment
-import com.lihui.hilt.ui.fragment.HomeFragment
-import com.lihui.hilt.ui.fragment.UserFragment
+import com.lihui.hilt.ui.fragment.home.HomeFragment
+import com.lihui.hilt.ui.fragment.user.UserFragment
 import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseActivity
 import com.rui.libray.base.BaseFragment
@@ -35,7 +34,10 @@ class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
 
 
     private val list: MutableList<BaseFragment<out BaseViewModel, out ViewDataBinding>> =
-        arrayListOf(HomeFragment(), DashboardFragment(), UserFragment())
+        arrayListOf(
+            HomeFragment(), DashboardFragment(),
+            UserFragment()
+        )
 
     override val viewModelConfig: ViewModelConfig
         get() = ViewModelConfig(R.layout.activity_home)

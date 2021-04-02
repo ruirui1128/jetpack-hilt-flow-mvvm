@@ -2,7 +2,7 @@ package com.lihui.hilt.ui.presenter
 
 import com.lihui.hilt.BR
 import com.lihui.hilt.data.model.ArticleModel
-import com.lihui.hilt.ui.vm.HomeVm
+import com.lihui.hilt.ui.fragment.home.HomeVm
 
 /**
  *Created by Rui
@@ -28,7 +28,7 @@ object ItemHomePresenter {
     /**
      * 接化发       接 化  发 三者互斥
      */
-    fun jhf(viewModel: HomeVm, model: ArticleModel,jfa:Int){
+    fun jhf(viewModel: HomeVm, model: ArticleModel, jfa:Int){
         viewModel.jhf {
             when(jfa){
                 JIE->{

@@ -8,7 +8,7 @@
     <data>
         <variable
             name="homeVm"
-            type="com.lihui.hilt.ui.vm.HomeVm" />
+            type="com.lihui.hilt.ui.fragment.home.HomeVm" />
 
     </data>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

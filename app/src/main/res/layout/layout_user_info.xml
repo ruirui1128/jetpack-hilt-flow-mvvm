@@ -11,7 +11,7 @@
 
         <variable
             name="layoutUserVm"
-            type="com.lihui.hilt.ui.vm.UserVm" />
+            type="com.lihui.hilt.ui.fragment.user.UserVm" />
 
 
     </data>

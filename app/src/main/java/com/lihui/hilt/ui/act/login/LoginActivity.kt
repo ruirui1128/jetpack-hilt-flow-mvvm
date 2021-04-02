@@ -1,4 +1,4 @@
-package com.lihui.hilt.ui.act
+package com.lihui.hilt.ui.act.login
 
 
 
@@ -10,8 +10,6 @@ import com.lihui.hilt.R
 import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.databinding.ActivityLoginBinding
 import com.lihui.hilt.event.MessageEvent
-import com.lihui.hilt.ui.presenter.LoginPresenter
-import com.lihui.hilt.ui.vm.LoginVm
 import com.lihui.hilt.uitl.LoginHandler
 import com.lihui.hilt.uitl.ToastUtil
 import com.rui.libray.base.BaseActivity

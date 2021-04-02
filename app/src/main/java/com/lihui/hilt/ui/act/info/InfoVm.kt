@@ -1,4 +1,4 @@
-package com.lihui.hilt.ui.vm
+package com.lihui.hilt.ui.act.info
 
 import androidx.lifecycle.MutableLiveData
 import com.lihui.hilt.data.api.ApiService
