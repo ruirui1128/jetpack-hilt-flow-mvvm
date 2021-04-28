@@ -15,8 +15,8 @@ class ResponseInterceptor : Interceptor {
         return if (response.body != null) {
             val body = response.body?.string()
             val model = Gson().fromJson(body, Res::class.java)
-            if (model.code==99999){
-               LiveEventBus.get(TOKEN_OUT).post(model.message)
+            if (model.code == 99999) {
+                LiveEventBus.get(TOKEN_OUT).post(model.message)
             }
             val responseBody = body?.toResponseBody()
             response.newBuilder().body(responseBody).build()

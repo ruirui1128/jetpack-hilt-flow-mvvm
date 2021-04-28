@@ -21,6 +21,7 @@
         <activity android:name=".ui.act.view.ViewActivity" />
         <activity android:name=".ui.act.svg.SvgPlayActivity" />
         <activity android:name=".ui.act.jhf.JhfActivity" />
+        <activity android:name=".ui.act.info.InfoActivity"/>
         <activity android:name=".ui.act.login.LoginActivity" />
         <activity android:name=".ui.act.home.HomeActivity">
             <intent-filter>

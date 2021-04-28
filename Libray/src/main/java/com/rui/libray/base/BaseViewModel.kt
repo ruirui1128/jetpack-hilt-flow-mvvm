@@ -117,7 +117,7 @@ open class BaseViewModel() : ViewModel(), LifecycleObserver {
         isStatueLayout: Boolean
     ) {
         error(t.message ?: "")   //有基类自行处理,业务层也可以自行处理
-        if (isLoadMore) {   //isLoadMore 为true 表示数据已经加载第二条数据 则不需要显示statueError
+        if (isLoadMore) {   //isLoadMore 为true 表示数据已经加载第二页数据 则不需要显示statueError
             loadMoreError()  //交由业务层自行处理
         } else {
             if (isStatueLayout) {

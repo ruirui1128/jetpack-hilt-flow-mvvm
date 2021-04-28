@@ -20,7 +20,15 @@
             <Button
                 android:id="@+id/btnRoom"
                 android:text="Room数据库"
-                android:layout_margin="@dimen/dp_10"
+                android:layout_margin="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/btnInfo"
+                android:text="简单列表1"
+                android:layout_marginStart="@dimen/dp10"
+                android:layout_marginEnd="@dimen/dp10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 

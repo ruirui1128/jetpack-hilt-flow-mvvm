@@ -1,7 +1,10 @@
 package com.rui.libray.ext
 
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.loadmore.BaseLoadMoreView
@@ -32,7 +35,6 @@ fun <T, BD : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loa
     list: MutableList<T>?, pageNumber: Int, emptyListener: () -> Unit = {}
 ): Int {
     loadMoreModule.isEnableLoadMore = true
-    loadMoreModule.isEnableLoadMore = true
     if (pageNumber == 1) {
         if (list == null || list.size == 0) {
             setList(null)
@@ -53,6 +55,47 @@ fun <T, BD : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loa
     }
     return page
 }
+
+/**
+ * adapter加载更多
+ * 带有初始化网络加载失败（不使用BaseActivity或者BaseFragment中的layoutStatue）
+ */
+fun <T, BD : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.loadMore2(
+    recyclerView: RecyclerView,
+    list: MutableList<T>?, pageNumber: Int,
+    isFirstLoad: Boolean = false,
+    reload: () -> Unit,
+    emptyListener: () -> Unit = {}
+): Int {
+    loadMoreModule.isEnableLoadMore = true
+    if (pageNumber == 1) {
+        if (isFirstLoad) {
+            val inflate = LayoutInflater.from(recyclerView.context)
+                .inflate(R.layout.layout_error, recyclerView)
+            inflate.findViewById<Button>(R.id.btnReLoad).onClick { reload() }
+            setEmptyView(inflate)
+        } else {
+            if (list == null || list.size == 0) {
+                setList(null)
+                emptyListener()
+                return 1
+            } else {
+                setList(list)
+            }
+        }
+
+    } else {
+        addData(list as MutableList<T>)
+    }
+    val page = pageNumber + 1
+    if (list?.size ?: 0 < BaseConstant.PAGESIZE_20) {
+        loadMoreModule.loadMoreEnd()
+    } else {
+        loadMoreModule.loadMoreComplete()
+    }
+    return page
+}
+
 
 //初始化adapter
 fun <T, BD : ViewDataBinding> BaseQuickAdapter<T, BaseDataBindingHolder<BD>>.initLoadMore(
