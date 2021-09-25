@@ -5,10 +5,11 @@ import com.lihui.hilt.R
 import com.lihui.hilt.databinding.FragmentDashboardBinding
 import com.lihui.hilt.ui.act.info.InfoActivity
 import com.lihui.hilt.ui.act.room.RoomActivity
-import com.rui.libray.base.BaseFragment
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.base.ViewModelConfig
-import com.rui.libray.ext.onClick
+import com.mind.lib.base.BaseFragment
+import com.mind.lib.base.BaseViewModel
+import com.mind.lib.base.ViewModelConfig
+import com.mind.lib.ext.onClick
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

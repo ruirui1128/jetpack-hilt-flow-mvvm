@@ -6,14 +6,15 @@ import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityMainBinding
 import com.lihui.hilt.ui.act.info.InfoActivity
 import com.lihui.hilt.ui.act.login.LoginActivity
-import com.rui.libray.base.BaseActivity
-import com.rui.libray.base.ViewModelConfig
-import com.rui.libray.ext.onClick
+import com.mind.lib.base.BaseActivity
+import com.mind.lib.base.ViewModelConfig
+import com.mind.lib.ext.onClick
+
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<MainViewModel,ActivityMainBinding>() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override val viewModelConfig: ViewModelConfig
 

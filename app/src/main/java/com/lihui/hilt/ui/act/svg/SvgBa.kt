@@ -5,13 +5,13 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
-import com.lihui.hilt.data.model.SvgModel
+
 import com.lihui.hilt.ui.ext.start
 
 import com.lihui.hilt.ui.vm.SvgPlayVm
 import com.opensource.svgaplayer.SVGACallback
 import com.opensource.svgaplayer.SVGAImageView
-import java.util.concurrent.LinkedBlockingQueue
+
 
 /**
  *Created by Rui

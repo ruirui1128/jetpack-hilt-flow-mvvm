@@ -8,8 +8,9 @@ import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.lihui.hilt.R
-import com.lihui.hilt.data.model.UserModel
+
 import com.lihui.hilt.databinding.ViewUserInfoBinding
+import com.mind.data.data.model.UserModel
 
 
 class UserInfoView @JvmOverloads constructor(

@@ -4,8 +4,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.module.LoadMoreModule
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.lihui.hilt.R
-import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.databinding.ItemInfoBinding
+import com.mind.data.data.model.ArticleModel
 import javax.inject.Inject
 
 class InfoAdapter @Inject constructor() :BaseQuickAdapter<ArticleModel,

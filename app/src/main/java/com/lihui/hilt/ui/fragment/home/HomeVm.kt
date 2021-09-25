@@ -2,22 +2,21 @@ package com.lihui.hilt.ui.fragment.home
 
 
 import androidx.lifecycle.MutableLiveData
-import com.lihui.hilt.data.api.ApiService
-import com.lihui.hilt.data.api.UserApi
-import com.lihui.hilt.data.model.ArticleModel
-import com.lihui.hilt.data.model.BannerDataModel
-import com.lihui.hilt.data.model.PageList
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.util.NetworkHelper
+import com.mind.data.data.api.ApiService
+import com.mind.data.data.api.UserApi
+import com.mind.data.data.model.ArticleModel
+import com.mind.data.data.model.BannerDataModel
+import com.mind.data.data.model.PageList
+import com.mind.lib.base.BaseViewModel
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeVm  @Inject constructor(
+class HomeVm @Inject constructor(
     private val apiService: ApiService,
     private val userService: UserApi,
-    networkHelper: NetworkHelper
-) : BaseViewModel(networkHelper) {
+) : BaseViewModel() {
 
     /**
      * 界面刷新
@@ -39,8 +38,9 @@ class HomeVm  @Inject constructor(
             "pageNumber" to pageNumber.toString(),
             "pageSize" to "20"
         )
-        launchFlow({ apiService.getArticle(map) },
-            { articleResult.postValue(it) },
+        launchFlow(
+            request = { apiService.getArticle(map) },
+            resp = { articleResult.postValue(it) },
             isStatueLayout = firstLoad,
             isLoadMore = (pageNumber != 1),
             loadMoreError = { loadMoreError() },
@@ -52,15 +52,19 @@ class HomeVm  @Inject constructor(
      * 而是直接返回
      * 注意区分场景
      */
-    fun getCollect(ok: (String?) -> Unit) {
-        launchFlow({ userService.getCollect() }, { ok(it) })
+    fun getCollect(resp: (String?) -> Unit) {
+        launchFlow(
+            request = { userService.getCollect() },
+            resp = { resp(it) })
     }
 
     /**
      * 更换头像
      */
     fun changeHeader(ok: (String?) -> Unit) {
-        launchFlow({ userService.changeHeader() }, { ok(it) })
+        launchFlow(
+            request = { userService.changeHeader() },
+            resp = { ok(it) })
     }
 
     /**

@@ -11,7 +11,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.rui.libray.widget.viewpager.SuperViewPager
+        <com.mind.lib.widget.viewpager.SuperViewPager
             android:layout_weight="1"
             android:id="@+id/homeViewPage"
             android:layout_width="match_parent"

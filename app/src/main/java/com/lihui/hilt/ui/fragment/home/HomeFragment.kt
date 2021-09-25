@@ -12,12 +12,12 @@ import com.lihui.hilt.databinding.FragmentHomeBinding
 import com.lihui.hilt.ui.act.jhf.JhfActivity
 import com.lihui.hilt.ui.adapter.ArticleAdapter
 import com.lihui.hilt.uitl.loginObserver
-import com.lihui.indiamall.util.ClickUtil
-import com.rui.libray.base.BaseFragment
-import com.rui.libray.base.ViewModelConfig
-import com.rui.libray.ext.init
-import com.rui.libray.ext.initLoadMore
-import com.rui.libray.ext.loadMore
+import com.mind.lib.base.BaseFragment
+import com.mind.lib.base.ViewModelConfig
+import com.mind.lib.ext.init
+import com.mind.lib.ext.initLoadMore
+import com.mind.lib.ext.loadMore
+
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -72,8 +72,7 @@ class HomeFragment : BaseFragment<HomeVm, FragmentHomeBinding>() {
         //加载更多 loadMore = getArticleList()   在扩展里面
         adapter.initLoadMore { getArticleList() }
         bind.rcvArticle.adapter = adapter
-        adapter.setOnItemChildClickListener { ada, view, position ->
-            if (ClickUtil.isFastDoubleClick) return@setOnItemChildClickListener
+        adapter.setOnItemChildClickListener { _, view, position ->
             when (view.id) {
                 R.id.ivCollect -> {
                     //是否登录   这个操作也可以放在itemHomePresenter中 具体场景具体实现，没有固定要求

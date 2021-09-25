@@ -6,12 +6,12 @@ import android.content.Intent
 import androidx.activity.viewModels
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
-import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.databinding.ActivityJhfBinding
 import com.lihui.hilt.event.MessageEvent
-import com.rui.libray.base.BaseActivity
-import com.rui.libray.base.ViewModelConfig
-import com.rui.libray.ext.onClick
+import com.mind.data.data.model.ArticleModel
+import com.mind.lib.base.BaseActivity
+import com.mind.lib.base.ViewModelConfig
+import com.mind.lib.ext.onClick
 import dagger.hilt.android.AndroidEntryPoint
 
 

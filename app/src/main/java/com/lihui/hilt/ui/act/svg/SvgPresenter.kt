@@ -1,11 +1,8 @@
 package com.lihui.hilt.ui.act.svg
 
-import com.lihui.hilt.data.model.SvgModel
 import com.lihui.hilt.ui.vm.SvgPlayVm
-import com.rui.libray.base.BaseViewModel
+import com.mind.data.data.model.SvgModel
 import java.util.*
-import java.util.concurrent.LinkedBlockingQueue
-
 
 /**
  *Created by Rui

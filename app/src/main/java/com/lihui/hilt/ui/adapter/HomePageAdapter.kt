@@ -11,11 +11,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.lihui.hilt.R
-import com.rui.libray.base.BaseFragment
-import com.rui.libray.base.BaseViewModel
+import com.mind.lib.base.BaseFragment
+import com.mind.lib.base.BaseViewModel
+
 
 class HomePageAdapter (private val mFm: FragmentManager,
-                       private val list: MutableList<BaseFragment<out BaseViewModel,out ViewDataBinding>>) :
+                       private val list: MutableList<BaseFragment<out BaseViewModel, out ViewDataBinding>>) :
     FragmentPagerAdapter(mFm) {
 
     private val titles = arrayOf("主页", "项目", "我的")

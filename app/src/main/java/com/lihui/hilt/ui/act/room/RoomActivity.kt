@@ -2,15 +2,13 @@ package com.lihui.hilt.ui.act.room
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.lihui.hilt.R
-import com.lihui.hilt.data.room.entity.WordEntity
 import com.lihui.hilt.databinding.ActivityRoomBinding
-import com.rui.libray.base.BaseActivity
-import com.rui.libray.base.ViewModelConfig
-import com.rui.libray.ext.onClick
+import com.mind.data.data.db.entity.WordEntity
+import com.mind.lib.base.BaseActivity
+import com.mind.lib.base.ViewModelConfig
+import com.mind.lib.ext.onClick
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

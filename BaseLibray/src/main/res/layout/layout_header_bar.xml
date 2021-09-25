@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlTitle"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="@dimen/dp45">
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <LinearLayout
+                android:background="?android:attr/selectableItemBackground"
+                android:id="@+id/flBack"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                     android:layout_height="match_parent">
+            <ImageView
+                    android:padding="4dp"
+                    android:layout_marginStart="@dimen/dp15"
+                    android:layout_marginEnd="@dimen/dp15"
+                    android:id="@+id/mLeftIv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"/>
+        </LinearLayout>
+
+        <TextView
+              android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+                android:id="@+id/mTitleTv"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+
+                android:layout_centerInParent="true"/>
+        <TextView
+               android:visibility="gone"
+                tools:text ="右边"
+                android:background="?android:attr/selectableItemBackground"
+                android:id="@+id/mRightTv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp15"
+                android:paddingRight="@dimen/dp15"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+
+        <ImageView
+                android:padding="4dp"
+                android:visibility="gone"
+                android:layout_marginEnd="20dp"
+                android:id="@+id/mRightIv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -3,7 +3,8 @@ package com.lihui.hilt.ui.act.room
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.viewholder.BaseViewHolder
 import com.lihui.hilt.R
-import com.lihui.hilt.data.room.entity.WordEntity
+import com.mind.data.data.db.entity.WordEntity
+
 import javax.inject.Inject
 
 class RoomAdapter @Inject constructor() :

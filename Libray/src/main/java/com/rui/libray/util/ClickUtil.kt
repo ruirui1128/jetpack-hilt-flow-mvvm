@@ -1,4 +1,4 @@
-package com.lihui.indiamall.util
+package com.rui.libray.util
 
 /**
  * 事件点击工具类，设置事件点击的响应时间间隔

@@ -10,7 +10,7 @@
 
         <variable
             name="itemArticleVm"
-            type="com.lihui.hilt.data.model.ArticleModel" />
+            type="com.mind.data.data.model.ArticleModel" />
 
         <import type="com.lihui.hilt.ui.presenter.ItemHomePresenter" />
 

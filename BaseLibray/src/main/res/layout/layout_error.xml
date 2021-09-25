@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_error"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:background="@color/colorPrimary"
+        android:id="@+id/loading_errorimg"
+        android:layout_width="@dimen/dp80"
+        android:layout_height="@dimen/dp80" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数据获取失败"
+        android:layout_marginTop="@dimen/dp12"
+        android:layout_marginBottom="@dimen/dp12"
+        android:textColor="@color/color_333"
+        android:textSize="@dimen/sp14" />
+
+    <Button
+        android:id="@+id/btnReLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp12"
+        android:textSize="@dimen/sp12"
+        android:text="点击重试" />
+</LinearLayout>

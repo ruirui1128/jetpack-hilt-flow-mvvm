@@ -1,13 +1,13 @@
 package com.lihui.hilt.ui.act.info
 
 import androidx.lifecycle.MutableLiveData
-import com.lihui.hilt.data.api.ApiService
-import com.lihui.hilt.data.api.UserApi
-import com.lihui.hilt.data.model.ArticleModel
-import com.lihui.hilt.data.model.PageList
-import com.lihui.hilt.data.model.UserModel
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.util.NetworkHelper
+import com.mind.data.data.api.ApiService
+import com.mind.data.data.api.UserApi
+import com.mind.data.data.model.ArticleModel
+import com.mind.data.data.model.PageList
+import com.mind.data.data.model.UserModel
+import com.mind.lib.base.BaseViewModel
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -15,14 +15,15 @@ import javax.inject.Inject
 class InfoVm @Inject constructor(
     private val apiService: ApiService,
     private val userApi: UserApi,
-    networkHelper: NetworkHelper
-) : BaseViewModel(networkHelper) {
+
+    ) : BaseViewModel() {
     val isRefreshing = MutableLiveData<Boolean>().also { it.value = false }
 
     val infoResult = MutableLiveData<PageList<ArticleModel>>()
     fun getInfoList(pageNumber: Int, loadMoreError: () -> Unit) {
-        launchFlow({ apiService.getArticle(hashMapOf()) },
-            { infoResult.postValue(it) },
+        launchFlow(
+            request = { apiService.getArticle(hashMapOf()) },
+            resp = { infoResult.postValue(it) },
             isLoadMore = (pageNumber != 1),
             loadMoreError = { loadMoreError() },
             complete = { isRefreshing.postValue(false) })

@@ -7,7 +7,8 @@ import androidx.lifecycle.findViewTreeLifecycleOwner
 import com.lihui.hilt.enums.StarLevelEnum
 import com.lihui.hilt.ui.fragment.user.UserVm
 import com.lihui.hilt.uitl.GlideUtil
-import com.rui.libray.ext.onClick
+import com.mind.lib.ext.onClick
+
 
 object ImageBA {
     /**

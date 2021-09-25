@@ -1,10 +1,9 @@
 package com.lihui.hilt.ui.vm
 
 import androidx.lifecycle.MutableLiveData
-import com.lihui.hilt.data.api.ApiService
-import com.lihui.hilt.data.model.SvgModel
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.util.NetworkHelper
+import com.mind.data.data.api.ApiService
+import com.mind.data.data.model.SvgModel
+import com.mind.lib.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -17,8 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SvgPlayVm  @Inject constructor(
     private val api: ApiService,
-    networkHelper: NetworkHelper
-) : BaseViewModel(networkHelper) {
+) : BaseViewModel() {
     /**
      * 播放队列中的长度
      */

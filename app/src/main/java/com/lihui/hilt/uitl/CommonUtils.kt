@@ -5,9 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.app.MyApp
-import com.lihui.hilt.data.ds.DsUtil
-import com.lihui.hilt.data.model.ArticleModel
 import com.lihui.hilt.event.MessageEvent
+import com.mind.lib.util.CacheManager
 
 /**
  *Created by Rui

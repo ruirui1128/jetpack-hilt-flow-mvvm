@@ -7,7 +7,8 @@ import android.widget.FrameLayout
 import com.lihui.hilt.R
 import com.lihui.hilt.uitl.ToastUtil
 import com.lihui.hilt.widget.ItemSettingView
-import com.rui.libray.ext.onClick
+import com.mind.lib.ext.onClick
+
 
 class UserActionView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

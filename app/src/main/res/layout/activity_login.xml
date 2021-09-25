@@ -12,10 +12,6 @@
             name="loginPresenter"
             type="com.lihui.hilt.ui.act.login.LoginPresenter" />
 
-        <variable
-            name="loginOwner"
-            type="androidx.lifecycle.LifecycleOwner" />
-
         <import type="android.text.InputType" />
 
     </data>
@@ -68,7 +64,6 @@
 <!--            android:inputType="@{loginVm.isClose ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD}"-->
             <EditText
                 android:text="@={loginVm.passwrod}"
-                owner="@{loginOwner}"
                 change="@{loginVm}"
                 android:hint="输入密码"
                 android:paddingStart="@dimen/dp15"

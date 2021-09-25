@@ -7,7 +7,7 @@
 
         <variable
             name="layoutUserModel"
-            type="com.lihui.hilt.data.model.UserModel" />
+            type="com.mind.data.data.model.UserModel" />
 
         <variable
             name="layoutUserVm"
@@ -59,8 +59,8 @@
             tools:text="120岁" />
 
         <ImageView
-            userLevelVm="@{layoutUserVm}"
             android:id="@+id/ivLevel"
+            userLevelVm="@{layoutUserVm}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_10"
@@ -71,15 +71,15 @@
             tools:src="@drawable/ic_star_level_1" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp15"
             android:gravity="center"
             android:text="头像可点击\n 等级图片可点击"
             android:textColor="@color/black"
-            android:layout_marginEnd="@dimen/dp15"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

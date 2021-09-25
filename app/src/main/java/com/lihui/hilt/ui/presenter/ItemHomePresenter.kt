@@ -1,8 +1,9 @@
 package com.lihui.hilt.ui.presenter
 
 import com.lihui.hilt.BR
-import com.lihui.hilt.data.model.ArticleModel
+
 import com.lihui.hilt.ui.fragment.home.HomeVm
+import com.mind.data.data.model.ArticleModel
 
 /**
  *Created by Rui

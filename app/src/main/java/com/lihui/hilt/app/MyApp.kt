@@ -4,15 +4,16 @@ import android.app.Application
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.createDataStore
-import com.jeremyliao.liveeventbus.LiveEventBus
-import com.lihui.hilt.data.ds.DsUtil
-import com.lihui.hilt.uitl.CacheManager
-
+import com.lihui.hilt.BuildConfig
+import com.mind.data.data.mmkv.KV
+import com.mind.lib.base.BaseApp
+import com.mind.lib.util.CacheManager
+import com.tencent.mmkv.MMKV
 
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class MyApp : Application() {
+class MyApp : BaseApp() {
     companion object {
         private lateinit var mApplication: Application
         fun getApp(): Application {
@@ -29,10 +30,17 @@ class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
         mApplication = this
-        LiveEventBus.config().lifecycleObserverAlwaysActive(true)
         dataStore = createDataStore(name = "hilt_app")
-        //赋值给缓存 这是同步取的数据
-        CacheManager.instance.putToken(DsUtil.getToken())
+        initCache()
+
+    }
+
+    /**
+     * 全局缓存
+     */
+    private fun initCache() {
+        CacheManager.instance.putToken(MMKV.defaultMMKV().getString(KV.TOKEN,"")?:"")
+        CacheManager.instance.putVersion(BuildConfig.VERSION_NAME)
     }
 
 

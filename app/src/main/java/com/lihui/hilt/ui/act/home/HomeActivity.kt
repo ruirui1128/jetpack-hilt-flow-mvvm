@@ -1,6 +1,7 @@
 package com.lihui.hilt.ui.act.home
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
@@ -15,10 +16,10 @@ import com.lihui.hilt.ui.fragment.DashboardFragment
 import com.lihui.hilt.ui.fragment.home.HomeFragment
 import com.lihui.hilt.ui.fragment.user.UserFragment
 import com.lihui.hilt.uitl.ToastUtil
-import com.rui.libray.base.BaseActivity
-import com.rui.libray.base.BaseFragment
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.base.ViewModelConfig
+import com.mind.lib.base.BaseActivity
+import com.mind.lib.base.BaseFragment
+import com.mind.lib.base.BaseViewModel
+import com.mind.lib.base.ViewModelConfig
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -50,6 +51,7 @@ class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
     private fun initBus() {
         LiveEventBus.get(TOKEN_OUT)
             .observe(this, Observer { ToastUtil.toast(Thread.currentThread().name) })
+
     }
 
     private fun initBottomNav() {
@@ -83,6 +85,7 @@ class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
         mCurrentPosition = position
     }
 
+    @SuppressLint("MissingSuperCall")
     protected override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(SELECTED_INDEX, mCurrentPosition)

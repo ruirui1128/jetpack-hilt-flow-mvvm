@@ -4,14 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences.Editor
 
 import com.lihui.hilt.app.MyApp
-import com.rui.libray.base.BaseConstant
 
 
 /*
-  SP工具类(废弃不建议使用  建议使用dataStore dada/ds/DsUtil)
+  SP工具类(废弃不建议使用  建议使用dataStore dada/ds/DsUtil)  mmkv
  */
 object AppPrefsUtils {
-    private var sp = MyApp.getApp().getSharedPreferences(BaseConstant.TABLE_PREFS, Context.MODE_PRIVATE)
+    private var sp = MyApp.getApp().getSharedPreferences("hilt_sp", Context.MODE_PRIVATE)
     private var ed: Editor
 
 

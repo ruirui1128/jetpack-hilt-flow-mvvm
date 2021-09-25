@@ -1,6 +1,6 @@
 viewmodel
 livedata
-view-binding
+data-binding
 hilt-android
 Kotlin + Coroutines + Flow
 Retrofit2 + OkHttp3

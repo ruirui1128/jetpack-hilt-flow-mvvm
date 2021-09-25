@@ -1,12 +1,12 @@
 package com.lihui.hilt.ui.act.svg
 
-import androidx.activity.viewModels
+
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivitySvgPlayBinding
 import com.lihui.hilt.ui.vm.SvgPlayVm
-import com.rui.libray.base.BaseActivity
-import com.rui.libray.base.ViewModelConfig
+import com.mind.lib.base.BaseActivity
+import com.mind.lib.base.ViewModelConfig
 import dagger.hilt.android.AndroidEntryPoint
 
 

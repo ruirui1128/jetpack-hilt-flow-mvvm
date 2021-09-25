@@ -1,3 +1,4 @@
-include ':Libray'
 include ':app'
 rootProject.name = "Hilt"
+include ':BaseLibray'
+include ':DataLibaray'

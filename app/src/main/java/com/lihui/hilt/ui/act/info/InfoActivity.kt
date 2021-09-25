@@ -2,25 +2,17 @@ package com.lihui.hilt.ui.act.info
 
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
-import android.view.TextureView
-import android.view.View
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityInfoBinding
-
 import com.lihui.hilt.ui.adapter.InfoAdapter
-import com.lihui.hilt.ui.act.info.InfoVm
-import com.rui.libray.base.BaseActivity
-
-import com.rui.libray.base.ViewModelConfig
-
-import com.rui.libray.ext.*
-
+import com.mind.lib.base.BaseActivity
+import com.mind.lib.base.ViewModelConfig
+import com.mind.lib.ext.init
+import com.mind.lib.ext.initLoadMore
+import com.mind.lib.ext.loadMore
 import dagger.hilt.android.AndroidEntryPoint
-
 import javax.inject.Inject
 
 

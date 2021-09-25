@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="c_777">#777777</color>
+
+    <color name="colorPrimary">#ff569f</color>
+    <color name="colorPrimaryDark">#ff569f</color>
+    <color name="colorAccent">#03DAC5</color>
+
+
+    <color name="white90">#1Affffff</color>
+    <color name="white80">#33ffffff</color>
+    <color name="white70">#4Dffffff</color>
+    <color name="white60">#66ffffff</color>
+    <color name="white50">#80ffffff</color>
+    <color name="white40">#99ffffff</color>
+    <color name="white30">#B3ffffff</color>
+    <color name="color_999">#999</color>
+    <color name="color_ededed">#ededed</color>
+    <color name="color_e6e6e6">#e6e6ed</color>
+
+    <color name="color_333">#333333</color>
+    <color name="color_666">#666666</color>
+
+
+
+    <color name="blue">#ff0000ff</color>
+    <color name="cyan">#ff00ffff</color>
+    <color name="gray">#ff888888</color>
+    <color name="green">#ff00ff00</color>
+    <color name="magenta">#ffff00ff</color>
+    <color name="red">#ffff0000</color>
+    <color name="transparent">#00000000</color>
+    <drawable name="yellow">#ffffff00</drawable>
+</resources>

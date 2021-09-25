@@ -2,26 +2,16 @@ package com.lihui.hilt.ui.bindadapter
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
-import android.view.View
-import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
-import com.rui.libray.util.DensityUtil
-import kotlinx.android.synthetic.main.activity_info.*
+import com.mind.lib.util.DensityUtil
+
 
 import java.io.File
 

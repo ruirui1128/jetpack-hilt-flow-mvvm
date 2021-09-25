@@ -2,16 +2,15 @@ package com.lihui.hilt.ui.act.main
 
 
 import androidx.lifecycle.MutableLiveData
-import com.lihui.hilt.data.api.ApiService
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.util.NetworkHelper
+import com.mind.data.data.api.ApiService
+import com.mind.lib.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-         private val apiService: ApiService,
-         networkHelper: NetworkHelper):BaseViewModel(networkHelper)
+    private val apiService: ApiService,
+   ): BaseViewModel()
 {
 
      val result = MutableLiveData<String>().apply {

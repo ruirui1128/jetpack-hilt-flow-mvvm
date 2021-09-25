@@ -1,18 +1,17 @@
 package com.lihui.hilt.ui.fragment.user
 
 import androidx.lifecycle.MutableLiveData
-import com.lihui.hilt.data.api.UserApi
-import com.lihui.hilt.data.model.UserModel
-import com.rui.libray.base.BaseViewModel
-import com.rui.libray.util.NetworkHelper
+import com.mind.data.data.api.UserApi
+import com.mind.data.data.model.UserModel
+import com.mind.lib.base.BaseViewModel
+
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class UserVm @Inject constructor(
     private val userApi: UserApi,
-    networkHelper: NetworkHelper
-) : BaseViewModel(networkHelper) {
+) : BaseViewModel() {
 
 
     //星耀等级

@@ -3,9 +3,9 @@ package com.lihui.hilt.ui.bindadapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.lihui.hilt.data.model.ArticleModel
+import com.mind.data.data.model.ArticleModel
+
 
 object AnmiBa {
     /**
