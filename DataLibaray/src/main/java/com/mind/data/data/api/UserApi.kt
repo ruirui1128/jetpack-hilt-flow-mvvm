@@ -5,6 +5,7 @@ import com.mind.data.data.model.LoginModel
 import com.mind.data.data.model.UserModel
 import com.mind.lib.data.model.Res
 import retrofit2.http.Body
+import retrofit2.http.Field
 import retrofit2.http.GET
 import retrofit2.http.POST
 

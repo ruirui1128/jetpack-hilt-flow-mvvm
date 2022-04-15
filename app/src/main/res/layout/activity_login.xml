@@ -5,9 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="loginVm"
             type="com.lihui.hilt.ui.act.login.LoginVm" />
+
         <variable
             name="loginPresenter"
             type="com.lihui.hilt.ui.act.login.LoginPresenter" />
@@ -22,79 +24,93 @@
         android:orientation="vertical"
         tools:context="com.lihui.hilt.ui.act.login.LoginActivity">
 
-<!--        <com.rui.libray.widget.HeaderBar-->
-<!--            app:titleText="登录"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <!--        <com.rui.libray.widget.HeaderBar-->
+        <!--            app:titleText="登录"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"/>-->
 
         <TextView
-            android:text="fastmock不验证随便输"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp5"
-            android:textSize="@dimen/sp12"
-            android:textColor="@color/black"
             android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:text="fastmock不验证随便输"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp12" />
+
         <EditText
-            android:text="@={loginVm.username}"
-            android:layout_marginTop="@dimen/dp20"
-            android:hint="输入账号"
-            android:paddingStart="@dimen/dp15"
-            android:layout_marginStart="@dimen/dp15"
-            android:layout_marginEnd="@dimen/dp15"
-            android:textSize="@dimen/sp14"
+            android:id="@+id/etUser"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginEnd="@dimen/dp15"
             android:background="@drawable/bg_r_5_s_1"
-            android:inputType="phone"
-            android:maxLines="1"
-            android:maxLength="16"
             android:digits="0123456789+"
+            android:hint="输入账号"
+            android:inputType="phone"
             android:lines="1"
-            android:layout_height="@dimen/dp50"/>
+            android:maxLength="16"
+            android:maxLines="1"
+            android:paddingStart="@dimen/dp15"
+            android:text="@={loginVm.username}"
+            android:textSize="@dimen/sp14" />
 
         <LinearLayout
-            android:layout_marginTop="@dimen/dp20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp15"
+            android:layout_marginTop="@dimen/dp20"
             android:layout_marginEnd="@dimen/dp15"
             android:background="@drawable/bg_r_5_s_1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal">
 
-<!--            android:inputType="@{loginVm.isClose ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD}"-->
+            <!--            android:inputType="@{loginVm.isClose ? InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD : InputType.TYPE_CLASS_TEXT |InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD}"-->
             <EditText
-                android:text="@={loginVm.passwrod}"
+                android:id="@+id/etPwd"
                 change="@{loginVm}"
-                android:hint="输入密码"
-                android:paddingStart="@dimen/dp15"
-                android:textSize="@dimen/sp14"
                 android:layout_width="0dp"
+                android:layout_height="@dimen/dp50"
                 android:layout_weight="1"
                 android:background="@null"
-                android:maxLines="1"
-                android:maxLength="16"
+                android:hint="输入密码"
                 android:lines="1"
-                android:layout_height="@dimen/dp50"/>
+                android:maxLength="16"
+                android:maxLines="1"
+                android:paddingStart="@dimen/dp15"
+                android:text="@={loginVm.passwrod}"
+                android:textSize="@dimen/sp14" />
 
             <ImageView
-                android:onClick="@{()->loginPresenter.showPwd(loginVm)}"
-                android:background="?android:attr/selectableItemBackground"
-                android:layout_gravity="center_vertical"
                 android:id="@+id/ivSee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{()->loginPresenter.showPwd(loginVm)}"
                 android:padding="@dimen/dp5"
                 android:src="@{loginVm.isClose? @drawable/ic_pwd_close: @drawable/ic_pwd_open}"
                 tools:src="@drawable/ic_pwd_close" />
         </LinearLayout>
 
         <TextView
-            android:onClick="@{()->loginPresenter.login(loginVm)}"
             style="@style/text_blue_common"
-            android:text="登录"
-            android:layout_marginTop="@dimen/dp25"/>
+            android:layout_marginTop="@dimen/dp25"
+            android:onClick="@{()->loginPresenter.login(loginVm)}"
+            android:text="登录" />
 
 
+        <TextView
+            android:id="@+id/tvLogin2"
+            style="@style/text_blue_common"
+            android:layout_marginTop="@dimen/dp25"
+            android:text="登录2" />
+
+        <TextView
+            android:id="@+id/tvLogin3"
+            style="@style/text_blue_common"
+            android:layout_marginTop="@dimen/dp25"
+            android:text="登录3" />
 
     </LinearLayout>
 </layout>

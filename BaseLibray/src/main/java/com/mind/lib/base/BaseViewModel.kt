@@ -8,6 +8,7 @@ import com.mind.lib.data.model.Res
 import com.mind.lib.data.net.ResCode
 
 import com.mind.lib.util.Util
+import com.mind.lib.util.toast
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -204,6 +205,66 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
                 // error()
             }
 
+        }
+    }
+
+
+    // -----------------------------------------------------------------------------------------------
+
+    fun <T> loadHttp(
+        request: suspend CoroutineScope.() -> Res<T>,  // 请求
+        resp: (T?) -> Unit,                            // 相应
+        err: (String) -> Unit = { },                   // 错误处理
+        end: () -> Unit = {},                          // 最后执行方法
+        isShowToast: Boolean = true,                   // 是否toast
+        isShowDialog: Boolean = true,                  // 是否显示加载框
+    ) {
+        viewModelScope.launch {
+            try {
+                showDialog(isShowDialog)
+                val data = request()                   // 请求+响应数据
+                if (data.code == ResCode.OK.getCode()) {    //业务响应成功
+                    resp(data.data)                   // 响应回调
+                } else {
+                    showToast(isShowDialog, data.msg)
+                    err(data.msg)                       // 业务失败处理
+                }
+            } catch (e: Exception) {
+                err(e.message ?: "")  //可根据具体异常显示具体错误提示   异常处理
+                showToast(isShowToast, e.message ?: "")
+            } finally {
+                end()
+                dismissDialog(isShowDialog)
+            }
+        }
+
+    }
+
+
+    /**
+     * toast
+     */
+    private fun showToast(show: Boolean, msg: String) {
+        if (show) {
+            toast(msg)
+        }
+    }
+
+    /**
+     * 显示对话框
+     */
+    private fun showDialog(show: Boolean) {
+        if (show) {
+            uiChange.showDialog.call()
+        }
+    }
+
+    /**
+     * 关闭对话框
+     */
+    private fun dismissDialog(show: Boolean) {
+        if (show) {
+            uiChange.dismissDialog.call()
         }
     }
 

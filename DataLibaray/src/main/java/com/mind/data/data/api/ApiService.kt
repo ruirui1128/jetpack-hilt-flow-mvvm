@@ -26,5 +26,4 @@ interface ApiService {
     suspend fun getArticle(@Body map:HashMap<String,String>):Res<PageList<ArticleModel>>
 
 
-
 }
