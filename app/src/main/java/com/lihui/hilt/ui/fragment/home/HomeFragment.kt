@@ -17,6 +17,7 @@ import com.mind.lib.base.ViewModelConfig
 import com.mind.lib.ext.init
 import com.mind.lib.ext.initLoadMore
 import com.mind.lib.ext.loadMore
+import com.mind.lib.util.toast
 
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -109,7 +110,10 @@ class HomeFragment : BaseFragment<HomeVm, FragmentHomeBinding>() {
     private fun initVm() {
         //文章数据返回
         viewModel.articleResult.observe(this, Observer {
-            pageNumber = adapter.loadMore(it?.list, pageNumber) { }
+            pageNumber = adapter.loadMore(it?.list, pageNumber) {
+                // 可自定义
+                toast("空界面了")
+            }
         })
     }
 

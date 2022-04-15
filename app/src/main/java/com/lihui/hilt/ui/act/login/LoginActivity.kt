@@ -43,6 +43,7 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
     }
 
     private fun initView() {
+        // 非hilt 注解的hilt http 请求
         bind.tvLogin2.onClick { viewModel.login() }
 
 
@@ -72,7 +73,6 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
         LoginHandler.get().postLoginHandler(token)
         DsUtil.putToken(lifecycleScope, it?.token ?: "")
         finish()
-
     }
 
     var token = ""

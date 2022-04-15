@@ -11,6 +11,7 @@ import com.jeremyliao.liveeventbus.LiveEventBus
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityHomeBinding
 import com.lihui.hilt.event.MessageEvent.TOKEN_OUT
+import com.lihui.hilt.task.TimeLifecycleTask
 import com.lihui.hilt.ui.adapter.HomePageAdapter
 import com.lihui.hilt.ui.fragment.DashboardFragment
 import com.lihui.hilt.ui.fragment.home.HomeFragment
@@ -44,6 +45,8 @@ class HomeActivity : BaseActivity<BaseViewModel, ActivityHomeBinding>() {
         get() = ViewModelConfig(R.layout.activity_home)
 
     override fun initialize() {
+        // 执行异步定时任务
+        lifecycle.addObserver(TimeLifecycleTask())
         initBottomNav()
         initBus()
     }
