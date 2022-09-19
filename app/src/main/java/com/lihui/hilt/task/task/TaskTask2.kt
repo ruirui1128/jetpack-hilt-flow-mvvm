@@ -1,8 +1,6 @@
 package com.lihui.hilt.task.task
 
-import com.mind.data.data.model.BannerDataModel
 import com.mind.data.http.ApiClient
-import com.mind.lib.ext.loadHttp
 import kotlinx.coroutines.runBlocking
 
 /**
@@ -12,12 +10,7 @@ import kotlinx.coroutines.runBlocking
 class TaskTask2() : Runnable {
     override fun run() {
         val data = runBlocking {             //阻塞当前线程
-            var result = mutableListOf<BannerDataModel>()
-            loadHttp(
-                request = { ApiClient.appApi.getBanner() },
-                resp = { it?.also { result = it } }
-            )
-            result
+            ApiClient.appApi.getBanner()
         }
 
     }

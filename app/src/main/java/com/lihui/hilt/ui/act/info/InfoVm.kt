@@ -7,7 +7,6 @@ import com.mind.data.data.model.ArticleModel
 import com.mind.data.data.model.PageList
 import com.mind.data.data.model.UserModel
 import com.mind.lib.base.BaseViewModel
-
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -27,7 +26,6 @@ class InfoVm @Inject constructor(
             isLoadMore = (pageNumber != 1),
             loadMoreError = { loadMoreError() },
             complete = { isRefreshing.postValue(false) })
-
     }
 
     val userInfoResult = MutableLiveData<UserModel>()

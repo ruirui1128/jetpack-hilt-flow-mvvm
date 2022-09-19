@@ -3,6 +3,7 @@ package com.lihui.hilt.ui.act.info
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityInfoBinding
