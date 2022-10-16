@@ -92,7 +92,7 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
 
         viewModelScope.launch(Dispatchers.Main) {
             try {
-                val result = withContext(Dispatchers.IO) { request() }
+                val result = request()
                 handlerCode(result, isStatueLayout, resp, error)
                 end(isShowDialog, complete)
             } catch (t: Throwable) {
@@ -101,6 +101,9 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
             }
         }
     }
+
+
+    fun http() = this
 
 
     /**

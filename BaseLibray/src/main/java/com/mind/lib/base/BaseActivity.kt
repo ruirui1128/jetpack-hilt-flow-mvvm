@@ -59,8 +59,6 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding>() : AppCom
     }
 
 
-
-
     protected open fun setStatusLayoutAndListener(): View? {
         return null
     }
