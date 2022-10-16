@@ -78,6 +78,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha02"
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.2'
 
-
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
 }

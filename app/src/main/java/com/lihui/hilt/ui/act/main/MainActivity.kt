@@ -2,6 +2,7 @@ package com.lihui.hilt.ui.act.main
 
 import android.content.Intent
 import android.widget.Toast
+import com.lihui.hilt.BR
 import com.lihui.hilt.R
 import com.lihui.hilt.databinding.ActivityMainBinding
 import com.lihui.hilt.ui.act.info.InfoActivity
@@ -17,9 +18,10 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
     override val viewModelConfig: ViewModelConfig
         get() = ViewModelConfig(R.layout.activity_main)
+          .bindViewModel(BR.mainVm)
+
 
     override fun initialize() {
-
 
 
         viewModel.fetchUsers() {
@@ -28,11 +30,13 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
 
         bind.btnLogin.onClick {
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
-        bind.btnInfo.onClick {
-            startActivity(Intent(this, InfoActivity::class.java))
-        }
+//        bind.btnInfo.onClick {
+//            startActivity(Intent(this, InfoActivity::class.java))
+//            finish()
+//        }
 
     }
 

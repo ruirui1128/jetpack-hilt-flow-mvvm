@@ -6,33 +6,41 @@
 
     <data>
 
+        <variable
+            name="mainVm"
+            type="com.lihui.hilt.ui.act.main.MainViewModel" />
+
+<!--        <import type="com.lihui.hilt.ui.act.main.MainPresenter" />-->
+
     </data>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
         tools:context=".ui.act.main.MainActivity">
 
 
         <Button
             android:id="@+id/btnLogin"
-            android:gravity="center"
-            android:text="登录"
-            android:layout_marginEnd="@dimen/dp30"
-            android:layout_marginStart="@dimen/dp30"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40" />
+            android:layout_height="@dimen/dp40"
+            android:layout_marginStart="@dimen/dp30"
+            android:layout_marginEnd="@dimen/dp30"
+            android:gravity="center"
+            android:text="登录" />
 
         <Button
             android:id="@+id/btnInfo"
-            android:gravity="center"
-            android:text="信息列表"
-            android:layout_marginEnd="@dimen/dp30"
-            android:layout_marginStart="@dimen/dp30"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40" />
+            android:layout_height="@dimen/dp40"
+            android:layout_marginStart="@dimen/dp30"
+            android:layout_marginEnd="@dimen/dp30"
+            android:gravity="center"
+
+            android:text="信息列表" />
 
     </LinearLayout>
+<!--    android:onClick="@{()->MainPresenter.INSTANCE.test(mainVm)}"-->
 </layout>

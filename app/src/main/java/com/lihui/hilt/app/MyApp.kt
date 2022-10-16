@@ -39,7 +39,7 @@ class MyApp : BaseApp() {
      * 全局缓存
      */
     private fun initCache() {
-        CacheManager.instance.putToken(MMKV.defaultMMKV().getString(KV.TOKEN,"")?:"")
+        CacheManager.instance.putToken(MMKV.defaultMMKV().getString(KV.TOKEN, "") ?: "")
         CacheManager.instance.putVersion(BuildConfig.VERSION_NAME)
     }
 

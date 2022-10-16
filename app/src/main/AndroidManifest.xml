@@ -22,8 +22,11 @@
         <activity android:name=".ui.act.svg.SvgPlayActivity" />
         <activity android:name=".ui.act.jhf.JhfActivity" />
         <activity android:name=".ui.act.info.InfoActivity"/>
-        <activity android:name=".ui.act.login.LoginActivity" />
-        <activity android:name=".ui.act.home.HomeActivity">
+        <activity android:name=".ui.act.login.LoginActivity"
+            android:launchMode="singleTask"/>
+        <activity
+            android:launchMode="singleTask"
+            android:name=".ui.act.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

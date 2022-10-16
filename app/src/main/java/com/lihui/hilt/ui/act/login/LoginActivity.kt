@@ -1,6 +1,7 @@
 package com.lihui.hilt.ui.act.login
 
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -10,6 +11,7 @@ import com.lihui.hilt.R
 import com.lihui.hilt.data.ds.DsUtil
 import com.lihui.hilt.databinding.ActivityLoginBinding
 import com.lihui.hilt.event.MessageEvent
+import com.lihui.hilt.ui.act.main.MainActivity
 import com.lihui.hilt.uitl.LoginHandler
 import com.lihui.hilt.uitl.ToastUtil
 import com.mind.data.data.mmkv.KV
@@ -44,7 +46,12 @@ class LoginActivity : BaseActivity<LoginVm, ActivityLoginBinding>() {
 
     private fun initView() {
         // 非hilt 注解的hilt http 请求
-        bind.tvLogin2.onClick { viewModel.login() }
+        bind.tvLogin2.onClick {
+          //  viewModel.login()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
 
         // 如果不想使用viewModel
